@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, Mail } from "lucide-react";
+import { MapPin, Mail, Phone } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -21,38 +21,46 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-[#6B6B6B] text-sm leading-relaxed max-w-sm">
-              Warehouse units, storage lots, and office-warehouse spaces for lease at Huntingdale, Melbourne. Built for ecommerce operators, tradespeople, importers, and makers who need real space to grow.
+              A business infrastructure platform where brands land, operate, and grow in Australia. Space, operations, and ecosystem — all in one place.
             </p>
             <div className="mt-6 flex flex-col gap-3">
               <a
-                href="https://maps.google.com/?q=17-31+Franklyn+Street+Huntingdale+VIC"
+                href="https://maps.google.com/?q=7+Distribution+Circuit+Huntingdale+VIC"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-start gap-3 text-[#6B6B6B] hover:text-black text-sm transition-colors"
               >
                 <MapPin size={14} className="mt-0.5 shrink-0 text-[#2a3065]" />
-                17-31 Franklyn Street, Huntingdale VIC 3166
+                7 Distribution Circuit, Huntingdale VIC 3166
               </a>
               <a
-                href="mailto:leasing@hexahub.com.au"
+                href="mailto:marketing@hexa.com.au"
                 className="flex items-center gap-3 text-[#6B6B6B] hover:text-black text-sm transition-colors"
               >
                 <Mail size={14} className="shrink-0 text-[#2a3065]" />
-                leasing@hexahub.com.au
+                marketing@hexa.com.au
+              </a>
+              <a
+                href="tel:+61406016666"
+                className="flex items-center gap-3 text-[#6B6B6B] hover:text-black text-sm transition-colors"
+              >
+                <Phone size={14} className="shrink-0 text-[#2a3065]" />
+                +61 406 016 666
               </a>
             </div>
           </div>
 
-          {/* Units */}
+          {/* Spaces */}
           <div>
-            <h3 className="text-black font-semibold text-sm uppercase tracking-widest mb-4">Units</h3>
+            <h3 className="text-black font-semibold text-sm uppercase tracking-widest mb-4">Spaces</h3>
             <ul className="flex flex-col gap-2">
               {[
                 { href: "/units?type=warehouse", label: "Warehouses" },
                 { href: "/units?type=storage", label: "Storage Spaces" },
+                { href: "/units?type=showroom-warehouse", label: "Showroom + Warehouse" },
                 { href: "/units?type=office-warehouse", label: "Office + Warehouse" },
                 { href: "/units?type=office", label: "Offices" },
-                { href: "/units", label: "All Available Units" },
+                { href: "/units", label: "All Available Spaces" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-[#6B6B6B] hover:text-black text-sm transition-colors">
@@ -68,17 +76,31 @@ export default function Footer() {
             <h3 className="text-black font-semibold text-sm uppercase tracking-widest mb-4">Company</h3>
             <ul className="flex flex-col gap-2">
               {[
-                { href: "/about", label: "About HexaHub" },
-                { href: "/services", label: "Services" },
+                { href: "/about", label: "About Hexa Hub" },
+                { href: "/ecosystem", label: "Ecosystem Partners" },
                 { href: "/events", label: "Events" },
                 { href: "/contact", label: "Contact" },
                 { href: "/contact#book-tour", label: "Book a Tour" },
-                { href: "https://hexaspace.com.au", label: "Hexa Space ↗", external: true },
               ].map((link) => (
                 <li key={link.href}>
+                  <Link href={link.href} className="text-[#6B6B6B] hover:text-black text-sm transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <h3 className="text-black font-semibold text-sm uppercase tracking-widest mt-8 mb-4">The Hexa Network</h3>
+            <ul className="flex flex-col gap-2">
+              {[
+                { href: "https://hexaspace.com.au", label: "Hexa Space ↗", external: true },
+                { href: "/ecosystem#retail", label: "369 Lonsdale St" },
+                { href: "/ecosystem#retail", label: "878 Whitehorse Rd" },
+              ].map((link) => (
+                <li key={link.label}>
                   <Link
                     href={link.href}
-                    {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    {...("external" in link && link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     className="text-[#6B6B6B] hover:text-black text-sm transition-colors"
                   >
                     {link.label}
@@ -91,7 +113,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-[#E5E5E5] flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[#6B6B6B] text-xs">
-            © {new Date().getFullYear()} HexaHub. A Hexa Group Company. All rights reserved.
+            © {new Date().getFullYear()} Hexa Hub. A Hexa Group Company. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <Link href="/privacy" className="text-[#6B6B6B] hover:text-black text-xs transition-colors">

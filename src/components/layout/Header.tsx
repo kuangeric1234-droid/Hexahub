@@ -6,8 +6,8 @@ import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 
 const NAV_LINKS = [
-  { href: "/units", label: "Available Units" },
-  { href: "/services", label: "Services" },
+  { href: "/units", label: "Spaces" },
+  { href: "/ecosystem", label: "Ecosystem" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -48,17 +48,17 @@ export default function Header() {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
             <a
-              href="tel:+61000000000"
+              href="tel:+61406016666"
               className="flex items-center gap-2 text-[#555555] hover:text-black text-sm transition-colors"
             >
               <Phone size={14} />
-              <span>Call us</span>
+              <span>+61 406 016 666</span>
             </a>
             <Link
-              href="/units"
+              href="/contact"
               className="bg-[#2a3065] hover:bg-[#1e2a54] text-white text-sm font-semibold px-4 py-2 transition-colors duration-200"
             >
-              Browse Units
+              Enquire Now
             </Link>
           </div>
 
@@ -89,11 +89,11 @@ export default function Header() {
               </Link>
             ))}
             <Link
-              href="/units"
+              href="/contact"
               className="mt-4 bg-[#2a3065] hover:bg-[#1e2a54] text-white text-sm font-semibold px-4 py-3 text-center transition-colors"
               onClick={() => setOpen(false)}
             >
-              Browse Available Units
+              Enquire Now
             </Link>
           </nav>
         </div>

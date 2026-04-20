@@ -21,31 +21,33 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "HexaHub — Warehouse & Storage Spaces in Huntingdale",
-    template: "%s | HexaHub",
+    default: "Hexa Hub — Business Infrastructure Platform, Huntingdale Melbourne",
+    template: "%s | Hexa Hub",
   },
   description:
-    "Warehouse units, storage lots, and office-warehouse spaces available to lease at 17-31 Franklyn Street, Huntingdale VIC 3166. Flexible terms, 24/7 access, 3-phase power.",
+    "Hexa Hub is a business infrastructure platform at 7 Distribution Circuit, Huntingdale VIC 3166. Warehouses, storage, offices, showrooms, and a connected ecosystem of logistics, e-commerce, and fulfilment partners.",
   keywords: [
+    "business infrastructure Melbourne",
     "warehouse lease Huntingdale",
+    "e-commerce fulfilment Melbourne",
     "storage space Melbourne",
-    "industrial unit lease",
+    "cross-border e-commerce Australia",
     "office warehouse Melbourne",
-    "HexaHub",
+    "Hexa Hub",
   ],
   openGraph: {
     type: "website",
     locale: "en_AU",
-    siteName: "HexaHub",
-    title: "HexaHub — Warehouse & Storage Spaces in Huntingdale",
+    siteName: "Hexa Hub",
+    title: "Hexa Hub — Business Infrastructure Platform, Huntingdale Melbourne",
     description:
-      "Warehouse units, storage lots, and office-warehouse spaces for lease at Huntingdale, Melbourne.",
+      "Space, operations, and ecosystem — all in one place. Hexa Hub is where brands land, operate, and grow in Australia.",
     images: [
       {
-        url: "/renders/Block H Front.jpg",
+        url: "/renders/Aerial.jpg",
         width: 1200,
         height: 630,
-        alt: "HexaHub warehouse units at Huntingdale",
+        alt: "Hexa Hub precinct aerial view, Huntingdale Melbourne",
       },
     ],
   },
