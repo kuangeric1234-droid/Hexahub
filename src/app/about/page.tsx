@@ -47,10 +47,19 @@ const ECOSYSTEM_NODES = [
 const LEADERSHIP = [
   {
     name: "William Yang",
-    title: "Co-founder & CEO, Hexa Group",
+    title: "Co-founder & CEO",
     bio: "As CEO of Hexa Group, William brings extensive expertise in finance, capital, legal, development management, and marketing. He has delivered landmark projects in Melbourne, including Swanston Central, Light House, and The William. With master's degrees in Business Law and Accounting, William's leadership drives Hexa's continued growth.",
   },
-  // Additional leadership profiles can be added here
+  {
+    name: "Chino Li",
+    title: "Co-founder",
+    bio: "Chino brings strategic insight and efficiency to Hexa. His global business acumen has been pivotal in forging successful partnerships. Chino also holds influential roles in international associations, further extending Hexa's global reach.",
+  },
+  {
+    name: "Leon Liu",
+    title: "Co-founder",
+    bio: "Leon's insights and pragmatic approach enhance Hexa's reputation for delivering high-quality developments. A skilled problem solver with a focus on compliance and risk management, Leon is highly regarded across the industry for his contributions to landmark projects such as the Melbourne Convention Centre, The Children's Hospital, and The William apartments.",
+  },
 ];
 
 export default function AboutPage() {
@@ -210,9 +219,11 @@ export default function AboutPage() {
           {/* ── SECTION 4: Leadership ── */}
           <section className="border-t border-[#E5E5E5] pt-20">
             <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">Leadership</p>
-            <h2 className="text-3xl font-black text-black tracking-tight mb-10">
-              The people behind Hexa Group
-            </h2>
+            <h2 className="text-3xl font-black text-black tracking-tight mb-4">Our Founders</h2>
+            <p className="text-[#6B6B6B] text-base italic leading-relaxed mb-10 max-w-2xl">
+              Hexa&apos;s founders bring together a rich wealth of experience and a global perspective,
+              forming the cornerstone of the company&apos;s success.
+            </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {LEADERSHIP.map(({ name, title, bio }) => (
                 <div key={name} className="border border-[#E5E5E5] p-8">
