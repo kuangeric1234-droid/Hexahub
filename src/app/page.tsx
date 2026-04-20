@@ -105,13 +105,6 @@ export default async function HomePage() {
 
           <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
             <div className="max-w-3xl">
-              <div className="flex items-center gap-2 mb-6">
-                <MapPin size={14} className="text-[#2a3065]" />
-                <span className="text-white/70 text-sm font-medium tracking-wide">
-                  7 Distribution Circuit, Huntingdale VIC
-                </span>
-              </div>
-
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.0] tracking-tight mb-6">
                 {headline}
               </h1>
