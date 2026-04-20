@@ -1,37 +1,44 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle, MapPin, Clock, Zap, Shield } from "lucide-react";
+import { ArrowRight, CheckCircle, MapPin, Clock, Zap, Shield, Package, Network } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import UnitCard from "@/components/units/UnitCard";
-import { getFeaturedLeaseUnits, getFeaturedSaleUnits, getSiteSettings } from "@/lib/sanity/queries";
+import { getFeaturedLeaseUnits, getFeaturedSaleUnits, getSiteSettings, getPartners, getMembers } from "@/lib/sanity/queries";
 
-const SERVICE_CARDS = [
+const SPACE_TYPES = [
   {
     type: "warehouse",
-    title: "Warehouse Units",
-    desc: "223–438m² with 3-phase power, roller doors, and mezzanine offices. Built for ecommerce operators, importers, and light manufacturers.",
+    title: "Warehouses",
+    desc: "223–438m² with 3-phase power, roller doors, and mezzanine offices. Built for importers and e-commerce operators.",
     href: "/units?type=warehouse",
     img: "/renders/Internal.jpg",
   },
   {
     type: "storage",
     title: "Storage Spaces",
-    desc: "31–75m² drive-through storage with 24/7 wireless keypad access. Perfect for tradespeople, seasonal stock, and equipment.",
+    desc: "31–75m² drive-through storage with 24/7 wireless keypad access. Flexible monthly memberships available.",
     href: "/units?type=storage",
     img: "/renders/Storage Final Image LOW RES.jpg",
   },
   {
+    type: "showroom-warehouse",
+    title: "Showroom + Warehouse",
+    desc: "Dual-purpose units combining street-facing showroom space with operational warehouse behind.",
+    href: "/units?type=showroom-warehouse",
+    img: "/renders/Block H Front.jpg",
+  },
+  {
     type: "office-warehouse",
     title: "Office + Warehouse",
-    desc: "240m² over two levels — full floor office above, warehouse with tilt door below. Street frontage on Distribution Circuit.",
+    desc: "240m² over two levels — full-floor office above, warehouse with tilt door below. Street frontage.",
     href: "/units?type=office-warehouse",
     img: "/renders/Mezzanine.jpg",
   },
   {
     type: "office",
-    title: "Office Spaces",
-    desc: "128–136m² private offices with natural light and district views. Ground floor and first floor options with direct street access.",
+    title: "Offices",
+    desc: "128–136m² private offices with natural light and district views. Ground and first floor options.",
     href: "/units?type=office",
     img: "/renders/Block B Front.jpg",
   },
@@ -44,17 +51,42 @@ const TRUST_ITEMS = [
   { icon: MapPin, title: "Prime Location", desc: "Minutes from Monash Freeway, Oakleigh, and Clayton industrial precincts." },
 ];
 
+const PILLARS = [
+  {
+    icon: Package,
+    label: "Space",
+    title: "Five types of space, one address.",
+    body: "Warehouses, storage, showrooms, offices, and combined office-warehouse units from 31–438m² at Huntingdale. Purpose-built, high-spec, and available now.",
+  },
+  {
+    icon: Zap,
+    label: "Operations",
+    title: "Infrastructure that works from day one.",
+    body: "3-phase power, roller doors, loading zones, 24/7 keypad access, NBN, CCTV, and The Hub — a shared lounge and meeting space included for every tenant.",
+  },
+  {
+    icon: Network,
+    label: "Ecosystem",
+    title: "A network of partners built in.",
+    body: "Every member plugs into EIZ Technology, Digitec IT, Australia Post logistics, and direct mentorship — the partners you need to land and grow in Australia.",
+  },
+];
+
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const [featuredLeaseUnits, featuredSaleUnits, settings] = await Promise.all([
+  const [featuredLeaseUnits, featuredSaleUnits, settings, partners, members] = await Promise.all([
     getFeaturedLeaseUnits().catch(() => []),
     getFeaturedSaleUnits().catch(() => []),
     getSiteSettings().catch(() => null),
+    getPartners().catch(() => []),
+    getMembers().catch(() => []),
   ]);
 
-  const headline = settings?.heroHeadline ?? "Your business needs space. We have it.";
-  const subheadline = settings?.heroSubheadline ?? "Warehouse units, storage lots, and office spaces available now at Huntingdale, Melbourne.";
+  const headline = settings?.heroHeadline ?? "Where brands land, operate, and grow.";
+  const subheadline =
+    settings?.heroSubheadline ??
+    "Hexa Hub is a business infrastructure platform at Huntingdale, Melbourne — space, operations, and a connected ecosystem, all in one place.";
 
   return (
     <>
@@ -63,25 +95,22 @@ export default async function HomePage() {
         {/* ── HERO ── */}
         <section className="relative min-h-screen flex items-end pb-24 pt-16 overflow-hidden">
           <Image
-            src="/renders/Block H Front.jpg"
-            alt="HexaHub warehouse units at Huntingdale"
+            src="/renders/Aerial.jpg"
+            alt="Hexa Hub precinct aerial view, Huntingdale Melbourne"
             fill
             priority
             className="object-cover object-center"
             sizes="100vw"
           />
-          {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/20" />
-          {/* Right-side vignette */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/30" />
 
           <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
             <div className="max-w-3xl">
-              {/* Location tag */}
               <div className="flex items-center gap-2 mb-6">
                 <MapPin size={14} className="text-[#2a3065]" />
                 <span className="text-white/70 text-sm font-medium tracking-wide">
-                  Huntingdale, Melbourne VIC
+                  7 Distribution Circuit, Huntingdale VIC
                 </span>
               </div>
 
@@ -97,23 +126,22 @@ export default async function HomePage() {
                   href="/units"
                   className="inline-flex items-center gap-2 bg-[#2a3065] hover:bg-[#1e2a54] text-white font-bold px-8 py-4 text-base transition-colors duration-200"
                 >
-                  Browse Available Units
+                  Browse Spaces
                   <ArrowRight size={16} />
                 </Link>
                 <Link
-                  href="/contact#book-tour"
+                  href="/contact"
                   className="inline-flex items-center gap-2 border border-white/30 hover:border-white/60 text-white font-semibold px-8 py-4 text-base transition-colors duration-200"
                 >
-                  Book a Tour
+                  Enquire Now
                 </Link>
               </div>
 
-              {/* Quick stats */}
               <div className="flex flex-wrap items-center gap-x-8 gap-y-2 mt-10 pt-10 border-t border-white/10">
                 {[
-                  ["16", "Units Available"],
+                  ["5", "Space Types"],
                   ["31–438", "m² Range"],
-                  ["12mo", "Min. Lease Term"],
+                  ["4", "Ecosystem Partners"],
                   ["24/7", "Site Access"],
                 ].map(([val, label]) => (
                   <div key={label}>
@@ -126,47 +154,128 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* ── SERVICES ── */}
+        {/* ── THREE PILLARS ── */}
+        <section className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="mb-14">
+              <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
+                The platform
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-black text-black tracking-tight max-w-xl">
+                More than a lease. A complete operating platform.
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {PILLARS.map(({ icon: Icon, label, title, body }) => (
+                <div key={label} className="border border-[#E5E5E5] p-8">
+                  <div className="w-10 h-10 bg-[#2a3065]/10 flex items-center justify-center mb-6">
+                    <Icon size={18} className="text-[#2a3065]" />
+                  </div>
+                  <p className="text-[#2a3065] text-xs font-semibold uppercase tracking-widest mb-3">{label}</p>
+                  <h3 className="text-black font-bold text-lg leading-snug mb-3">{title}</h3>
+                  <p className="text-[#6B6B6B] text-sm leading-relaxed">{body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── ECOSYSTEM PARTNERS ── */}
+        {partners.length > 0 && (
+          <section className="py-24 bg-[#F5F5F5] border-y border-[#E5E5E5]">
+            <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
+                <div>
+                  <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
+                    Ecosystem
+                  </p>
+                  <h2 className="text-3xl sm:text-4xl font-black text-black tracking-tight">
+                    Partners built into the platform.
+                  </h2>
+                </div>
+                <Link
+                  href="/ecosystem"
+                  className="inline-flex items-center gap-2 text-[#6B6B6B] hover:text-black text-sm transition-colors shrink-0"
+                >
+                  View full ecosystem <ArrowRight size={14} />
+                </Link>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {partners.map((partner) => (
+                  <div key={partner._id} className="bg-white border border-[#E5E5E5] p-6 flex flex-col">
+                    <p className="text-[#2a3065] text-xs font-semibold uppercase tracking-widest mb-3">
+                      {partner.category === "supply-chain"
+                        ? "Supply Chain"
+                        : partner.category === "digital"
+                        ? "Digital"
+                        : partner.category === "shipping"
+                        ? "Shipping & Logistics"
+                        : "Mentorship"}
+                    </p>
+                    <h3 className="text-black font-bold text-base mb-2">{partner.name}</h3>
+                    {partner.shortDescription && (
+                      <p className="text-[#6B6B6B] text-sm leading-relaxed mb-4 flex-1">
+                        {partner.shortDescription}
+                      </p>
+                    )}
+                    {partner.memberBenefits && partner.memberBenefits.length > 0 && (
+                      <ul className="space-y-1.5">
+                        {partner.memberBenefits.slice(0, 3).map((benefit) => (
+                          <li key={benefit} className="flex items-start gap-2 text-xs text-[#555555]">
+                            <CheckCircle size={11} className="text-[#2a3065] mt-0.5 shrink-0" />
+                            {benefit}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── SPACES ── */}
         <section className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
               <div>
                 <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
-                  What&apos;s available
+                  Spaces
                 </p>
                 <h2 className="text-3xl sm:text-4xl font-black text-black tracking-tight">
-                  Four types of space.<br />One address.
+                  Five types of space.<br />One address.
                 </h2>
               </div>
               <Link
-                href="/services"
+                href="/units"
                 className="inline-flex items-center gap-2 text-[#6B6B6B] hover:text-black text-sm transition-colors shrink-0"
               >
-                View all services <ArrowRight size={14} />
+                View all spaces <ArrowRight size={14} />
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {SERVICE_CARDS.map((card) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              {SPACE_TYPES.map((card) => (
                 <Link
                   key={card.type}
                   href={card.href}
-                  className="group relative overflow-hidden bg-[#F5F5F5] border border-[#E5E5E5] hover:border-[#2a3065]/50 transition-all duration-300 aspect-[4/5] flex flex-col justify-end"
+                  className="group relative overflow-hidden bg-[#F5F5F5] border border-[#E5E5E5] hover:border-[#2a3065]/50 transition-all duration-300 aspect-[3/4] flex flex-col justify-end"
                 >
                   <Image
                     src={card.img}
                     alt={card.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-50"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
-                  <div className="relative p-5">
-                    <h3 className="text-white font-bold text-lg leading-tight mb-2">{card.title}</h3>
-                    <p className="text-white/60 text-sm leading-snug line-clamp-3">{card.desc}</p>
-                    <div className="flex items-center gap-1 text-[#2a3065] text-xs font-medium mt-3 group-hover:gap-2 transition-all">
-                      <span className="text-white/80">View units</span>
-                      <ArrowRight size={11} className="text-white/80" />
+                  <div className="relative p-4">
+                    <h3 className="text-white font-bold text-sm leading-tight mb-1.5">{card.title}</h3>
+                    <p className="text-white/60 text-xs leading-snug line-clamp-3">{card.desc}</p>
+                    <div className="flex items-center gap-1 mt-2.5">
+                      <span className="text-white/80 text-xs">View units</span>
+                      <ArrowRight size={10} className="text-white/80" />
                     </div>
                   </div>
                 </Link>
@@ -179,8 +288,6 @@ export default async function HomePage() {
         {(featuredLeaseUnits.length > 0 || featuredSaleUnits.length > 0) && (
           <section className="py-24 bg-[#F5F5F5]">
             <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-
-              {/* For Lease row */}
               {featuredLeaseUnits.length > 0 && (
                 <div className={featuredSaleUnits.length > 0 ? "mb-20" : ""}>
                   <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
@@ -207,7 +314,6 @@ export default async function HomePage() {
                 </div>
               )}
 
-              {/* For Sale row */}
               {featuredSaleUnits.length > 0 && (
                 <div>
                   <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
@@ -233,7 +339,110 @@ export default async function HomePage() {
                   </div>
                 </div>
               )}
+            </div>
+          </section>
+        )}
 
+        {/* ── HEXA NETWORK ── */}
+        <section className="py-24 bg-[#2a3065]">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="mb-14">
+              <p className="text-white/50 text-sm font-semibold uppercase tracking-widest mb-3">
+                The Hexa Network
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight max-w-xl">
+                Three nodes. One community.
+              </h2>
+              <p className="text-white/60 text-base leading-relaxed mt-4 max-w-2xl">
+                Hexa Hub sits within a broader network of Hexa spaces across Melbourne — connecting industrial operations, co-working, and retail presence into a single community.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                {
+                  name: "Hexa Hub",
+                  location: "Huntingdale",
+                  desc: "Business infrastructure platform. Warehouses, storage, showrooms, and offices with an integrated partner ecosystem.",
+                  href: "/" as string,
+                  badge: "You are here",
+                  current: true,
+                  external: false,
+                },
+                {
+                  name: "Hexa Space",
+                  location: "Melbourne CBD",
+                  desc: "Co-working and flexible office space for early-stage brands, remote teams, and entrepreneurs entering the Australian market.",
+                  href: "https://hexaspace.com.au",
+                  badge: null,
+                  current: false,
+                  external: true,
+                },
+                {
+                  name: "Retail Presence",
+                  location: "369 Lonsdale St + 878 Whitehorse Rd",
+                  desc: "Physical retail and pop-up space at Melbourne CBD and Box Hill — test, sell, and build brand presence without a long-term commitment.",
+                  href: "/ecosystem#retail",
+                  badge: null,
+                  current: false,
+                  external: false,
+                },
+              ].map((node) => (
+                <Link
+                  key={node.name}
+                  href={node.href}
+                  {...(node.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className={`group border p-8 transition-colors ${
+                    node.current
+                      ? "border-white/40 bg-white/10"
+                      : "border-white/20 hover:border-white/40 hover:bg-white/5"
+                  }`}
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <p className="text-white/50 text-xs font-semibold uppercase tracking-widest mb-1">
+                        {node.location}
+                      </p>
+                      <h3 className="text-white font-bold text-xl">{node.name}</h3>
+                    </div>
+                    {node.badge && (
+                      <span className="text-[#2a3065] bg-white text-[10px] font-bold uppercase tracking-widest px-2 py-1 shrink-0">
+                        {node.badge}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-white/60 text-sm leading-relaxed mb-4">{node.desc}</p>
+                  <div className="flex items-center gap-1 text-white/40 group-hover:text-white/70 text-xs transition-colors">
+                    <span>Learn more</span>
+                    <ArrowRight size={11} />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── MEMBERS ── */}
+        {members.length > 0 && (
+          <section className="py-24 bg-white border-b border-[#E5E5E5]">
+            <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+              <div className="mb-12">
+                <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
+                  Community
+                </p>
+                <h2 className="text-3xl sm:text-4xl font-black text-black tracking-tight">
+                  Businesses operating at Hexa Hub.
+                </h2>
+              </div>
+              <div className="flex flex-wrap gap-4">
+                {members.map((member) => (
+                  <div
+                    key={member._id}
+                    className="border border-[#E5E5E5] px-6 py-4 flex items-center justify-center min-w-[140px]"
+                  >
+                    <span className="text-[#555555] text-sm font-medium">{member.name}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
         )}
@@ -244,13 +453,15 @@ export default async function HomePage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div>
                 <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
-                  Why HexaHub
+                  Why Hexa Hub
                 </p>
                 <h2 className="text-3xl sm:text-4xl font-black text-black tracking-tight mb-6">
-                  Built for businesses<br />that mean business.
+                  Built for brands<br />building in Australia.
                 </h2>
                 <p className="text-[#6B6B6B] text-base leading-relaxed mb-8">
-                  HexaHub Huntingdale is a brand-new industrial precinct purpose-built for modern operators. Every unit is finished to a high spec — polished concrete, LED high-bay lighting, CCTV, and NBN — so you can start operating on day one.
+                  Every unit at Hexa Hub is finished to a high specification — polished concrete, LED high-bay
+                  lighting, NBN, and CCTV — so you start operating from day one. No setup friction, no hidden
+                  infrastructure gaps.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {TRUST_ITEMS.map(({ icon: Icon, title, desc }) => (
@@ -270,7 +481,7 @@ export default async function HomePage() {
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
                     src="/renders/The Hub @ Found Spaces.jpg"
-                    alt="The Hub — communal amenity at HexaHub"
+                    alt="The Hub — communal amenity at Hexa Hub"
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -299,14 +510,15 @@ export default async function HomePage() {
                   Huntingdale, Melbourne.
                 </h2>
                 <p className="text-[#6B6B6B] text-base leading-relaxed mb-8">
-                  Positioned in Melbourne&apos;s south-east industrial corridor, HexaHub sits minutes from the Monash Freeway and is surrounded by Oakleigh, Clayton, and Mulgrave trade precincts.
+                  Positioned in Melbourne&apos;s south-east industrial corridor, Hexa Hub sits minutes from the
+                  Monash Freeway and is surrounded by Oakleigh, Clayton, and Mulgrave trade precincts.
                 </p>
                 <ul className="space-y-3 mb-8">
                   {[
                     "Minutes to Monash Freeway (M1) via Springvale Rd",
                     "Close to Oakleigh and Clayton commercial hubs",
                     "Nearby Huntingdale and Oakleigh train stations",
-                    "17-31 Franklyn Street, Huntingdale VIC 3166",
+                    "7 Distribution Circuit, Huntingdale VIC 3166",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-3 text-sm text-[#555555]">
                       <CheckCircle size={14} className="text-[#2a3065] mt-0.5 shrink-0" />
@@ -314,17 +526,19 @@ export default async function HomePage() {
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href="/contact"
+                <a
+                  href="https://maps.google.com/?q=7+Distribution+Circuit+Huntingdale+VIC"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-[#2a3065] hover:bg-[#1e2a54] text-white font-bold px-6 py-3 text-sm transition-colors"
                 >
                   Get directions <ArrowRight size={14} />
-                </Link>
+                </a>
               </div>
               <div className="relative aspect-[4/3] overflow-hidden bg-[#EBEBEB]">
                 <Image
                   src="/renders/Aerial.jpg"
-                  alt="Aerial view of HexaHub estate at Huntingdale"
+                  alt="Aerial view of Hexa Hub estate at Huntingdale"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -338,23 +552,24 @@ export default async function HomePage() {
         <section className="py-24 bg-white">
           <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
             <h2 className="text-4xl sm:text-5xl font-black text-black tracking-tight mb-4">
-              Ready to find your space?
+              Ready to operate at Hexa Hub?
             </h2>
             <p className="text-[#6B6B6B] text-lg mb-10 max-w-xl mx-auto">
-              All units are available now on 12-month minimum leases. Prices exclude GST and outgoings.
+              Speak to the team about spaces, membership options, and what the Hexa Hub ecosystem can do for
+              your business.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link
-                href="/units"
+                href="/contact"
                 className="inline-flex items-center gap-2 bg-[#2a3065] hover:bg-[#1e2a54] text-white font-bold px-8 py-4 text-base transition-colors"
               >
-                Browse Available Units <ArrowRight size={16} />
+                Enquire Now <ArrowRight size={16} />
               </Link>
               <Link
-                href="/contact"
+                href="/units"
                 className="inline-flex items-center gap-2 border border-[#E5E5E5] hover:border-[#999] text-black font-semibold px-8 py-4 text-base transition-colors"
               >
-                Enquire Now
+                Browse Spaces
               </Link>
             </div>
           </div>
