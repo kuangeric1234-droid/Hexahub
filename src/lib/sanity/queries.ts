@@ -57,6 +57,31 @@ export type Member = {
   active?: boolean;
 };
 
+export type Service = {
+  _id: string;
+  title: string;
+  icon?: string;
+  description?: string;
+  pricing?: string;
+  category?: string;
+  order?: number;
+};
+
+export type Event = {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  date: string;
+  endDate?: string;
+  location?: string;
+  summary?: string;
+  description?: unknown[];
+  recap?: unknown[];
+  coverImage?: { asset: { _ref: string }; alt?: string };
+  gallery?: { asset: { _ref: string }; alt?: string }[];
+  rsvpLink?: string;
+};
+
 export type SiteSettings = {
   phone?: string;
   email?: string;
@@ -77,6 +102,13 @@ const UNIT_FIELDS = groq`
   attributes, description, featured, availableFrom,
   photos[]{ asset, alt },
   floorPlan{ asset }
+`;
+
+const EVENT_FIELDS = groq`
+  _id, title, slug, date, endDate, location, summary,
+  description, recap, rsvpLink,
+  coverImage{ asset, alt },
+  gallery[]{ asset, alt }
 `;
 
 export async function getAllUnits(): Promise<Unit[]> {
@@ -107,12 +139,20 @@ export async function getTestimonials() {
   return client.fetch(groq`*[_type == "testimonial" && featured == true] | order(_createdAt asc) { _id, authorName, authorCompany, quote, photo }`);
 }
 
-export async function getUpcomingEvents() {
-  return client.fetch(groq`*[_type == "event" && eventType == "upcoming"] | order(date asc)[0...3] { _id, title, slug, date, description, coverImage{ asset, alt }, rsvpLink }`);
+export async function getUpcomingEvents(): Promise<Event[]> {
+  return client.fetch(groq`*[_type == "event" && date >= now()] | order(date asc) { ${EVENT_FIELDS} }`);
 }
 
-export async function getServices() {
-  return client.fetch(groq`*[_type == "service"] | order(order asc) { _id, title, slug, description, icon, coverImage{ asset, alt }, targetCustomers, startingFromPrice, unitType }`);
+export async function getPastEvents(): Promise<Event[]> {
+  return client.fetch(groq`*[_type == "event" && date < now()] | order(date desc) { ${EVENT_FIELDS} }`);
+}
+
+export async function getEventBySlug(slug: string): Promise<Event | null> {
+  return client.fetch(groq`*[_type == "event" && slug.current == $slug][0] { ${EVENT_FIELDS} }`, { slug });
+}
+
+export async function getServices(): Promise<Service[]> {
+  return client.fetch(groq`*[_type == "service" && active == true] | order(order asc) { _id, title, icon, description, pricing, category, order }`);
 }
 
 export async function getPartners(): Promise<Partner[]> {
