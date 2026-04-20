@@ -83,7 +83,7 @@ export default async function HomePage() {
     getMembers().catch(() => []),
   ]);
 
-  const headline = settings?.heroHeadline ?? "Where brands land, operate, and grow.";
+  const headline = "Where brands land, operate, and grow.";
   const subheadline =
     settings?.heroSubheadline ??
     "Hexa Hub is a business infrastructure platform at Huntingdale, Melbourne — space, operations, and a connected ecosystem, all in one place.";
