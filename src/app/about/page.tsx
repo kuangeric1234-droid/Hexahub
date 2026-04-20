@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 const ECOSYSTEM_NODES = [
   {
     name: "Hexa Space",
+    location: "Box Hill",
     desc: "Coworking and community for founders and early-stage businesses.",
     href: "https://hexaspace.com.au",
     external: true,
