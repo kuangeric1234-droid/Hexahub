@@ -9,16 +9,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-3 mb-4">
+            <Link href="/" className="inline-flex mb-4">
               <Image
-                src="/logo/hexahub-mark.svg"
+                src="/hexahub-logo.png"
                 alt="HexaHub"
-                width={36}
+                width={108}
                 height={36}
+                className="h-9 w-auto"
               />
-              <span className="text-black font-bold text-xl tracking-tight">
-                Hexa<span className="text-[#2a3065]">Hub</span>
-              </span>
             </Link>
             <p className="text-[#6B6B6B] text-sm leading-relaxed max-w-sm">
               A business infrastructure platform where brands land, operate, and grow in Australia. Space, operations, and ecosystem — all in one place.

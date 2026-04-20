@@ -22,16 +22,14 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group" aria-label="HexaHub home">
+          <Link href="/" className="flex items-center group" aria-label="HexaHub home">
             <Image
-              src="/logo/hexahub-mark.svg"
-              alt=""
-              width={36}
+              src="/hexahub-logo.png"
+              alt="HexaHub"
+              width={108}
               height={36}
+              className="h-9 w-auto"
             />
-            <span className="text-black font-bold text-xl tracking-tight">
-              Hexa<span className="text-[#2a3065]">Hub</span>
-            </span>
           </Link>
 
           {/* Desktop nav */}
