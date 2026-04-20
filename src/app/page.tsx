@@ -370,7 +370,7 @@ export default async function HomePage() {
                 },
                 {
                   name: "Hexa Space",
-                  location: "Melbourne CBD",
+                  location: "Box Hill",
                   desc: "Co-working and flexible office space for early-stage brands, remote teams, and entrepreneurs entering the Australian market.",
                   href: "https://hexaspace.com.au",
                   badge: null,
