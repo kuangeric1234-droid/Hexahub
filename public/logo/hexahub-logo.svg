@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none" role="img" aria-label="HexaHub">
+  <!-- Hexagon outline -->
+  <path d="M34 8 L58 8 L70 28 L58 48 L34 48 L22 28 Z" stroke="currentColor" stroke-width="3.5" fill="none" stroke-linejoin="round"/>
+  <!-- Inner hexagon -->
+  <path d="M34 16 L52 16 L61 28 L52 40 L34 40 L25 28 Z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/>
+  <!-- Isometric box top face -->
+  <path d="M46 18 L54 23 L46 28 L38 23 Z" fill="currentColor"/>
+  <!-- Isometric box left face -->
+  <path d="M38 23 L46 28 L46 36 L38 31 Z" fill="currentColor" opacity="0.5"/>
+  <!-- Isometric box right face -->
+  <path d="M46 28 L54 23 L54 31 L46 36 Z" fill="currentColor" opacity="0.75"/>
+  <!-- Wordmark -->
+  <text x="88" y="36" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-weight="700" font-size="28" fill="currentColor" letter-spacing="-0.5">HexaHub</text>
+</svg>

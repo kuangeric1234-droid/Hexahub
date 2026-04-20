@@ -1,0 +1,95 @@
+"use server";
+
+import { Resend } from "resend";
+import { client } from "@/lib/sanity/client";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export type EnquiryState = {
+  success: boolean;
+  error?: string;
+};
+
+export async function submitEnquiry(
+  prevState: EnquiryState,
+  formData: FormData
+): Promise<EnquiryState> {
+  const name = (formData.get("name") as string | null)?.trim();
+  const email = (formData.get("email") as string | null)?.trim();
+  const phone = (formData.get("phone") as string | null)?.trim();
+  const businessName = (formData.get("businessName") as string | null)?.trim();
+  const message = (formData.get("message") as string | null)?.trim();
+  const unitId = (formData.get("unitId") as string | null)?.trim();
+  const source = (formData.get("source") as string | null)?.trim();
+  const honeypot = formData.get("website") as string | null;
+
+  // Spam guard
+  if (honeypot) return { success: true };
+
+  // Basic validation
+  if (!name || !email || !message) {
+    return { success: false, error: "Please fill in all required fields." };
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return { success: false, error: "Please enter a valid email address." };
+  }
+
+  const submittedAt = new Date().toISOString();
+
+  try {
+    // Log to Sanity
+    await client.create({
+      _type: "enquiry",
+      name,
+      email,
+      phone: phone || undefined,
+      businessName: businessName || undefined,
+      message,
+      unitIdText: unitId || undefined,
+      submittedAt,
+      status: "new",
+      source: source || "website",
+    });
+  } catch {
+    // Don't block the user if Sanity write fails — still attempt email
+  }
+
+  try {
+    const recipient = process.env.ENQUIRY_EMAIL ?? "leasing@hexahub.com.au";
+    await resend.emails.send({
+      from: "HexaHub Enquiries <enquiries@hexahub.com.au>",
+      to: recipient,
+      replyTo: email,
+      subject: unitId ? `New Enquiry — ${unitId}` : "New General Enquiry — HexaHub",
+      html: `
+        <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
+          <h2 style="color:#111;margin-bottom:8px">New Enquiry${unitId ? ` — Unit ${unitId}` : ""}</h2>
+          <p style="color:#555;margin-bottom:24px;font-size:13px">Received ${new Date(submittedAt).toLocaleString("en-AU", { timeZone: "Australia/Melbourne" })} AEST</p>
+          <table style="width:100%;border-collapse:collapse">
+            ${[
+              ["Name", name],
+              ["Email", email],
+              ["Phone", phone || "—"],
+              ["Business", businessName || "—"],
+              ["Unit Interest", unitId || "General"],
+              ["Message", message],
+            ]
+              .map(
+                ([label, value]) => `
+              <tr>
+                <td style="padding:10px 16px;background:#f9f9f9;font-weight:600;font-size:13px;color:#333;width:140px;border-bottom:1px solid #eee">${label}</td>
+                <td style="padding:10px 16px;font-size:13px;color:#333;border-bottom:1px solid #eee;white-space:pre-wrap">${value}</td>
+              </tr>`
+              )
+              .join("")}
+          </table>
+          <p style="margin-top:24px;font-size:12px;color:#999">Sent via HexaHub website contact form</p>
+        </div>
+      `,
+    });
+  } catch {
+    // Email failed — enquiry still saved to Sanity
+  }
+
+  return { success: true };
+}
