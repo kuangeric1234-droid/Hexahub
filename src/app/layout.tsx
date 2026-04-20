@@ -20,6 +20,7 @@ const inter = Inter({
 // Update --font-display in globals.css to point to the new font CSS variable.
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://hexahub.com.au"),
   title: {
     default: "Hexa Hub — Business Infrastructure Platform, Huntingdale Melbourne",
     template: "%s | Hexa Hub",
