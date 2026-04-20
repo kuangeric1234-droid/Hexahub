@@ -20,6 +20,7 @@ export async function submitEnquiry(
   const businessName = (formData.get("businessName") as string | null)?.trim();
   const message = (formData.get("message") as string | null)?.trim();
   const unitId = (formData.get("unitId") as string | null)?.trim();
+  const spaceType = (formData.get("spaceType") as string | null)?.trim();
   const source = (formData.get("source") as string | null)?.trim();
   const honeypot = formData.get("website") as string | null;
 
@@ -37,7 +38,6 @@ export async function submitEnquiry(
   const submittedAt = new Date().toISOString();
 
   try {
-    // Log to Sanity
     await client.create({
       _type: "enquiry",
       name,
@@ -45,7 +45,7 @@ export async function submitEnquiry(
       phone: phone || undefined,
       businessName: businessName || undefined,
       message,
-      unitIdText: unitId || undefined,
+      unitIdText: unitId || spaceType || undefined,
       submittedAt,
       status: "new",
       source: source || "website",
@@ -55,12 +55,13 @@ export async function submitEnquiry(
   }
 
   try {
-    const recipient = process.env.ENQUIRY_EMAIL ?? "leasing@hexahub.com.au";
+    const recipient = process.env.ENQUIRY_EMAIL ?? "marketing@hexa.com.au";
+    const interestLabel = unitId || spaceType || "General";
     await resend.emails.send({
-      from: "HexaHub Enquiries <enquiries@hexahub.com.au>",
+      from: "Hexa Hub Enquiries <enquiries@hexahub.com.au>",
       to: recipient,
       replyTo: email,
-      subject: unitId ? `New Enquiry — ${unitId}` : "New General Enquiry — HexaHub",
+      subject: unitId ? `New Enquiry — ${unitId}` : `New Enquiry — ${interestLabel}`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
           <h2 style="color:#111;margin-bottom:8px">New Enquiry${unitId ? ` — Unit ${unitId}` : ""}</h2>
@@ -71,7 +72,7 @@ export async function submitEnquiry(
               ["Email", email],
               ["Phone", phone || "—"],
               ["Business", businessName || "—"],
-              ["Unit Interest", unitId || "General"],
+              ["Interested in", interestLabel],
               ["Message", message],
             ]
               .map(
@@ -83,7 +84,7 @@ export async function submitEnquiry(
               )
               .join("")}
           </table>
-          <p style="margin-top:24px;font-size:12px;color:#999">Sent via HexaHub website contact form</p>
+          <p style="margin-top:24px;font-size:12px;color:#999">Sent via Hexa Hub website contact form</p>
         </div>
       `,
     });

@@ -6,13 +6,30 @@ import { CheckCircle, AlertCircle, Send } from "lucide-react";
 
 const initialState: EnquiryState = { success: false };
 
+const INTEREST_OPTIONS = [
+  { value: "", label: "Select an option…" },
+  { value: "warehouse", label: "Warehouse Unit" },
+  { value: "storage", label: "Storage Space" },
+  { value: "showroom-warehouse", label: "Showroom + Warehouse" },
+  { value: "office-warehouse", label: "Office + Warehouse" },
+  { value: "office", label: "Office" },
+  { value: "general", label: "General enquiry" },
+  { value: "book-tour", label: "Book a site tour" },
+];
+
 interface Props {
   unitId?: string;
   unitTitle?: string;
   source?: string;
+  showInterestField?: boolean;
 }
 
-export default function EnquiryForm({ unitId, unitTitle, source = "website" }: Props) {
+export default function EnquiryForm({
+  unitId,
+  unitTitle,
+  source = "website",
+  showInterestField = false,
+}: Props) {
   const [state, action, pending] = useActionState(submitEnquiry, initialState);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -90,6 +107,25 @@ export default function EnquiryForm({ unitId, unitTitle, source = "website" }: P
         </div>
       </div>
 
+      {showInterestField && (
+        <div>
+          <label htmlFor="eq-interest" className="block text-sm font-medium text-[#555555] mb-1.5">
+            I&apos;m interested in
+          </label>
+          <select
+            id="eq-interest"
+            name="spaceType"
+            className="w-full bg-white border border-[#E5E5E5] text-black px-4 py-3 text-sm focus:outline-none focus:border-[#2a3065] transition-colors"
+          >
+            {INTEREST_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
       <div>
         <label htmlFor="eq-message" className="block text-sm font-medium text-[#555555] mb-1.5">
           Message <span className="text-[#2a3065]">*</span>
@@ -100,7 +136,11 @@ export default function EnquiryForm({ unitId, unitTitle, source = "website" }: P
           required
           rows={5}
           className="w-full bg-white border border-[#E5E5E5] text-black placeholder-[#C8C8C8] px-4 py-3 text-sm focus:outline-none focus:border-[#2a3065] transition-colors resize-none"
-          placeholder={unitId ? `I'm interested in unit ${unitId}...` : "Tell us what you need — size, how you'll use the space, when you need it..."}
+          placeholder={
+            unitId
+              ? `I'm interested in unit ${unitId}…`
+              : "Tell us what you need — size, how you'll use the space, when you need it…"
+          }
         />
       </div>
 

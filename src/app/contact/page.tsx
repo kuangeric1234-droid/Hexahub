@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { MapPin, Mail, Clock, ExternalLink } from "lucide-react";
+import { MapPin, Mail, Phone, Clock, ExternalLink } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import EnquiryForm from "@/components/forms/EnquiryForm";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Get in touch with HexaHub to enquire about available units or book a site tour.",
+  description:
+    "Get in touch with Hexa Hub to enquire about available spaces, membership options, or book a site tour at Huntingdale Melbourne.",
 };
 
 export default function ContactPage() {
@@ -18,6 +19,9 @@ export default function ContactPage() {
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-2">Get in touch</p>
             <h1 className="text-3xl sm:text-4xl font-black text-black tracking-tight">Contact Us</h1>
+            <p className="text-[#6B6B6B] mt-3 text-base max-w-xl leading-relaxed">
+              Enquire about spaces, membership options, or book a tour — the team will get back to you within one business day.
+            </p>
           </div>
         </div>
 
@@ -31,9 +35,11 @@ export default function ContactPage() {
                   <MapPin size={18} className="text-[#2a3065] shrink-0 mt-0.5" />
                   <div>
                     <div className="text-black font-semibold text-sm mb-1">Address</div>
-                    <div className="text-[#555555] text-sm">17-31 Franklyn Street<br />Huntingdale VIC 3166</div>
+                    <div className="text-[#555555] text-sm">
+                      7 Distribution Circuit<br />Huntingdale VIC 3166
+                    </div>
                     <a
-                      href="https://maps.google.com/?q=17-31+Franklyn+Street+Huntingdale+VIC"
+                      href="https://maps.google.com/?q=7+Distribution+Circuit+Huntingdale+VIC"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 text-[#2a3065] text-xs mt-2 hover:underline"
@@ -46,8 +52,23 @@ export default function ContactPage() {
                   <Mail size={18} className="text-[#2a3065] shrink-0 mt-0.5" />
                   <div>
                     <div className="text-black font-semibold text-sm mb-1">Email</div>
-                    <a href="mailto:leasing@hexahub.com.au" className="text-[#555555] hover:text-black text-sm transition-colors">
-                      leasing@hexahub.com.au
+                    <a
+                      href="mailto:marketing@hexa.com.au"
+                      className="text-[#555555] hover:text-black text-sm transition-colors"
+                    >
+                      marketing@hexa.com.au
+                    </a>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <Phone size={18} className="text-[#2a3065] shrink-0 mt-0.5" />
+                  <div>
+                    <div className="text-black font-semibold text-sm mb-1">Phone</div>
+                    <a
+                      href="tel:+61406016666"
+                      className="text-[#555555] hover:text-black text-sm transition-colors"
+                    >
+                      +61 406 016 666
                     </a>
                   </div>
                 </div>
@@ -63,7 +84,7 @@ export default function ContactPage() {
               {/* Map placeholder */}
               <div className="mt-10 bg-[#F5F5F5] border border-[#E5E5E5] aspect-video flex items-center justify-center">
                 <a
-                  href="https://maps.google.com/?q=17-31+Franklyn+Street+Huntingdale+VIC"
+                  href="https://maps.google.com/?q=7+Distribution+Circuit+Huntingdale+VIC"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#2a3065] text-sm underline"
@@ -74,8 +95,10 @@ export default function ContactPage() {
 
               <div id="book-tour" className="mt-10 bg-[#F5F5F5] border border-[#2a3065]/40 p-6">
                 <h3 className="text-black font-bold mb-2">Book a Site Tour</h3>
-                <p className="text-[#555555] text-sm mb-4">
-                  The best way to understand the space is to walk it. We offer tours Monday–Friday. Mention &ldquo;book a tour&rdquo; in your message and we&apos;ll find a time that works.
+                <p className="text-[#555555] text-sm">
+                  The best way to understand the space is to walk it. We offer tours Monday–Friday. Select
+                  &ldquo;Book a site tour&rdquo; in the form, or mention it in your message, and we&apos;ll
+                  find a time that works.
                 </p>
               </div>
             </div>
@@ -83,7 +106,7 @@ export default function ContactPage() {
             {/* Form */}
             <div>
               <h2 className="text-black font-bold text-xl mb-6">Send an Enquiry</h2>
-              <EnquiryForm source="contact-page" />
+              <EnquiryForm source="contact-page" showInterestField={true} />
             </div>
           </div>
         </div>
