@@ -47,12 +47,28 @@ export type Partner = {
   featured?: boolean;
 };
 
+export type MemberCategory =
+  | "ecommerce-retail"
+  | "logistics-fulfilment"
+  | "technology-digital"
+  | "health-beauty"
+  | "food-beverage"
+  | "home-lifestyle"
+  | "fashion-apparel"
+  | "professional-services"
+  | "other";
+
 export type Member = {
   _id: string;
   name: string;
   logo?: { asset: { _ref: string } };
   website?: string;
-  industry?: string;
+  category?: MemberCategory;
+  featured?: boolean;
+  featuredPersonName?: string;
+  featuredPersonRole?: string;
+  featuredPersonPhoto?: { asset: { _ref: string } };
+  featuredStory?: string;
   order?: number;
   active?: boolean;
 };
@@ -159,6 +175,27 @@ export async function getPartners(): Promise<Partner[]> {
   return client.fetch(groq`*[_type == "partner" && featured == true] | order(order asc) { _id, name, slug, category, logo{ asset }, shortDescription, memberBenefits, website, order, featured }`);
 }
 
+const MEMBER_FIELDS = groq`
+  _id, name, website, category, featured,
+  featuredPersonName, featuredPersonRole, featuredStory,
+  logo{ asset },
+  featuredPersonPhoto{ asset },
+  order
+`;
+
+export async function getAllMembers(): Promise<Member[]> {
+  return client.fetch(groq`*[_type == "member" && active == true] | order(order asc) { ${MEMBER_FIELDS} }`);
+}
+
+export async function getFeaturedMembers(): Promise<Member[]> {
+  return client.fetch(groq`*[_type == "member" && active == true && featured == true] | order(order asc) { ${MEMBER_FIELDS} }`);
+}
+
+export async function getMembersByCategory(category: MemberCategory): Promise<Member[]> {
+  return client.fetch(groq`*[_type == "member" && active == true && category == $category] | order(order asc) { ${MEMBER_FIELDS} }`, { category });
+}
+
+/** @deprecated use getAllMembers */
 export async function getMembers(): Promise<Member[]> {
-  return client.fetch(groq`*[_type == "member" && active == true] | order(order asc) { _id, name, logo{ asset }, website, industry, order }`);
+  return getAllMembers();
 }
