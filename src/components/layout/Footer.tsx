@@ -76,6 +76,7 @@ export default function Footer() {
               {[
                 { href: "/about", label: "About Hexa Hub" },
                 { href: "/ecosystem", label: "Ecosystem Partners" },
+                { href: "/members", label: "Members" },
                 { href: "/events", label: "Events" },
                 { href: "/contact", label: "Contact" },
                 { href: "/contact#book-tour", label: "Book a Tour" },
