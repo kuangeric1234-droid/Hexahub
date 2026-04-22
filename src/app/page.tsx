@@ -312,25 +312,22 @@ export default async function HomePage() {
                       ))}
                     </ul>
 
-                    {/* Spacer pushes bottom row to bottom */}
+                    {/* Spacer pushes button to bottom */}
                     <div className="flex-1" />
 
-                    {/* Bottom row: both elements pinned to bottom-right, cross-fade on hover */}
-                    <div className="relative self-end h-11">
-                      {/* Arrow-circle — visible by default, fades out on hover */}
-                      <div className="space-card-arrow-btn absolute right-0 w-11 h-11 rounded-full bg-white flex items-center justify-center transition-opacity duration-200 ease-out">
+                    {/* Single morphing button: circle → pill on hover */}
+                    <Link
+                      href="/contact"
+                      aria-label={`Book a tour for ${card.title}`}
+                      className="space-card-btn self-end flex items-center overflow-hidden whitespace-nowrap rounded-full bg-white h-11 transition-[width] duration-[350ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
+                    >
+                      <span className="space-card-btn-text font-inter-tight font-medium text-[14px] text-[#2a3065] pl-4 pr-2 opacity-0 transition-opacity duration-200 flex-1 min-w-0">
+                        Book a tour
+                      </span>
+                      <span className="shrink-0 w-11 h-11 flex items-center justify-center">
                         <ArrowRight size={14} className="text-[#2a3065]" />
-                      </div>
-
-                      {/* Book a tour pill — hidden by default, fades in on hover */}
-                      <Link
-                        href="/contact"
-                        aria-label={`Book a tour for ${card.title}`}
-                        className="space-card-cta absolute right-0 opacity-0 pointer-events-none inline-flex items-center gap-1.5 bg-white text-[#2a3065] font-inter-tight font-medium text-[14px] px-5 py-2.5 rounded-full transition-opacity duration-[250ms] delay-100 ease-out whitespace-nowrap"
-                      >
-                        Book a tour <ArrowRight size={13} />
-                      </Link>
-                    </div>
+                      </span>
+                    </Link>
                   </div>
                 </div>
               ))}

@@ -114,11 +114,14 @@
    also live in @layer utilities. Within the same layer, specificity wins,
    and our multi-class hover selectors outrank the single-class utilities. */
 @layer utilities {
-  /* ── Touch / no-hover fallback: specs + pill always visible, arrow hidden ── */
+  /* Default button width = circle (44px) */
+  .space-card-btn { width: 44px; }
+
+  /* ── Touch / no-hover fallback: specs + expanded button always visible ── */
   @media (hover: none) {
     .space-type-card .space-card-specs { opacity: 1; }
-    .space-type-card .space-card-cta   { opacity: 1; pointer-events: auto; }
-    .space-type-card .space-card-arrow-btn { display: none; }
+    .space-type-card .space-card-btn { width: 180px; }
+    .space-type-card .space-card-btn-text { opacity: 1; }
   }
 
   @media (hover: hover) {
@@ -137,14 +140,14 @@
     .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-specs {
       opacity: 1;
     }
-    /* Active card: fade out arrow-circle */
-    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-arrow-btn {
-      opacity: 0;
+    /* Active card: expand button from circle → pill */
+    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-btn {
+      width: 180px;
     }
-    /* Active card: fade in pill + restore pointer-events */
-    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-cta {
+    /* Active card: fade in button text after width starts opening */
+    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-btn-text {
       opacity: 1;
-      pointer-events: auto;
+      transition-delay: 150ms;
     }
 
     /* Keyboard focus ring on the card container */
