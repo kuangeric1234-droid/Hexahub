@@ -62,18 +62,21 @@ const PILLARS = [
     label: "Space",
     title: "Five types of space, one address.",
     body: "Warehouses, storage, showrooms, offices, and combined office-warehouse units from 31–438m² at Huntingdale. Purpose-built, high-spec, and available now.",
+    href: "/spaces",
   },
   {
     icon: Zap,
     label: "Operations",
     title: "Infrastructure that works from day one.",
     body: "3-phase power, roller doors, loading zones, 24/7 keypad access, NBN, CCTV, and The Hub — a shared lounge and meeting space included for every tenant.",
+    href: "/operations",
   },
   {
     icon: Network,
     label: "Ecosystem",
     title: "A network of partners built in.",
     body: "Every member plugs into EIZ Technology, Digitec IT, Australia Post logistics, and direct mentorship — the partners you need to land and grow in Australia.",
+    href: "/ecosystem",
   },
 ];
 
@@ -172,15 +175,32 @@ export default async function HomePage() {
                 More than a lease. A complete operating platform.
               </h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {PILLARS.map(({ icon: Icon, label, title, body }) => (
-                <div key={label} className="border border-[#E5E5E5] p-8">
-                  <div className="w-10 h-10 bg-[#2a3065]/10 flex items-center justify-center mb-6">
-                    <Icon size={18} className="text-[#2a3065]" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {PILLARS.map(({ label, title, body, href }) => (
+                <div key={label} className="bg-[#F5F5F5] rounded-3xl p-6 lg:p-8 flex flex-col">
+                  {/* Image placeholder */}
+                  <div className="w-full aspect-[4/3] rounded-2xl bg-[#E5E5E5] flex items-center justify-center mb-6 shrink-0">
+                    <span className="text-[#6B6B6B] text-xs font-medium uppercase tracking-widest">Image placeholder</span>
                   </div>
+
+                  {/* Eyebrow */}
                   <p className="text-[#2a3065] text-xs font-semibold uppercase tracking-widest mb-3">{label}</p>
-                  <h3 className="text-black font-bold text-lg leading-snug mb-3">{title}</h3>
-                  <p className="text-[#6B6B6B] text-sm leading-relaxed">{body}</p>
+
+                  {/* Headline */}
+                  <h3 className="font-inter-tight font-semibold text-[rgb(36,43,43)] text-xl leading-snug mb-3">{title}</h3>
+
+                  {/* Body */}
+                  <p className="text-[#6B6B6B] text-sm leading-relaxed mb-8 flex-1">{body}</p>
+
+                  {/* CTA */}
+                  <div>
+                    <Link
+                      href={href}
+                      className="inline-flex items-center gap-2 bg-[#2a3065] hover:bg-[#1e2a54] text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors duration-200"
+                    >
+                      Learn more <ArrowRight size={14} />
+                    </Link>
+                  </div>
                 </div>
               ))}
             </div>
