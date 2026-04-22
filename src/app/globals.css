@@ -114,9 +114,11 @@
    also live in @layer utilities. Within the same layer, specificity wins,
    and our multi-class hover selectors outrank the single-class utilities. */
 @layer utilities {
-  /* ── Touch / no-hover fallback: specs always visible, arrow stays as-is ── */
+  /* ── Touch / no-hover fallback: specs + pill always visible, arrow hidden ── */
   @media (hover: none) {
     .space-type-card .space-card-specs { opacity: 1; }
+    .space-type-card .space-card-cta   { opacity: 1; pointer-events: auto; }
+    .space-type-card .space-card-arrow-btn { display: none; }
   }
 
   @media (hover: hover) {
@@ -135,13 +137,14 @@
     .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-specs {
       opacity: 1;
     }
-    /* Active card: invert arrow-circle (white bg → navy bg) */
+    /* Active card: fade out arrow-circle */
     .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-arrow-btn {
-      background-color: #2a3065;
+      opacity: 0;
     }
-    /* Active card: invert arrow icon (navy → white) */
-    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-arrow-icon {
-      color: #ffffff;
+    /* Active card: fade in pill + restore pointer-events */
+    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-cta {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     /* Keyboard focus ring on the card container */

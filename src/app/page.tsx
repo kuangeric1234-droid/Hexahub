@@ -311,17 +311,25 @@ export default async function HomePage() {
                       ))}
                     </ul>
 
-                    {/* Spacer pushes button to bottom */}
+                    {/* Spacer pushes bottom row to bottom */}
                     <div className="flex-1" />
 
-                    {/* Arrow-circle — the CTA. Inverts colour on hover (white→navy bg, navy→white arrow) */}
-                    <Link
-                      href="/contact"
-                      aria-label={`Book a tour — ${card.title}`}
-                      className="space-card-arrow-btn self-end w-11 h-11 rounded-full bg-white flex items-center justify-center transition-colors duration-300 ease-out"
-                    >
-                      <ArrowRight size={14} className="space-card-arrow-icon text-[#2a3065] transition-colors duration-300 ease-out" />
-                    </Link>
+                    {/* Bottom row: pill (bottom-left) + arrow-circle (bottom-right) — cross-fade on hover */}
+                    <div className="flex items-end justify-between">
+                      {/* Book a tour pill — hidden by default, fades in on hover */}
+                      <Link
+                        href="/contact"
+                        aria-label={`Book a tour for ${card.title}`}
+                        className="space-card-cta opacity-0 pointer-events-none inline-flex items-center gap-1.5 bg-white text-[#2a3065] font-inter-tight font-medium text-[14px] px-5 py-2.5 rounded-full transition-opacity duration-[250ms] delay-100 ease-out"
+                      >
+                        Book a tour <ArrowRight size={13} />
+                      </Link>
+
+                      {/* Arrow-circle — visible by default, fades out on hover */}
+                      <div className="space-card-arrow-btn w-11 h-11 rounded-full bg-white flex items-center justify-center transition-opacity duration-200 ease-out">
+                        <ArrowRight size={14} className="text-[#2a3065]" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
