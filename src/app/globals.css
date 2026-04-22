@@ -114,11 +114,9 @@
    also live in @layer utilities. Within the same layer, specificity wins,
    and our multi-class hover selectors outrank the single-class utilities. */
 @layer utilities {
-  /* ── Touch / no-hover fallback: specs + button always visible ── */
+  /* ── Touch / no-hover fallback: specs always visible, arrow stays as-is ── */
   @media (hover: none) {
     .space-type-card .space-card-specs { opacity: 1; }
-    .space-type-card .space-card-cta   { opacity: 1; transform: translateY(0); }
-    .space-type-card .space-card-arrow-indicator { display: none; }
   }
 
   @media (hover: hover) {
@@ -129,7 +127,7 @@
     .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-navy {
       opacity: 1;
     }
-    /* Active card: fade out bottom gradient (navy is solid, gradient fights it) */
+    /* Active card: fade out bottom gradient */
     .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-gradient {
       opacity: 0;
     }
@@ -137,19 +135,18 @@
     .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-specs {
       opacity: 1;
     }
-    /* Active card: hide directional arrow */
-    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-arrow-indicator {
-      opacity: 0;
+    /* Active card: invert arrow-circle (white bg → navy bg) */
+    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-arrow-btn {
+      background-color: #2a3065;
     }
-    /* Active card: slide CTA up into view */
-    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-cta {
-      opacity: 1;
-      transform: translateY(0);
+    /* Active card: invert arrow icon (navy → white) */
+    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-arrow-icon {
+      color: #ffffff;
     }
 
     /* Keyboard focus ring on the card container */
     .space-type-card:focus-visible {
-      outline: 2px solid #2a3065;
+      outline: 2px solid white;
       outline-offset: 2px;
     }
   }
