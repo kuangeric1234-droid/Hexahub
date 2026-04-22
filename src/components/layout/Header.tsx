@@ -28,35 +28,7 @@ type NavItem =
   | { type: "dropdown"; label: string; groups: DropdownGroup[] };
 
 const NAV_CONFIG: NavItem[] = [
-  {
-    type: "dropdown",
-    label: "Spaces",
-    groups: [
-      {
-        // No heading — single-column panel
-        items: [
-          {
-            title: "Access Plans",
-            href: "/access-plans",
-            description: "Business address and flexible access to Huntingdale — without a full lease",
-            icon: Key,
-          },
-          {
-            title: "Warehouse Spaces",
-            href: "/warehouse-spaces",
-            description: "Dedicated warehouse units from 223–438m² with 3-phase power and roller doors",
-            icon: Package,
-          },
-          {
-            title: "Office Spaces",
-            href: "/office-spaces",
-            description: "Private offices with natural light and district views — 128–136m²",
-            icon: Building2,
-          },
-        ],
-      },
-    ],
-  },
+  { type: "link", label: "Spaces", href: "/spaces" },
   {
     type: "dropdown",
     label: "Services",
