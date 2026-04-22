@@ -55,15 +55,19 @@ const AMENITIES = [
 ];
 
 export default function AmenitiesAccordion() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndices, setOpenIndices] = useState<Set<number>>(new Set());
 
   const toggle = (i: number) =>
-    setOpenIndex((prev) => (prev === i ? null : i));
+    setOpenIndices((prev) => {
+      const next = new Set(prev);
+      next.has(i) ? next.delete(i) : next.add(i);
+      return next;
+    });
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 items-start">
       {AMENITIES.map((item, i) => {
-        const isOpen = openIndex === i;
+        const isOpen = openIndices.has(i);
         const panelId = `amenity-panel-${i}`;
         return (
           <div
