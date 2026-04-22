@@ -9,6 +9,7 @@ import { getFeaturedLeaseUnits, getFeaturedSaleUnits, getSiteSettings, getPartne
 const SPACE_TYPES = [
   {
     type: "warehouse",
+    category: "WAREHOUSE",
     title: "Warehouses",
     desc: "223–438m² with 3-phase power, roller doors, and mezzanine offices. Built for importers and e-commerce operators.",
     href: "/units?type=warehouse",
@@ -16,6 +17,7 @@ const SPACE_TYPES = [
   },
   {
     type: "storage",
+    category: "STORAGE",
     title: "Storage Spaces",
     desc: "31–75m² drive-through storage with 24/7 wireless keypad access. Flexible monthly memberships available.",
     href: "/units?type=storage",
@@ -23,6 +25,7 @@ const SPACE_TYPES = [
   },
   {
     type: "showroom-warehouse",
+    category: "WAREHOUSE",
     title: "Showroom + Warehouse",
     desc: "Dual-purpose units combining street-facing showroom space with operational warehouse behind.",
     href: "/units?type=showroom-warehouse",
@@ -30,6 +33,7 @@ const SPACE_TYPES = [
   },
   {
     type: "office-warehouse",
+    category: "WAREHOUSE",
     title: "Office + Warehouse",
     desc: "240m² over two levels — full-floor office above, warehouse with tilt door below. Street frontage.",
     href: "/units?type=office-warehouse",
@@ -37,6 +41,7 @@ const SPACE_TYPES = [
   },
   {
     type: "office",
+    category: "OFFICE",
     title: "Offices",
     desc: "128–136m² private offices with natural light and district views. Ground and first floor options.",
     href: "/units?type=office",
@@ -246,27 +251,33 @@ export default async function HomePage() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div className="space-types-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
               {SPACE_TYPES.map((card) => (
                 <Link
                   key={card.type}
                   href={card.href}
-                  className="group relative overflow-hidden bg-[#F5F5F5] border border-[#E5E5E5] hover:border-[#2a3065]/50 transition-all duration-300 aspect-[3/4] flex flex-col justify-end"
+                  className="space-type-card group relative overflow-hidden bg-[#F5F5F5] border border-[#E5E5E5] transition-all duration-300 ease-out aspect-[3/4] flex flex-col justify-end"
                 >
                   <Image
                     src={card.img}
                     alt={card.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-50"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-75"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                  {/* Gradient overlay — fades on hover via CSS */}
+                  <div className="space-card-overlay absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent transition-opacity duration-300" />
+                  {/* Sibling-dim overlay — becomes visible on non-hovered cards via CSS :has() */}
+                  <div className="space-card-dim absolute inset-0 bg-black opacity-0 transition-opacity duration-300 pointer-events-none" />
                   <div className="relative p-4">
+                    <p className="text-white/40 text-[10px] font-medium uppercase tracking-[0.09em] mb-1">{card.category}</p>
                     <h3 className="text-white font-bold text-sm leading-tight mb-1.5">{card.title}</h3>
                     <p className="text-white/60 text-xs leading-snug line-clamp-3">{card.desc}</p>
                     <div className="flex items-center gap-1 mt-2.5">
                       <span className="text-white/80 text-xs">View units</span>
-                      <ArrowRight size={10} className="text-white/80" />
+                      <span className="space-card-arrow inline-flex transition-transform duration-300 ease-out">
+                        <ArrowRight size={10} className="text-white/80" />
+                      </span>
                     </div>
                   </div>
                 </Link>

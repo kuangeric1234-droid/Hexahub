@@ -97,3 +97,37 @@
     background: #6B6B6B;
   }
 }
+
+/* ── Space Types Grid — Saltbox hover effect ──────────────────────────────
+   Gated behind @media (hover: hover) so touch devices always show the
+   default bright state with no dimming. */
+@layer components {
+  @media (hover: hover) {
+    /* Hovered card: lift + shadow */
+    .space-types-grid .space-type-card:is(:hover, :focus-visible) {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.28);
+    }
+
+    /* Hovered card: fade the gradient overlay to near-transparent */
+    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-overlay {
+      opacity: 0.12;
+    }
+
+    /* Sibling cards: show dim overlay on non-active cards */
+    .space-types-grid:has(.space-type-card:is(:hover, :focus-visible)) .space-type-card:not(:is(:hover, :focus-visible)) .space-card-dim {
+      opacity: 0.55;
+    }
+
+    /* Arrow slides right on hovered card */
+    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-arrow {
+      transform: translateX(4px);
+    }
+
+    /* Keyboard focus outline (complements the global :focus-visible rule) */
+    .space-type-card:focus-visible {
+      outline: 2px solid #2a3065;
+      outline-offset: 2px;
+    }
+  }
+}
