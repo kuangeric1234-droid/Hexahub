@@ -2,6 +2,7 @@
 
 import { Resend } from "resend";
 import { client } from "@/lib/sanity/client";
+import { createOrUpdateContact } from "@/lib/hubspot/client";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -91,6 +92,20 @@ export async function submitEnquiry(
   } catch {
     // Email failed — enquiry still saved to Sanity
   }
+
+  // HubSpot — last, most likely to fail due to external API
+  const [firstName, ...rest] = name.split(" ");
+  const lastName = rest.join(" ") || undefined;
+  await createOrUpdateContact({
+    email,
+    firstName: firstName || undefined,
+    lastName,
+    phone: phone || undefined,
+    company: businessName || undefined,
+    leadSource: "Website Contact Form",
+    message: message || undefined,
+  });
+  // Failures are already logged with [HUBSPOT_ERROR] prefix inside createOrUpdateContact
 
   return { success: true };
 }
