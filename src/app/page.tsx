@@ -88,15 +88,13 @@ export default async function HomePage() {
     getMembers().catch(() => []),
   ]);
 
-  const headline = "Where brands land, operate, and grow.";
-  const subheadline = "Hexa Hub is a business infrastructure platform at Huntingdale, Melbourne — space, operations, and a connected ecosystem, all in one place.";
 
   return (
     <>
       <Header />
       <main>
         {/* ── HERO ── */}
-        <section className="relative min-h-screen flex items-end pb-24 pt-16 overflow-hidden">
+        <section className="relative min-h-screen flex items-center pt-16 pb-16 overflow-hidden">
           <Image
             src="/renders/Aerial.jpg"
             alt="Hexa Hub precinct aerial view, Huntingdale Melbourne"
@@ -105,48 +103,59 @@ export default async function HomePage() {
             className="object-cover object-center"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/20" />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/30" />
+          {/* Subtle overlay — lighter than before so the aerial photo breathes */}
+          <div className="absolute inset-0 bg-black/25" />
 
-          <div className="relative max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20 w-full">
-            <div className="max-w-3xl">
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.0] tracking-tight mb-6">
-                {headline}
+          <div className="relative max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20 w-full flex flex-col gap-10">
+
+            {/* ── Light content panel ── */}
+            <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl py-12 lg:py-16 px-8 lg:px-12 max-w-3xl w-full">
+
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#2a3065] leading-[1.15] tracking-tight mb-6">
+                Flexible{" "}
+                <span className="italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">space</span>
+                , on-site{" "}
+                <span className="italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">operations</span>
+                {" "}and an{" "}
+                <span className="italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">ecosystem</span>
+                {" "}built for brands scaling in Australia
               </h1>
-              <p className="text-white/60 text-lg sm:text-xl leading-relaxed mb-10 max-w-xl">
-                {subheadline}
+
+              <p className="text-gray-600 text-lg leading-relaxed mb-10">
+                Hexa Hub is a business infrastructure platform at Huntingdale, Melbourne — giving brands the space, operations, and partners to land and scale in Australia.
               </p>
 
               <div className="flex flex-wrap items-center gap-4">
                 <Link
-                  href="/units"
+                  href="/contact#book-tour"
                   className="inline-flex items-center gap-2 bg-[#2a3065] hover:bg-[#1e2a54] text-white font-bold px-8 py-4 text-base transition-colors duration-200"
                 >
-                  Browse Spaces
-                  <ArrowRight size={16} />
+                  Book a tour
                 </Link>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 border border-white/30 hover:border-white/60 text-white font-semibold px-8 py-4 text-base transition-colors duration-200"
+                  className="inline-flex items-center gap-2 text-[#2a3065] font-semibold text-base hover:underline transition-colors duration-200"
                 >
-                  Enquire Now
+                  Speak to our team <ArrowRight size={16} />
                 </Link>
               </div>
-
-              <div className="flex flex-wrap items-center gap-x-8 gap-y-2 mt-10 pt-10 border-t border-white/10">
-                {[
-                  ["5", "Space Types"],
-                  ["31–438", "m² Range"],
-                  ["4", "Ecosystem Partners"],
-                  ["24/7", "Site Access"],
-                ].map(([val, label]) => (
-                  <div key={label}>
-                    <div className="text-white font-black text-2xl">{val}</div>
-                    <div className="text-white/50 text-xs mt-0.5">{label}</div>
-                  </div>
-                ))}
-              </div>
             </div>
+
+            {/* ── Stats row — outside panel, white text on photo ── */}
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-3 pt-8 border-t border-white/25">
+              {[
+                ["5", "Space Types"],
+                ["31–438", "m² Range"],
+                ["4", "Ecosystem Partners"],
+                ["24/7", "Site Access"],
+              ].map(([val, label]) => (
+                <div key={label}>
+                  <div className="text-white font-black text-2xl">{val}</div>
+                  <div className="text-white/60 text-xs mt-0.5">{label}</div>
+                </div>
+              ))}
+            </div>
+
           </div>
         </section>
 
