@@ -109,10 +109,11 @@
 }
 
 /* ── Space Types Grid — hover-reveal specs + navy overlay ─────────────────
-   All hover effects are gated behind @media (hover: hover) so touch devices
-   always see the full card content (specs + button visible by default via
-   the no-hover block below). */
-@layer components {
+   Must be in @layer utilities (not @layer components) so these rules win
+   over Tailwind utility classes like opacity-0 and translate-y-3, which
+   also live in @layer utilities. Within the same layer, specificity wins,
+   and our multi-class hover selectors outrank the single-class utilities. */
+@layer utilities {
   /* ── Touch / no-hover fallback: specs + button always visible ── */
   @media (hover: none) {
     .space-type-card .space-card-specs { opacity: 1; }
@@ -128,7 +129,7 @@
     .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-navy {
       opacity: 1;
     }
-    /* Active card: fade out the gradient (navy is solid, gradient not needed) */
+    /* Active card: fade out bottom gradient (navy is solid, gradient fights it) */
     .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-gradient {
       opacity: 0;
     }
@@ -136,17 +137,17 @@
     .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-specs {
       opacity: 1;
     }
-    /* Active card: hide arrow indicator */
+    /* Active card: hide directional arrow */
     .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-arrow-indicator {
       opacity: 0;
     }
-    /* Active card: slide CTA button up into view */
+    /* Active card: slide CTA up into view */
     .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-cta {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* Keyboard focus outline */
+    /* Keyboard focus ring on the card container */
     .space-type-card:focus-visible {
       outline: 2px solid #2a3065;
       outline-offset: 2px;

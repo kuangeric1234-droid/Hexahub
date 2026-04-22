@@ -294,27 +294,27 @@ export default async function HomePage() {
                   {/* Default gradient (bottom-up) — fades out on hover */}
                   <div className="space-card-gradient absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 ease-out" />
 
-                  {/* Content layer */}
-                  <div className="relative flex flex-col h-full p-4 lg:p-5">
+                  {/* Content layer — z-10 ensures it sits above image + overlays */}
+                  <div className="relative z-10 flex flex-col h-full p-4 lg:p-5">
                     {/* Title — always visible at top-left */}
                     <h3 className="font-inter-tight font-semibold text-white text-base lg:text-[17px] leading-snug">
                       {card.title}
                     </h3>
 
                     {/* Specs — hidden by default, revealed on hover */}
-                    <ul className="space-card-specs mt-3 flex flex-col gap-1.5 opacity-0 transition-opacity duration-300 ease-out">
+                    <ul className="space-card-specs mt-3 flex flex-col gap-2 opacity-0 transition-opacity duration-300 ease-out">
                       {card.specs.map((spec) => (
-                        <li key={spec} className="text-white/80 text-xs leading-snug flex items-start gap-1.5">
-                          <span className="mt-[3px] shrink-0 w-1 h-1 rounded-full bg-white/60 inline-block" />
+                        <li key={spec} className="text-white/85 text-[13px] leading-snug flex items-start gap-2">
+                          <span className="mt-1.5 shrink-0 w-1 h-1 rounded-full bg-white/60 inline-block" />
                           {spec}
                         </li>
                       ))}
                     </ul>
 
-                    {/* Spacer pushes button to bottom */}
+                    {/* Spacer pushes indicators to bottom */}
                     <div className="flex-1" />
 
-                    {/* Arrow indicator — visible in default state, hidden when specs appear */}
+                    {/* Arrow indicator — visible at rest, fades out on hover */}
                     <div className="space-card-arrow-indicator self-end w-7 h-7 rounded-full bg-white/20 flex items-center justify-center transition-opacity duration-300 ease-out">
                       <ArrowRight size={12} className="text-white" />
                     </div>
@@ -322,7 +322,7 @@ export default async function HomePage() {
                     {/* Book a tour button — slides up on hover */}
                     <Link
                       href="/contact"
-                      className="space-card-cta mt-3 inline-flex items-center gap-1.5 bg-white text-[#2a3065] text-xs font-semibold px-4 py-2 rounded-full opacity-0 translate-y-3 transition-all duration-300 ease-out self-start"
+                      className="space-card-cta mt-3 inline-flex items-center gap-1.5 bg-white text-[#2a3065] text-[13px] font-semibold px-4 py-2 rounded-full opacity-0 translate-y-3 transition-all duration-300 ease-out self-start"
                     >
                       Book a tour <ArrowRight size={11} />
                     </Link>
