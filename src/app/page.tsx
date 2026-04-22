@@ -94,68 +94,78 @@ export default async function HomePage() {
       <Header />
       <main>
         {/* ── HERO ── */}
-        <section className="relative min-h-screen flex items-center pt-16 pb-16 overflow-hidden">
-          <Image
-            src="/renders/Aerial.jpg"
-            alt="Hexa Hub precinct aerial view, Huntingdale Melbourne"
-            fill
-            priority
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-          {/* Subtle overlay — lighter than before so the aerial photo breathes */}
-          <div className="absolute inset-0 bg-black/25" />
+        <section className="bg-white pt-24 pb-16 lg:pt-32 lg:pb-24">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-          <div className="relative max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20 w-full flex flex-col gap-10">
+              {/* ── Left: text column ── */}
+              <div>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#2a3065] leading-[1.1] tracking-tight mb-6">
+                  Flexible{" "}
+                  <span className="italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">space</span>
+                  , on-site{" "}
+                  <span className="italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">operations</span>
+                  {" "}and an{" "}
+                  <span className="italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">ecosystem</span>
+                  {" "}built for brands scaling in Australia
+                </h1>
 
-            {/* ── Light content panel ── */}
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl py-12 lg:py-16 px-8 lg:px-12 max-w-3xl w-full">
+                <p className="text-gray-600 text-lg leading-relaxed mb-10 max-w-xl">
+                  Hexa Hub is a business infrastructure platform at Huntingdale, Melbourne — giving brands the space, operations, and partners to land and scale in Australia.
+                </p>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#2a3065] leading-[1.15] tracking-tight mb-6">
-                Flexible{" "}
-                <span className="italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">space</span>
-                , on-site{" "}
-                <span className="italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">operations</span>
-                {" "}and an{" "}
-                <span className="italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">ecosystem</span>
-                {" "}built for brands scaling in Australia
-              </h1>
-
-              <p className="text-gray-600 text-lg leading-relaxed mb-10">
-                Hexa Hub is a business infrastructure platform at Huntingdale, Melbourne — giving brands the space, operations, and partners to land and scale in Australia.
-              </p>
-
-              <div className="flex flex-wrap items-center gap-4">
-                <Link
-                  href="/contact#book-tour"
-                  className="inline-flex items-center gap-2 bg-[#2a3065] hover:bg-[#1e2a54] text-white font-bold px-8 py-4 text-base transition-colors duration-200"
-                >
-                  Book a tour
-                </Link>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 text-[#2a3065] font-semibold text-base hover:underline transition-colors duration-200"
-                >
-                  Speak to our team <ArrowRight size={16} />
-                </Link>
-              </div>
-            </div>
-
-            {/* ── Stats row — outside panel, white text on photo ── */}
-            <div className="flex flex-wrap items-center gap-x-8 gap-y-3 pt-8 border-t border-white/25">
-              {[
-                ["5", "Space Types"],
-                ["31–438", "m² Range"],
-                ["4", "Ecosystem Partners"],
-                ["24/7", "Site Access"],
-              ].map(([val, label]) => (
-                <div key={label}>
-                  <div className="text-white font-black text-2xl">{val}</div>
-                  <div className="text-white/60 text-xs mt-0.5">{label}</div>
+                <div className="flex flex-wrap items-center gap-4 mb-12">
+                  <Link
+                    href="/contact#book-tour"
+                    className="inline-flex items-center gap-2 bg-[#2a3065] hover:bg-[#1e2a54] text-white font-bold px-8 py-4 text-base transition-colors duration-200"
+                  >
+                    Book a tour
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center gap-2 text-[#2a3065] font-semibold text-base hover:underline transition-colors duration-200"
+                  >
+                    Speak to our team <ArrowRight size={16} />
+                  </Link>
                 </div>
-              ))}
-            </div>
 
+                {/* Stats row */}
+                <div className="flex flex-wrap gap-x-8 gap-y-4 pt-8 border-t border-[#E5E5E5]">
+                  {[
+                    ["5", "Space Types"],
+                    ["31–438", "m² Range"],
+                    ["4", "Ecosystem Partners"],
+                    ["24/7", "Site Access"],
+                  ].map(([val, label]) => (
+                    <div key={label}>
+                      <div className="text-[#2a3065] font-black text-2xl">{val}</div>
+                      <div className="text-gray-500 text-xs uppercase tracking-wide mt-0.5">{label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* ── Right: media column ── */}
+              <div className="relative">
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+                  <Image
+                    src="/renders/Aerial.jpg"
+                    alt="Hexa Hub precinct aerial view, Huntingdale Melbourne"
+                    fill
+                    priority
+                    className="object-cover object-center"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                </div>
+                {/* Pull-quote overlay */}
+                <div className="absolute bottom-6 left-6 bg-[#2a3065] text-white rounded-xl p-5 max-w-[260px] shadow-lg">
+                  <p className="text-sm font-semibold leading-snug">
+                    More than a lease. A business platform for brands landing and growing in Australia.
+                  </p>
+                </div>
+              </div>
+
+            </div>
           </div>
         </section>
 
