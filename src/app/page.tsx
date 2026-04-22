@@ -100,13 +100,13 @@ export default async function HomePage() {
 
               {/* ── Left: text column ── */}
               <div>
-                <h1 className="font-inter-tight text-4xl sm:text-5xl lg:text-6xl font-extrabold text-black leading-[1.1] tracking-tight mb-6">
+                <h1 className="font-inter-tight font-medium text-[36px] leading-[44px] sm:text-[44px] sm:leading-[54px] lg:text-[56px] lg:leading-[67px] text-[rgb(36,43,43)] tracking-tight mb-6">
                   Flexible{" "}
-                  <span className="font-besley italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">space</span>
+                  <span className="font-besley font-medium italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">space</span>
                   , on-site{" "}
-                  <span className="font-besley italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">operations</span>
+                  <span className="font-besley font-medium italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">operations</span>
                   {" "}and an{" "}
-                  <span className="font-besley italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">ecosystem</span>
+                  <span className="font-besley font-medium italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">ecosystem</span>
                   {" "}built for brands scaling in Australia
                 </h1>
 

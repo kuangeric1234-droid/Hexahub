@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
-import { Montserrat, Inter, Inter_Tight, Besley } from "next/font/google";
+import { Inter, Inter_Tight, Besley } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  variable: "--font-montserrat",
-  display: "swap",
-});
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,21 +12,18 @@ const inter = Inter({
 
 const interTight = Inter_Tight({
   subsets: ["latin"],
-  weight: ["700", "800", "900"],
+  weight: ["500", "600", "700", "800", "900"],
   variable: "--font-inter-tight",
   display: "swap",
 });
 
 const besley = Besley({
   subsets: ["latin"],
-  weight: ["700"],
+  weight: ["500", "700"],
   style: ["italic"],
   variable: "--font-besley",
   display: "swap",
 });
-
-// TODO: Replace Montserrat with Gotham/GT America when licensed webfonts are available.
-// Update --font-display in globals.css to point to the new font CSS variable.
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://hexahub.com.au"),
@@ -75,7 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
-    <html lang="en-AU" className={`h-full antialiased ${montserrat.variable} ${inter.variable} ${interTight.variable} ${besley.variable}`}>
+    <html lang="en-AU" className={`h-full antialiased ${inter.variable} ${interTight.variable} ${besley.variable}`}>
       <body className="min-h-full flex flex-col">
         {children}
         {gaId && (
