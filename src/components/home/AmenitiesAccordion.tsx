@@ -55,15 +55,15 @@ const AMENITIES = [
 ];
 
 export default function AmenitiesAccordion() {
-  const [open, setOpen] = useState<Record<number, boolean>>({});
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggle = (i: number) =>
-    setOpen((prev) => ({ ...prev, [i]: !prev[i] }));
+    setOpenIndex((prev) => (prev === i ? null : i));
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 items-start">
       {AMENITIES.map((item, i) => {
-        const isOpen = !!open[i];
+        const isOpen = openIndex === i;
         const panelId = `amenity-panel-${i}`;
         return (
           <div
@@ -93,9 +93,7 @@ export default function AmenitiesAccordion() {
               id={panelId}
               role="region"
               className="overflow-hidden transition-all duration-200 ease-out"
-              style={{
-                maxHeight: isOpen ? "200px" : "0px",
-              }}
+              style={{ maxHeight: isOpen ? "200px" : "0px" }}
             >
               <p className="px-5 pb-4 pt-1 text-[#6B6B6B] text-sm leading-relaxed">
                 {item.desc}
