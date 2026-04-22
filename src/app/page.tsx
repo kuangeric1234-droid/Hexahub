@@ -8,43 +8,33 @@ import { getFeaturedLeaseUnits, getFeaturedSaleUnits, getSiteSettings, getPartne
 
 const SPACE_TYPES = [
   {
-    type: "warehouse",
-    category: "WAREHOUSE",
-    title: "Warehouses",
-    desc: "223–438m² with 3-phase power, roller doors, and mezzanine offices. Built for importers and e-commerce operators.",
-    href: "/units?type=warehouse",
-    img: "/renders/Internal.jpg",
-  },
-  {
     type: "storage",
-    category: "STORAGE",
     title: "Storage Spaces",
-    desc: "31–75m² drive-through storage with 24/7 wireless keypad access. Flexible monthly memberships available.",
-    href: "/units?type=storage",
+    specs: ["31–75m² drive-through storage", "24/7 wireless keypad access", "Flexible monthly membership"],
     img: "/renders/Storage Final Image LOW RES.jpg",
   },
   {
+    type: "warehouse",
+    title: "Warehouses",
+    specs: ["223–438m² warehouse units", "3-phase power, roller doors", "Mezzanine offices included"],
+    img: "/renders/Internal.jpg",
+  },
+  {
     type: "showroom-warehouse",
-    category: "WAREHOUSE",
     title: "Showroom + Warehouse",
-    desc: "Dual-purpose units combining street-facing showroom space with operational warehouse behind.",
-    href: "/units?type=showroom-warehouse",
+    specs: ["Dual-purpose units", "Street-facing showroom space", "Operational warehouse behind"],
     img: "/renders/Block H Front.jpg",
   },
   {
     type: "office-warehouse",
-    category: "WAREHOUSE",
     title: "Office + Warehouse",
-    desc: "240m² over two levels — full-floor office above, warehouse with tilt door below. Street frontage.",
-    href: "/units?type=office-warehouse",
+    specs: ["240m² over two levels", "Full-floor office above", "Warehouse with tilt door below", "Street frontage"],
     img: "/renders/Mezzanine.jpg",
   },
   {
     type: "office",
-    category: "OFFICE",
     title: "Offices",
-    desc: "128–136m² private offices with natural light and district views. Ground and first floor options.",
-    href: "/units?type=office",
+    specs: ["128–136m² private offices", "Natural light, district views", "Ground and first floor options"],
     img: "/renders/Block B Front.jpg",
   },
 ];
@@ -282,36 +272,62 @@ export default async function HomePage() {
               </Link>
             </div>
 
-            <div className="space-types-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div className="space-types-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
               {SPACE_TYPES.map((card) => (
-                <Link
+                <div
                   key={card.type}
-                  href={card.href}
-                  className="space-type-card group relative overflow-hidden bg-[#F5F5F5] border border-[#E5E5E5] transition-all duration-300 ease-out aspect-[3/4] flex flex-col justify-end"
+                  className="space-type-card group relative overflow-hidden rounded-2xl aspect-[2/3] flex flex-col"
+                  tabIndex={0}
                 >
+                  {/* Background image */}
                   <Image
                     src={card.img}
                     alt={card.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-75"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
+                    className="space-card-image object-cover transition-opacity duration-300 ease-out"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                   />
-                  {/* Gradient overlay — fades on hover via CSS */}
-                  <div className="space-card-overlay absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent transition-opacity duration-300" />
-                  {/* Sibling-dim overlay — becomes visible on non-hovered cards via CSS :has() */}
-                  <div className="space-card-dim absolute inset-0 bg-black opacity-0 transition-opacity duration-300 pointer-events-none" />
-                  <div className="relative p-4">
-                    <p className="text-white/40 text-[10px] font-medium uppercase tracking-[0.09em] mb-1">{card.category}</p>
-                    <h3 className="text-white font-bold text-sm leading-tight mb-1.5">{card.title}</h3>
-                    <p className="text-white/60 text-xs leading-snug line-clamp-3">{card.desc}</p>
-                    <div className="flex items-center gap-1 mt-2.5">
-                      <span className="text-white/80 text-xs">View units</span>
-                      <span className="space-card-arrow inline-flex transition-transform duration-300 ease-out">
-                        <ArrowRight size={10} className="text-white/80" />
-                      </span>
+
+                  {/* Navy reveal overlay — fades in on hover */}
+                  <div className="space-card-navy absolute inset-0 bg-[#2a3065] transition-opacity duration-300 ease-out opacity-0" />
+
+                  {/* Default gradient (bottom-up) — fades out on hover */}
+                  <div className="space-card-gradient absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 ease-out" />
+
+                  {/* Content layer */}
+                  <div className="relative flex flex-col h-full p-4 lg:p-5">
+                    {/* Title — always visible at top-left */}
+                    <h3 className="font-inter-tight font-semibold text-white text-base lg:text-[17px] leading-snug">
+                      {card.title}
+                    </h3>
+
+                    {/* Specs — hidden by default, revealed on hover */}
+                    <ul className="space-card-specs mt-3 flex flex-col gap-1.5 opacity-0 transition-opacity duration-300 ease-out">
+                      {card.specs.map((spec) => (
+                        <li key={spec} className="text-white/80 text-xs leading-snug flex items-start gap-1.5">
+                          <span className="mt-[3px] shrink-0 w-1 h-1 rounded-full bg-white/60 inline-block" />
+                          {spec}
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Spacer pushes button to bottom */}
+                    <div className="flex-1" />
+
+                    {/* Arrow indicator — visible in default state, hidden when specs appear */}
+                    <div className="space-card-arrow-indicator self-end w-7 h-7 rounded-full bg-white/20 flex items-center justify-center transition-opacity duration-300 ease-out">
+                      <ArrowRight size={12} className="text-white" />
                     </div>
+
+                    {/* Book a tour button — slides up on hover */}
+                    <Link
+                      href="/contact"
+                      className="space-card-cta mt-3 inline-flex items-center gap-1.5 bg-white text-[#2a3065] text-xs font-semibold px-4 py-2 rounded-full opacity-0 translate-y-3 transition-all duration-300 ease-out self-start"
+                    >
+                      Book a tour <ArrowRight size={11} />
+                    </Link>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           </div>

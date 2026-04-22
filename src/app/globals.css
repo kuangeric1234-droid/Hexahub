@@ -108,33 +108,45 @@
   }
 }
 
-/* ── Space Types Grid — Saltbox hover effect ──────────────────────────────
-   Gated behind @media (hover: hover) so touch devices always show the
-   default bright state with no dimming. */
+/* ── Space Types Grid — hover-reveal specs + navy overlay ─────────────────
+   All hover effects are gated behind @media (hover: hover) so touch devices
+   always see the full card content (specs + button visible by default via
+   the no-hover block below). */
 @layer components {
+  /* ── Touch / no-hover fallback: specs + button always visible ── */
+  @media (hover: none) {
+    .space-type-card .space-card-specs { opacity: 1; }
+    .space-type-card .space-card-cta   { opacity: 1; transform: translateY(0); }
+    .space-type-card .space-card-arrow-indicator { display: none; }
+  }
+
   @media (hover: hover) {
-    /* Hovered card: lift + shadow */
-    .space-types-grid .space-type-card:is(:hover, :focus-visible) {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.28);
+    /* Active card: fade out image, fade in navy */
+    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-image {
+      opacity: 0;
+    }
+    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-navy {
+      opacity: 1;
+    }
+    /* Active card: fade out the gradient (navy is solid, gradient not needed) */
+    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-gradient {
+      opacity: 0;
+    }
+    /* Active card: reveal specs */
+    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-specs {
+      opacity: 1;
+    }
+    /* Active card: hide arrow indicator */
+    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-arrow-indicator {
+      opacity: 0;
+    }
+    /* Active card: slide CTA button up into view */
+    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-cta {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    /* Hovered card: fade the gradient overlay to near-transparent */
-    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-overlay {
-      opacity: 0.12;
-    }
-
-    /* Sibling cards: show dim overlay on non-active cards */
-    .space-types-grid:has(.space-type-card:is(:hover, :focus-visible)) .space-type-card:not(:is(:hover, :focus-visible)) .space-card-dim {
-      opacity: 0.55;
-    }
-
-    /* Arrow slides right on hovered card */
-    .space-types-grid .space-type-card:is(:hover, :focus-visible) .space-card-arrow {
-      transform: translateX(4px);
-    }
-
-    /* Keyboard focus outline (complements the global :focus-visible rule) */
+    /* Keyboard focus outline */
     .space-type-card:focus-visible {
       outline: 2px solid #2a3065;
       outline-offset: 2px;
