@@ -315,16 +315,21 @@ export default async function HomePage() {
                     {/* Spacer pushes button to bottom */}
                     <div className="flex-1" />
 
-                    {/* Single morphing button: circle → pill on hover */}
+                    {/* Single morphing button: circle → pill on hover.
+                        Arrow is absolute right-0 w-11, so it fills the
+                        44px circle (centred) and stays pinned right as
+                        the pill expands. Text occupies the space to its left. */}
                     <Link
                       href="/contact"
                       aria-label={`Book a tour for ${card.title}`}
-                      className="space-card-btn self-end flex items-center overflow-hidden whitespace-nowrap rounded-full bg-white h-11 transition-[width] duration-[350ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
+                      className="space-card-btn relative self-end overflow-hidden rounded-full bg-white h-11 transition-[width] duration-[350ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
                     >
-                      <span className="space-card-btn-text font-inter-tight font-medium text-[14px] text-[#2a3065] pl-4 pr-2 opacity-0 transition-opacity duration-200 flex-1 min-w-0">
+                      {/* Text — clipped by overflow-hidden when pill is 44px wide */}
+                      <span className="space-card-btn-text absolute inset-y-0 left-0 right-11 flex items-center pl-4 font-inter-tight font-medium text-[14px] text-[#2a3065] whitespace-nowrap opacity-0 transition-opacity duration-200">
                         Book a tour
                       </span>
-                      <span className="shrink-0 w-11 h-11 flex items-center justify-center">
+                      {/* Arrow — always fills the rightmost 44px, visually centred in circle state */}
+                      <span className="absolute inset-y-0 right-0 w-11 flex items-center justify-center pointer-events-none">
                         <ArrowRight size={14} className="text-[#2a3065]" />
                       </span>
                     </Link>
