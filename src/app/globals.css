@@ -98,6 +98,16 @@
   }
 }
 
+/* ── Hero typography — fonts loaded via next/font, referenced via CSS var ── */
+@layer utilities {
+  .font-inter-tight {
+    font-family: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+  }
+  .font-besley {
+    font-family: var(--font-besley), Georgia, serif;
+  }
+}
+
 /* ── Space Types Grid — Saltbox hover effect ──────────────────────────────
    Gated behind @media (hover: hover) so touch devices always show the
    default bright state with no dimming. */

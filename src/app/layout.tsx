@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Inter } from "next/font/google";
+import { Montserrat, Inter, Inter_Tight, Besley } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
@@ -13,6 +13,21 @@ const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const interTight = Inter_Tight({
+  subsets: ["latin"],
+  weight: ["700", "800", "900"],
+  variable: "--font-inter-tight",
+  display: "swap",
+});
+
+const besley = Besley({
+  subsets: ["latin"],
+  weight: ["700"],
+  style: ["italic"],
+  variable: "--font-besley",
   display: "swap",
 });
 
@@ -60,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
-    <html lang="en-AU" className={`h-full antialiased ${montserrat.variable} ${inter.variable}`}>
+    <html lang="en-AU" className={`h-full antialiased ${montserrat.variable} ${inter.variable} ${interTight.variable} ${besley.variable}`}>
       <body className="min-h-full flex flex-col">
         {children}
         {gaId && (

@@ -96,17 +96,17 @@ export default async function HomePage() {
         {/* ── HERO ── */}
         <section className="bg-white pt-24 pb-16 lg:pt-32 lg:pb-24">
           <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 
               {/* ── Left: text column ── */}
               <div>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#2a3065] leading-[1.1] tracking-tight mb-6">
+                <h1 className="font-inter-tight text-4xl sm:text-5xl lg:text-6xl font-extrabold text-black leading-[1.1] tracking-tight mb-6">
                   Flexible{" "}
-                  <span className="italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">space</span>
+                  <span className="font-besley italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">space</span>
                   , on-site{" "}
-                  <span className="italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">operations</span>
+                  <span className="font-besley italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">operations</span>
                   {" "}and an{" "}
-                  <span className="italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">ecosystem</span>
+                  <span className="font-besley italic underline decoration-[#2a3065] decoration-[5px] underline-offset-[5px]">ecosystem</span>
                   {" "}built for brands scaling in Australia
                 </h1>
 
@@ -146,23 +146,15 @@ export default async function HomePage() {
               </div>
 
               {/* ── Right: media column ── */}
-              <div className="relative">
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
-                  <Image
-                    src="/renders/Aerial.jpg"
-                    alt="Hexa Hub precinct aerial view, Huntingdale Melbourne"
-                    fill
-                    priority
-                    className="object-cover object-center"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </div>
-                {/* Pull-quote overlay */}
-                <div className="absolute bottom-6 left-6 bg-[#2a3065] text-white rounded-xl p-5 max-w-[260px] shadow-lg">
-                  <p className="text-sm font-semibold leading-snug">
-                    More than a lease. A business platform for brands landing and growing in Australia.
-                  </p>
-                </div>
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+                <Image
+                  src="/renders/Aerial.jpg"
+                  alt="Hexa Hub precinct aerial view, Huntingdale Melbourne"
+                  fill
+                  priority
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
               </div>
 
             </div>
