@@ -211,7 +211,7 @@ export default async function ServicesPage() {
 
         {/* ── HERO ── */}
         <div className="bg-[#2a3065] py-20">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <p className="text-white/50 text-sm font-semibold uppercase tracking-widest mb-3">
               Platform services
             </p>
@@ -229,7 +229,7 @@ export default async function ServicesPage() {
 
         {/* ── SERVICES GRID ── */}
         <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <div className="mb-12">
               <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
                 What&apos;s available
@@ -269,7 +269,7 @@ export default async function ServicesPage() {
 
         {/* ── THE HEXA HUB DIFFERENCE ── */}
         <section className="py-24 bg-[#F5F5F5] border-y border-[#E5E5E5]">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <div className="mb-14">
               <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
                 Why it matters

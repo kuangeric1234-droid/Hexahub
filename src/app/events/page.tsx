@@ -45,7 +45,7 @@ export default async function EventsPage() {
 
         {/* ── PAGE HEADER ── */}
         <div className="bg-[#F5F5F5] border-b border-[#E5E5E5] py-12">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-2">Community</p>
             <h1 className="text-3xl sm:text-4xl font-black text-black tracking-tight">Events</h1>
             <p className="text-[#6B6B6B] mt-3 text-base max-w-2xl leading-relaxed">
@@ -56,7 +56,7 @@ export default async function EventsPage() {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 space-y-20">
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20 py-16 space-y-20">
 
           {/* ── UPCOMING EVENTS ── */}
           <section>

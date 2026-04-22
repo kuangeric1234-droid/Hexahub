@@ -62,7 +62,7 @@ export default async function UnitDetailPage({ params }: Props) {
       <main className="pt-16 min-h-screen bg-white">
         {/* Back */}
         <div className="bg-[#F5F5F5] border-b border-[#E5E5E5]">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-5">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20 py-5">
             <Link
               href="/units"
               className="inline-flex items-center gap-2 text-[#6B6B6B] hover:text-black text-sm transition-colors"
@@ -88,7 +88,7 @@ export default async function UnitDetailPage({ params }: Props) {
         {/* Thumbnail strip */}
         {photos.length > 1 && (
           <div className="bg-[#F5F5F5] border-b border-[#E5E5E5]">
-            <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-3 flex gap-3 overflow-x-auto">
+            <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20 py-3 flex gap-3 overflow-x-auto">
               {photos.slice(0, 6).map((photo, i) => {
                 const src = urlFor(photo.asset).width(160).height(100).fit("crop").auto("format").url();
                 return (
@@ -101,7 +101,7 @@ export default async function UnitDetailPage({ params }: Props) {
           </div>
         )}
 
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12">
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Left — details */}
             <div className="lg:col-span-2 space-y-10">

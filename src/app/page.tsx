@@ -108,7 +108,7 @@ export default async function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/20" />
           <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/30" />
 
-          <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
+          <div className="relative max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20 w-full">
             <div className="max-w-3xl">
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.0] tracking-tight mb-6">
                 {headline}
@@ -152,7 +152,7 @@ export default async function HomePage() {
 
         {/* ── THREE PILLARS ── */}
         <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <div className="mb-14">
               <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
                 The platform
@@ -179,7 +179,7 @@ export default async function HomePage() {
         {/* ── ECOSYSTEM PARTNERS ── */}
         {partners.length > 0 && (
           <section className="py-24 bg-[#F5F5F5] border-y border-[#E5E5E5]">
-            <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
               <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
                 <div>
                   <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
@@ -233,7 +233,7 @@ export default async function HomePage() {
 
         {/* ── SPACES ── */}
         <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
               <div>
                 <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
@@ -289,7 +289,7 @@ export default async function HomePage() {
         {/* ── FEATURED LISTINGS ── */}
         {(featuredLeaseUnits.length > 0 || featuredSaleUnits.length > 0) && (
           <section className="py-24 bg-[#F5F5F5]">
-            <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
               {featuredLeaseUnits.length > 0 && (
                 <div className={featuredSaleUnits.length > 0 ? "mb-20" : ""}>
                   <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
@@ -347,7 +347,7 @@ export default async function HomePage() {
 
         {/* ── HEXA NETWORK ── */}
         <section className="py-24 bg-[#2a3065]">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <div className="mb-14">
               <p className="text-white/50 text-sm font-semibold uppercase tracking-widest mb-3">
                 The Hexa Network
@@ -426,7 +426,7 @@ export default async function HomePage() {
         {/* ── MEMBERS ── */}
         {members.length > 0 && (
           <section className="py-24 bg-white border-b border-[#E5E5E5]">
-            <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
               <div className="mb-12">
                 <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
                   Community
@@ -451,7 +451,7 @@ export default async function HomePage() {
 
         {/* ── WHY HEXA HUB ── */}
         <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div>
                 <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
@@ -502,7 +502,7 @@ export default async function HomePage() {
 
         {/* ── LOCATION ── */}
         <section className="py-24 bg-[#F5F5F5] border-y border-[#E5E5E5]">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div>
                 <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">

@@ -29,7 +29,7 @@ export default async function MembersPage() {
 
         {/* ── PAGE HEADER ── */}
         <div className="bg-[#F5F5F5] border-b border-[#E5E5E5] py-12">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-2">
               Community
             </p>
@@ -42,7 +42,7 @@ export default async function MembersPage() {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 space-y-20">
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20 py-16 space-y-20">
 
           {/* ── FEATURED MEMBERS ── */}
           {featuredMembers.length > 0 && (

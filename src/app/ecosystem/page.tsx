@@ -99,7 +99,7 @@ export default function EcosystemPage() {
 
         {/* ── PAGE HEADER ── */}
         <div className="bg-[#F5F5F5] border-b border-[#E5E5E5] py-12">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-2">Platform</p>
             <h1 className="text-3xl sm:text-4xl font-black text-black tracking-tight">
               The Hexa Hub Ecosystem
@@ -114,7 +114,7 @@ export default function EcosystemPage() {
 
         {/* ── WHAT'S INCLUDED ── */}
         <section className="py-16 bg-white border-b border-[#E5E5E5]">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               {[
                 { label: "Supply Chain", name: "EIZ Technology", anchor: "#eiz-technology" },
@@ -140,7 +140,7 @@ export default function EcosystemPage() {
         </section>
 
         {/* ── PARTNER SECTIONS ── */}
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 space-y-24">
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20 py-16 space-y-24">
           {PARTNERS.map((p, i) => (
             <div
               key={p.id}
@@ -199,7 +199,7 @@ export default function EcosystemPage() {
 
         {/* ── RETAIL PRESENCE ── */}
         <section id="retail" className="py-24 bg-[#F5F5F5] border-y border-[#E5E5E5]">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <div className="mb-12">
               <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
                 Retail network
