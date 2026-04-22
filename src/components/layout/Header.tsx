@@ -6,14 +6,10 @@ import { useState, useRef, useCallback } from "react";
 import {
   Menu, X, Phone, ChevronDown,
   Key, Package, Building2,
-  Users, Truck, Mail,
+  Truck, MailPlus,
 } from "lucide-react";
 
 // ── Nav config ────────────────────────────────────────────────────────────────
-
-type NavItem =
-  | { type: "link"; label: string; href: string }
-  | { type: "dropdown"; label: string; items: DropdownItem[] };
 
 type DropdownItem = {
   title: string;
@@ -22,52 +18,88 @@ type DropdownItem = {
   icon: React.ElementType;
 };
 
+type DropdownGroup = {
+  heading?: string; // optional — Spaces has no heading, Services does
+  items: DropdownItem[];
+};
+
+type NavItem =
+  | { type: "link"; label: string; href: string }
+  | { type: "dropdown"; label: string; groups: DropdownGroup[] };
+
 const NAV_CONFIG: NavItem[] = [
   {
     type: "dropdown",
     label: "Spaces",
-    items: [
+    groups: [
       {
-        title: "Access Plans",
-        href: "/access-plans",
-        description: "Business address and flexible access to Huntingdale — without a full lease",
-        icon: Key,
-      },
-      {
-        title: "Warehouse Spaces",
-        href: "/warehouse-spaces",
-        description: "Dedicated warehouse units from 223–438m² with 3-phase power and roller doors",
-        icon: Package,
-      },
-      {
-        title: "Office Spaces",
-        href: "/office-spaces",
-        description: "Private offices with natural light and district views — 128–136m²",
-        icon: Building2,
+        // No heading — single-column panel
+        items: [
+          {
+            title: "Access Plans",
+            href: "/access-plans",
+            description: "Business address and flexible access to Huntingdale — without a full lease",
+            icon: Key,
+          },
+          {
+            title: "Warehouse Spaces",
+            href: "/warehouse-spaces",
+            description: "Dedicated warehouse units from 223–438m² with 3-phase power and roller doors",
+            icon: Package,
+          },
+          {
+            title: "Office Spaces",
+            href: "/office-spaces",
+            description: "Private offices with natural light and district views — 128–136m²",
+            icon: Building2,
+          },
+        ],
       },
     ],
   },
   {
     type: "dropdown",
     label: "Services",
-    items: [
+    groups: [
       {
-        title: "Community Spaces",
-        href: "/community-spaces",
-        description: "The Hub — shared lounge, meeting rooms, and community events",
-        icon: Users,
+        heading: "Hexa Hub Plans",
+        items: [
+          {
+            title: "Access Plans",
+            href: "/access-plans",
+            description: "Business address and flexible access to Huntingdale — without a full lease",
+            icon: Key,
+          },
+          {
+            title: "Warehouse Spaces",
+            href: "/warehouse-spaces",
+            description: "Dedicated warehouse units from 223–438m² with 3-phase power and roller doors",
+            icon: Package,
+          },
+          {
+            title: "Office Spaces",
+            href: "/office-spaces",
+            description: "Private offices with natural light and district views — 128–136m²",
+            icon: Building2,
+          },
+        ],
       },
       {
-        title: "Operations & Fulfilment",
-        href: "/operations",
-        description: "On-site support for receiving, storage, and outbound shipping",
-        icon: Truck,
-      },
-      {
-        title: "Australia Post Partner",
-        href: "/australia-post",
-        description: "Direct carrier pickup and partner access through our Australia Post integration",
-        icon: Mail,
+        heading: "Hexa Hub Services",
+        items: [
+          {
+            title: "Operations & Fulfilment",
+            href: "/operations",
+            description: "On-site support for receiving, storage, and outbound shipping",
+            icon: Truck,
+          },
+          {
+            title: "Australia Post Business Partner",
+            href: "/australia-post",
+            description: "Direct carrier pickup and partner access through our Australia Post integration",
+            icon: MailPlus,
+          },
+        ],
       },
     ],
   },
@@ -78,43 +110,70 @@ const NAV_CONFIG: NavItem[] = [
   { type: "link", label: "Contact",   href: "/contact" },
 ];
 
-// ── Dropdown panel ────────────────────────────────────────────────────────────
+// ── Shared item row ───────────────────────────────────────────────────────────
 
-function DropdownPanel({
-  items,
+function DropdownItemRow({
+  item,
   onClose,
 }: {
-  items: DropdownItem[];
+  item: DropdownItem;
   onClose: () => void;
 }) {
+  const Icon = item.icon;
+  return (
+    <Link
+      href={item.href}
+      onClick={onClose}
+      className="flex items-start gap-4 px-4 py-3 rounded-lg hover:bg-[#F5F5F5] transition-colors duration-150 group"
+    >
+      <span className="mt-0.5 shrink-0 w-8 h-8 rounded-lg bg-[#2a3065]/8 flex items-center justify-center">
+        <Icon size={15} className="text-[#2a3065]" />
+      </span>
+      <span className="flex flex-col gap-0.5">
+        <span className="font-inter-tight font-semibold text-[14px] text-[rgb(36,43,43)] group-hover:text-black">
+          {item.title}
+        </span>
+        <span className="text-[#6B6B6B] text-[13px] leading-snug">
+          {item.description}
+        </span>
+      </span>
+    </Link>
+  );
+}
+
+// ── Dropdown panel (single-group = 1 col; multi-group = 2+ cols) ──────────────
+
+function DropdownPanel({
+  groups,
+  onClose,
+}: {
+  groups: DropdownGroup[];
+  onClose: () => void;
+}) {
+  const isMultiColumn = groups.length > 1;
+
   return (
     <div
-      className="absolute top-full left-0 mt-1 w-[440px] bg-white border border-[#E5E5E5] rounded-xl shadow-lg p-2 z-50
-                 animate-in fade-in slide-in-from-top-1 duration-200"
+      className={`absolute top-full left-0 mt-1 bg-white border border-[#E5E5E5] rounded-xl shadow-lg p-2 z-50
+                  animate-in fade-in slide-in-from-top-1 duration-200
+                  ${isMultiColumn ? "w-[700px]" : "w-[440px]"}`}
     >
-      {items.map((item) => {
-        const Icon = item.icon;
-        return (
-          <Link
-            key={item.href}
-            href={item.href}
-            onClick={onClose}
-            className="flex items-start gap-4 px-4 py-3 rounded-lg hover:bg-[#F5F5F5] transition-colors duration-150 group"
-          >
-            <span className="mt-0.5 shrink-0 w-8 h-8 rounded-lg bg-[#2a3065]/8 flex items-center justify-center">
-              <Icon size={15} className="text-[#2a3065]" />
-            </span>
-            <span className="flex flex-col gap-0.5">
-              <span className="font-inter-tight font-semibold text-[14px] text-[rgb(36,43,43)] group-hover:text-black">
-                {item.title}
-              </span>
-              <span className="text-[#6B6B6B] text-[13px] leading-snug">
-                {item.description}
-              </span>
-            </span>
-          </Link>
-        );
-      })}
+      <div className={isMultiColumn ? "grid grid-cols-2 gap-2 p-4" : ""}>
+        {groups.map((group, gi) => (
+          <div key={gi}>
+            {group.heading && (
+              <p className="px-4 pt-2 pb-3 text-[11px] font-semibold uppercase tracking-wider text-[#6B6B6B]">
+                {group.heading}
+              </p>
+            )}
+            <div className="flex flex-col">
+              {group.items.map((item) => (
+                <DropdownItemRow key={item.href} item={item} onClose={onClose} />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -172,7 +231,7 @@ function DesktopDropdown({ item }: { item: Extract<NavItem, { type: "dropdown" }
 
       {open && (
         <DropdownPanel
-          items={item.items}
+          groups={item.groups}
           onClose={() => { setOpen(false); triggerRef.current?.focus(); }}
         />
       )}
@@ -205,24 +264,36 @@ function MobileDropdown({
           className={`text-[#6B6B6B] transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         />
       </button>
+
       {open && (
-        <div className="pb-2 flex flex-col gap-1">
-          {item.items.map((sub) => {
-            const Icon = sub.icon;
-            return (
-              <Link
-                key={sub.href}
-                href={sub.href}
-                onClick={onNavClose}
-                className="flex items-center gap-3 pl-3 pr-2 py-2 rounded-lg hover:bg-[#F5F5F5] transition-colors"
-              >
-                <Icon size={14} className="text-[#2a3065] shrink-0" />
-                <span className="font-inter-tight font-semibold text-[14px] text-[rgb(36,43,43)]">
-                  {sub.title}
-                </span>
-              </Link>
-            );
-          })}
+        <div className="pb-3 flex flex-col gap-4">
+          {item.groups.map((group, gi) => (
+            <div key={gi}>
+              {group.heading && (
+                <p className="px-1 pb-1 text-[11px] font-semibold uppercase tracking-wider text-[#6B6B6B]">
+                  {group.heading}
+                </p>
+              )}
+              <div className="flex flex-col gap-0.5">
+                {group.items.map((sub) => {
+                  const Icon = sub.icon;
+                  return (
+                    <Link
+                      key={sub.href}
+                      href={sub.href}
+                      onClick={onNavClose}
+                      className="flex items-center gap-3 pl-2 pr-2 py-2 rounded-lg hover:bg-[#F5F5F5] transition-colors"
+                    >
+                      <Icon size={14} className="text-[#2a3065] shrink-0" />
+                      <span className="font-inter-tight font-semibold text-[14px] text-[rgb(36,43,43)]">
+                        {sub.title}
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
