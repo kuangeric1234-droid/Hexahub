@@ -76,7 +76,7 @@ export default async function UnitsPage({ searchParams }: Props) {
             <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-2">
               17-31 Franklyn Street, Huntingdale VIC 3166
             </p>
-            <h1 className="text-3xl sm:text-4xl font-black text-black tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-bold text-black tracking-tight">
               {activeListing === "for-sale" ? "Units For Sale" : "Units For Lease"}
             </h1>
           </div>
@@ -192,7 +192,7 @@ export default async function UnitsPage({ searchParams }: Props) {
             </div>
           ) : (
             <div className="text-center py-24">
-              <p className="text-[#D0D0D0] text-6xl font-black mb-4">—</p>
+              <p className="text-[#D0D0D0] text-6xl font-bold mb-4">—</p>
               <p className="text-black font-semibold text-lg">No units match your filters.</p>
               <p className="text-[#6B6B6B] text-sm mt-2">
                 Try adjusting your search or{" "}

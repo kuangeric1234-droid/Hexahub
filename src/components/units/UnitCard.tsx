@@ -37,7 +37,7 @@ export default function UnitCard({ unit }: { unit: Unit }) {
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-[#C8C8C8] text-4xl font-black">{unit.unitId}</span>
+            <span className="text-[#C8C8C8] text-4xl font-bold">{unit.unitId}</span>
           </div>
         )}
         <div className="absolute top-3 left-3 flex items-center gap-2">

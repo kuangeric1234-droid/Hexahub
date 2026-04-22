@@ -73,7 +73,7 @@ export default function AboutPage() {
         <div className="bg-[#F5F5F5] border-b border-[#E5E5E5] py-12">
           <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-2">About us</p>
-            <h1 className="text-3xl sm:text-4xl font-black text-black tracking-tight">About Hexa Hub</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold text-black tracking-tight">About Hexa Hub</h1>
           </div>
         </div>
 
@@ -83,7 +83,7 @@ export default function AboutPage() {
           <section className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <div>
               <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">Vision</p>
-              <h2 className="text-3xl font-black text-black tracking-tight mb-6">
+              <h2 className="text-3xl font-bold text-black tracking-tight mb-6">
                 A new kind of business infrastructure
               </h2>
               <div className="space-y-4 text-[#555555] text-base leading-relaxed">
@@ -119,7 +119,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
               <div>
                 <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">The precinct</p>
-                <h2 className="text-3xl font-black text-black tracking-tight mb-6">Found Huntingdale</h2>
+                <h2 className="text-3xl font-bold text-black tracking-tight mb-6">Found Huntingdale</h2>
                 <div className="space-y-4 text-[#555555] text-base leading-relaxed">
                   <p>
                     Found Huntingdale is the precinct where Hexa Hub has taken shape. More than 22,000 square
@@ -158,7 +158,7 @@ export default function AboutPage() {
                     ["24/7", "site access"],
                   ].map(([val, label]) => (
                     <div key={label} className="flex items-baseline gap-3 border-b border-[#E5E5E5] pb-5 last:border-0 last:pb-0">
-                      <span className="text-black font-black text-2xl shrink-0">{val}</span>
+                      <span className="text-black font-bold text-2xl shrink-0">{val}</span>
                       <span className="text-[#6B6B6B] text-sm">{label}</span>
                     </div>
                   ))}
@@ -170,7 +170,7 @@ export default function AboutPage() {
           {/* ── SECTION 3: Part of a larger ecosystem ── */}
           <section className="border-t border-[#E5E5E5] pt-20">
             <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">The Hexa Group</p>
-            <h2 className="text-3xl font-black text-black tracking-tight mb-4">
+            <h2 className="text-3xl font-bold text-black tracking-tight mb-4">
               Part of a larger ecosystem
             </h2>
             <p className="text-[#555555] text-base leading-relaxed mb-10 max-w-2xl">
@@ -220,7 +220,7 @@ export default function AboutPage() {
           {/* ── SECTION 4: Leadership ── */}
           <section className="border-t border-[#E5E5E5] pt-20">
             <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">Leadership</p>
-            <h2 className="text-3xl font-black text-black tracking-tight mb-4">Our Founders</h2>
+            <h2 className="text-3xl font-bold text-black tracking-tight mb-4">Our Founders</h2>
             <p className="text-[#6B6B6B] text-base italic leading-relaxed mb-10 max-w-2xl">
               Hexa&apos;s founders bring together a rich wealth of experience and a global perspective,
               forming the cornerstone of the company&apos;s success.
@@ -229,7 +229,7 @@ export default function AboutPage() {
               {LEADERSHIP.map(({ name, title, bio }) => (
                 <div key={name} className="border border-[#E5E5E5] p-8">
                   <div className="w-12 h-12 bg-[#2a3065] flex items-center justify-center mb-6">
-                    <span className="text-white font-black text-lg">{name.charAt(0)}</span>
+                    <span className="text-white font-bold text-lg">{name.charAt(0)}</span>
                   </div>
                   <h3 className="text-black font-bold text-xl mb-1">{name}</h3>
                   <p className="text-[#2a3065] text-xs font-semibold uppercase tracking-widest mb-5">{title}</p>
@@ -242,7 +242,7 @@ export default function AboutPage() {
           {/* ── SECTION 5: Get in touch ── */}
           <section className="border-t border-[#E5E5E5] pt-20">
             <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">Contact</p>
-            <h2 className="text-3xl font-black text-black tracking-tight mb-8">Get in touch</h2>
+            <h2 className="text-3xl font-bold text-black tracking-tight mb-8">Get in touch</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
               <a
                 href="https://maps.google.com/?q=7+Distribution+Circuit+Huntingdale+VIC"

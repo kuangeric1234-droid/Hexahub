@@ -147,7 +147,7 @@ export default function SpacesPage() {
         <div className="bg-[#F5F5F5] border-b border-[#E5E5E5] py-12">
           <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-2">What we offer</p>
-            <h1 className="text-3xl sm:text-4xl font-black text-black tracking-tight">Spaces</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold text-black tracking-tight">Spaces</h1>
             <p className="text-[#6B6B6B] mt-3 text-base max-w-2xl leading-relaxed">
               Five types of industrial and commercial space at 7 Distribution Circuit, Huntingdale VIC 3166.
               All units are move-in ready with 24/7 access and shared amenities included.
@@ -164,7 +164,7 @@ export default function SpacesPage() {
             >
               <div className={i % 2 === 1 ? "lg:col-start-2" : ""}>
                 <p className="text-[#2a3065] text-xs font-semibold uppercase tracking-widest mb-3">{s.subtitle}</p>
-                <h2 className="text-3xl font-black text-black tracking-tight mb-4">{s.title}</h2>
+                <h2 className="text-3xl font-bold text-black tracking-tight mb-4">{s.title}</h2>
                 <p className="text-[#555555] text-base leading-relaxed mb-6">{s.desc}</p>
 
                 <div className="mb-6">
@@ -197,7 +197,7 @@ export default function SpacesPage() {
                     {s.monthlyFrom ? (
                       <>
                         <div className="text-[#6B6B6B] text-xs mb-0.5">Starting from</div>
-                        <div className="text-black font-black text-xl">
+                        <div className="text-black font-bold text-xl">
                           ${s.monthlyFrom.toLocaleString("en-AU")}/mo
                         </div>
                         <div className="text-[#6B6B6B] text-xs">ex GST + outgoings</div>

@@ -101,7 +101,7 @@ export default function EcosystemPage() {
         <div className="bg-[#F5F5F5] border-b border-[#E5E5E5] py-12">
           <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-2">Platform</p>
-            <h1 className="text-3xl sm:text-4xl font-black text-black tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-bold text-black tracking-tight">
               The Hexa Hub Ecosystem
             </h1>
             <p className="text-[#6B6B6B] mt-3 text-base max-w-2xl leading-relaxed">
@@ -154,7 +154,7 @@ export default function EcosystemPage() {
                 <p className="text-[#2a3065] text-xs font-semibold uppercase tracking-widest mb-3">
                   {p.category}
                 </p>
-                <h2 className="text-3xl font-black text-black tracking-tight mb-2">{p.name}</h2>
+                <h2 className="text-3xl font-bold text-black tracking-tight mb-2">{p.name}</h2>
                 <p className="text-[#6B6B6B] text-base italic mb-6">{p.tagline}</p>
                 <div className="space-y-4 text-[#555555] text-sm leading-relaxed mb-8">
                   <p>{p.desc}</p>
@@ -204,7 +204,7 @@ export default function EcosystemPage() {
               <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
                 Retail network
               </p>
-              <h2 className="text-3xl sm:text-4xl font-black text-black tracking-tight mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-black tracking-tight mb-4">
                 Physical retail presence in Melbourne.
               </h2>
               <p className="text-[#6B6B6B] text-base leading-relaxed max-w-2xl">
@@ -240,7 +240,7 @@ export default function EcosystemPage() {
         {/* ── CTA ── */}
         <section className="py-24 bg-white">
           <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
-            <h2 className="text-4xl sm:text-5xl font-black text-black tracking-tight mb-4">
+            <h2 className="text-4xl sm:text-5xl font-bold text-black tracking-tight mb-4">
               Ready to plug in?
             </h2>
             <p className="text-[#6B6B6B] text-lg mb-10 max-w-xl mx-auto">

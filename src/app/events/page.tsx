@@ -47,7 +47,7 @@ export default async function EventsPage() {
         <div className="bg-[#F5F5F5] border-b border-[#E5E5E5] py-12">
           <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-2">Community</p>
-            <h1 className="text-3xl sm:text-4xl font-black text-black tracking-tight">Events</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold text-black tracking-tight">Events</h1>
             <p className="text-[#6B6B6B] mt-3 text-base max-w-2xl leading-relaxed">
               Hexa Hub runs workshops, founder talks, industry sessions, and community events at The Hub
               — our shared communal space at Huntingdale. Events are open to members and, where noted, to
@@ -65,7 +65,7 @@ export default async function EventsPage() {
                 <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-2">
                   What&apos;s on
                 </p>
-                <h2 className="text-2xl sm:text-3xl font-black text-black tracking-tight">
+                <h2 className="text-2xl sm:text-3xl font-bold text-black tracking-tight">
                   Upcoming Events
                 </h2>
               </div>
@@ -144,7 +144,7 @@ export default async function EventsPage() {
               <p className="text-[#6B6B6B] text-sm font-semibold uppercase tracking-widest mb-2">
                 Archive
               </p>
-              <h2 className="text-2xl sm:text-3xl font-black text-black tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-bold text-black tracking-tight">
                 Past Events
               </h2>
             </div>

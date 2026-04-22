@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle, MapPin, Clock, Zap, Shield, Package, Network }
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import UnitCard from "@/components/units/UnitCard";
+import AmenitiesAccordion from "@/components/home/AmenitiesAccordion";
 import { getFeaturedLeaseUnits, getFeaturedSaleUnits, getSiteSettings, getPartners, getMembers } from "@/lib/sanity/queries";
 
 const SPACE_TYPES = [
@@ -131,7 +132,7 @@ export default async function HomePage() {
                     ["24/7", "Site Access"],
                   ].map(([val, label]) => (
                     <div key={label}>
-                      <div className="text-[#2a3065] font-black text-2xl">{val}</div>
+                      <div className="text-[#2a3065] font-bold text-2xl">{val}</div>
                       <div className="text-gray-500 text-xs uppercase tracking-wide mt-0.5">{label}</div>
                     </div>
                   ))}
@@ -161,7 +162,7 @@ export default async function HomePage() {
               <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
                 The platform
               </p>
-              <h2 className="text-3xl sm:text-4xl font-black text-black tracking-tight max-w-xl">
+              <h2 className="text-3xl sm:text-4xl font-bold text-black tracking-tight max-w-xl">
                 More than a lease. A complete operating platform.
               </h2>
             </div>
@@ -206,7 +207,7 @@ export default async function HomePage() {
                   <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
                     Ecosystem
                   </p>
-                  <h2 className="text-3xl sm:text-4xl font-black text-black tracking-tight">
+                  <h2 className="text-3xl sm:text-4xl font-bold text-black tracking-tight">
                     Partners built into the platform.
                   </h2>
                 </div>
@@ -260,7 +261,7 @@ export default async function HomePage() {
                 <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
                   Spaces
                 </p>
-                <h2 className="text-3xl sm:text-4xl font-black text-black tracking-tight">
+                <h2 className="text-3xl sm:text-4xl font-bold text-black tracking-tight">
                   Five types of space.<br />One address.
                 </h2>
               </div>
@@ -337,6 +338,24 @@ export default async function HomePage() {
           </div>
         </section>
 
+        {/* ── AMENITIES ── */}
+        <section className="py-20 lg:py-28 bg-[#F5F5F5] border-t border-[#E5E5E5]">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
+            <div className="mb-12">
+              <p className="text-[#6B6B6B] text-sm font-semibold uppercase tracking-widest mb-3">
+                Amenities
+              </p>
+              <h2 className="font-inter-tight font-bold text-3xl sm:text-4xl text-[rgb(36,43,43)] tracking-tight mb-3">
+                What&apos;s included
+              </h2>
+              <p className="text-[#6B6B6B] text-base max-w-xl leading-relaxed">
+                Everything built into Hexa Hub at Huntingdale — from infrastructure to ecosystem.
+              </p>
+            </div>
+            <AmenitiesAccordion />
+          </div>
+        </section>
+
         {/* ── FEATURED LISTINGS ── */}
         {(featuredLeaseUnits.length > 0 || featuredSaleUnits.length > 0) && (
           <section className="py-24 bg-[#F5F5F5]">
@@ -348,7 +367,7 @@ export default async function HomePage() {
                       <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
                         Available for lease
                       </p>
-                      <h2 className="text-3xl sm:text-4xl font-black text-black tracking-tight">
+                      <h2 className="text-3xl sm:text-4xl font-bold text-black tracking-tight">
                         Featured lease listings
                       </h2>
                     </div>
@@ -374,7 +393,7 @@ export default async function HomePage() {
                       <p className="text-[#C8922A] text-sm font-semibold uppercase tracking-widest mb-3">
                         Available for purchase
                       </p>
-                      <h2 className="text-3xl sm:text-4xl font-black text-black tracking-tight">
+                      <h2 className="text-3xl sm:text-4xl font-bold text-black tracking-tight">
                         Featured sale listings
                       </h2>
                     </div>
@@ -403,7 +422,7 @@ export default async function HomePage() {
               <p className="text-white/50 text-sm font-semibold uppercase tracking-widest mb-3">
                 The Hexa Network
               </p>
-              <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight max-w-xl">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight max-w-xl">
                 Three nodes. One community.
               </h2>
               <p className="text-white/60 text-base leading-relaxed mt-4 max-w-2xl">
@@ -482,7 +501,7 @@ export default async function HomePage() {
                 <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
                   Community
                 </p>
-                <h2 className="text-3xl sm:text-4xl font-black text-black tracking-tight">
+                <h2 className="text-3xl sm:text-4xl font-bold text-black tracking-tight">
                   Businesses operating at Hexa Hub.
                 </h2>
               </div>
@@ -508,7 +527,7 @@ export default async function HomePage() {
                 <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
                   Why Hexa Hub
                 </p>
-                <h2 className="text-3xl sm:text-4xl font-black text-black tracking-tight mb-6">
+                <h2 className="text-3xl sm:text-4xl font-bold text-black tracking-tight mb-6">
                   Built for brands<br />building in Australia.
                 </h2>
                 <p className="text-[#6B6B6B] text-base leading-relaxed mb-8">
@@ -541,7 +560,7 @@ export default async function HomePage() {
                   />
                 </div>
                 <div className="absolute -bottom-6 -left-6 bg-white border border-[#E5E5E5] p-5 max-w-[220px]">
-                  <div className="text-black font-black text-2xl mb-1">The Hub</div>
+                  <div className="text-black font-bold text-2xl mb-1">The Hub</div>
                   <div className="text-[#555555] text-xs leading-snug">
                     Exclusive communal lounge, pool table, meeting room, and kitchen — free for all tenants.
                   </div>
@@ -559,7 +578,7 @@ export default async function HomePage() {
                 <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
                   Location
                 </p>
-                <h2 className="text-3xl sm:text-4xl font-black text-black tracking-tight mb-4">
+                <h2 className="text-3xl sm:text-4xl font-bold text-black tracking-tight mb-4">
                   Huntingdale, Melbourne.
                 </h2>
                 <p className="text-[#6B6B6B] text-base leading-relaxed mb-8">
@@ -604,7 +623,7 @@ export default async function HomePage() {
         {/* ── CTA ── */}
         <section className="py-24 bg-white">
           <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
-            <h2 className="text-4xl sm:text-5xl font-black text-black tracking-tight mb-4">
+            <h2 className="text-4xl sm:text-5xl font-bold text-black tracking-tight mb-4">
               Ready to operate at Hexa Hub?
             </h2>
             <p className="text-[#6B6B6B] text-lg mb-10 max-w-xl mx-auto">

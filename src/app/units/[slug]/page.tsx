@@ -112,7 +112,7 @@ export default async function UnitDetailPage({ params }: Props) {
                   <TypeBadge type={unit.type as Parameters<typeof TypeBadge>[0]["type"]} />
                   <span className="text-[#6B6B6B] text-xs font-mono bg-[#EBEBEB] px-2 py-1">{unit.unitId}</span>
                 </div>
-                <h1 className="text-3xl sm:text-4xl font-black text-black tracking-tight mb-3">{unit.title}</h1>
+                <h1 className="text-3xl sm:text-4xl font-bold text-black tracking-tight mb-3">{unit.title}</h1>
                 {unit.streetAddress && (
                   <div className="flex items-center gap-2 text-[#555555] text-sm">
                     <MapPin size={13} className="text-[#2a3065] shrink-0" />
@@ -226,7 +226,7 @@ export default async function UnitDetailPage({ params }: Props) {
                   </span>
 
                   {/* Monthly price — prominent */}
-                  <div className="text-4xl font-black text-black leading-none">
+                  <div className="text-4xl font-bold text-black leading-none">
                     {formatMonthly(unit.annualPrice)}
                   </div>
                   {/* Annual as secondary */}

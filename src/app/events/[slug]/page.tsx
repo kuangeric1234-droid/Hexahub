@@ -85,7 +85,7 @@ export default async function EventDetailPage({ params }: Props) {
               )}
             </div>
 
-            <h1 className="text-3xl sm:text-4xl font-black text-black tracking-tight mb-5">
+            <h1 className="text-3xl sm:text-4xl font-bold text-black tracking-tight mb-5">
               {event.title}
             </h1>
 
@@ -132,7 +132,7 @@ export default async function EventDetailPage({ params }: Props) {
           {/* Recap — past events only */}
           {isPast && event.recap && Array.isArray(event.recap) && event.recap.length > 0 && (
             <div>
-              <h2 className="text-xl font-black text-black tracking-tight mb-6">How it went</h2>
+              <h2 className="text-xl font-bold text-black tracking-tight mb-6">How it went</h2>
               <div className="prose prose-sm sm:prose-base max-w-none text-[#333] leading-relaxed">
                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                 <PortableText value={event.recap as any} />
@@ -143,7 +143,7 @@ export default async function EventDetailPage({ params }: Props) {
           {/* Gallery — past events */}
           {isPast && event.gallery && event.gallery.length > 0 && (
             <div>
-              <h2 className="text-xl font-black text-black tracking-tight mb-6">Gallery</h2>
+              <h2 className="text-xl font-bold text-black tracking-tight mb-6">Gallery</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {event.gallery.map((img, i) => (
                   <div key={i} className="relative aspect-square overflow-hidden bg-[#F5F5F5]">

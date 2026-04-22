@@ -183,7 +183,7 @@ function PricingBadge({ pricing }: { pricing?: string }) {
     <div className={`mt-4 pt-4 border-t border-[#E5E5E5]`}>
       <span className="text-[#6B6B6B] text-xs block mb-0.5">Pricing</span>
       <span
-        className={`text-sm font-black ${
+        className={`text-sm font-bold ${
           isIncluded ? "text-[#2a3065]" : "text-black"
         }`}
       >
@@ -215,7 +215,7 @@ export default async function ServicesPage() {
             <p className="text-white/50 text-sm font-semibold uppercase tracking-widest mb-3">
               Platform services
             </p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.0] mb-6 max-w-3xl">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.0] mb-6 max-w-3xl">
               Business-Ready Ecosystem
             </h1>
             <p className="text-white/70 text-base sm:text-lg leading-relaxed max-w-2xl">
@@ -234,7 +234,7 @@ export default async function ServicesPage() {
               <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
                 What&apos;s available
               </p>
-              <h2 className="text-3xl sm:text-4xl font-black text-black tracking-tight mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-black tracking-tight mb-4">
                 Breakdown of services
               </h2>
               <p className="text-[#6B6B6B] text-sm max-w-xl leading-relaxed">
@@ -274,7 +274,7 @@ export default async function ServicesPage() {
               <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
                 Why it matters
               </p>
-              <h2 className="text-3xl sm:text-4xl font-black text-black tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-bold text-black tracking-tight">
                 The Hexa Hub Difference
               </h2>
             </div>
@@ -300,7 +300,7 @@ export default async function ServicesPage() {
         {/* ── CTA ── */}
         <section className="py-24 bg-white">
           <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
-            <h2 className="text-4xl font-black text-black tracking-tight mb-4">
+            <h2 className="text-4xl font-bold text-black tracking-tight mb-4">
               Ready to put the platform to work?
             </h2>
             <p className="text-[#6B6B6B] text-lg mb-10 max-w-xl mx-auto">

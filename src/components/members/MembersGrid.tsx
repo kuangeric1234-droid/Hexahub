@@ -33,7 +33,7 @@ export default function MembersGrid({ members }: { members: Member[] }) {
       <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
         The community
       </p>
-      <h2 className="text-3xl font-black text-black tracking-tight mb-8">
+      <h2 className="text-3xl font-bold text-black tracking-tight mb-8">
         Browse all members
       </h2>
 
@@ -93,7 +93,7 @@ export default function MembersGrid({ members }: { members: Member[] }) {
                     className="object-contain max-h-full max-w-full"
                   />
                 ) : (
-                  <span className="text-[#2a3065] font-black text-lg text-center leading-tight">
+                  <span className="text-[#2a3065] font-bold text-lg text-center leading-tight">
                     {m.name}
                   </span>
                 )}

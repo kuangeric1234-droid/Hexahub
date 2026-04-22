@@ -33,7 +33,7 @@ export default async function MembersPage() {
             <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-2">
               Community
             </p>
-            <h1 className="text-3xl sm:text-4xl font-black text-black tracking-tight mb-3">
+            <h1 className="text-3xl sm:text-4xl font-bold text-black tracking-tight mb-3">
               Our Members
             </h1>
             <p className="text-[#6B6B6B] text-base max-w-xl leading-relaxed">
@@ -50,7 +50,7 @@ export default async function MembersPage() {
               <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
                 Spotlight
               </p>
-              <h2 className="text-3xl font-black text-black tracking-tight mb-10">
+              <h2 className="text-3xl font-bold text-black tracking-tight mb-10">
                 Meet the community
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -84,7 +84,7 @@ export default async function MembersPage() {
                               className="object-contain max-h-16"
                             />
                           ) : (
-                            <span className="text-[#2a3065] font-black text-2xl">
+                            <span className="text-[#2a3065] font-bold text-2xl">
                               {m.name.charAt(0)}
                             </span>
                           )}
@@ -145,7 +145,7 @@ export default async function MembersPage() {
           {/* ── CTA ── */}
           <section className="border-t border-[#E5E5E5] pt-20">
             <div className="bg-[#F5F5F5] border border-[#E5E5E5] p-12 text-center">
-              <h2 className="text-3xl font-black text-black tracking-tight mb-4">
+              <h2 className="text-3xl font-bold text-black tracking-tight mb-4">
                 Want to become part of the Hexa Hub community?
               </h2>
               <p className="text-[#6B6B6B] text-base mb-8 max-w-lg mx-auto leading-relaxed">
