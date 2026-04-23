@@ -266,10 +266,10 @@ export default function AccessPlansPage() {
 
             {/* Scrollable wrapper on mobile */}
             <div className="overflow-x-auto -mx-6 sm:-mx-8 lg:mx-0">
-              <div className="min-w-[640px] px-6 sm:px-8 lg:px-0">
+              <div className="min-w-[640px] lg:min-w-0 px-6 sm:px-8 lg:px-0">
 
                 {/* Plan header cards */}
-                <div className="grid grid-cols-[30%_35%_35%] gap-3 mb-3">
+                <div className="grid grid-cols-[3fr_3.5fr_3.5fr] gap-3 mb-3">
                   <div />
                   {/* Virtual */}
                   <div className="bg-[#eef0f8] rounded-xl p-5">
@@ -309,7 +309,7 @@ export default function AccessPlansPage() {
                 {TABLE_ROWS.map((row, i) => (
                   <div
                     key={row.feature}
-                    className={`grid grid-cols-[30%_35%_35%] gap-3 items-center px-0 py-3 border-b border-[#E5E5E5] ${
+                    className={`grid grid-cols-[3fr_3.5fr_3.5fr] gap-3 items-center px-0 py-3 border-b border-[#E5E5E5] ${
                       i % 2 === 0 ? "bg-white" : "bg-transparent"
                     }`}
                     style={{ borderRadius: i % 2 === 0 ? "8px" : undefined, padding: i % 2 === 0 ? "12px 16px" : "12px 16px" }}
