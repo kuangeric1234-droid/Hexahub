@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import UnitCard from "@/components/units/UnitCard";
 import AmenitiesAccordion from "@/components/home/AmenitiesAccordion";
+import SpaceCard from "@/components/shared/SpaceCard";
 import { getFeaturedLeaseUnits, getFeaturedSaleUnits, getSiteSettings, getPartners, getMembers } from "@/lib/sanity/queries";
 
 const SPACE_TYPES = [
@@ -275,66 +276,15 @@ export default async function HomePage() {
 
             <div className="space-types-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
               {SPACE_TYPES.map((card) => (
-                <div
+                <SpaceCard
                   key={card.type}
-                  className="space-type-card group relative overflow-hidden rounded-2xl aspect-[2/3] flex flex-col"
-                  tabIndex={0}
-                >
-                  {/* Background image */}
-                  <Image
-                    src={card.img}
-                    alt={card.title}
-                    fill
-                    className="space-card-image object-cover transition-opacity duration-300 ease-out"
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                  />
-
-                  {/* Navy reveal overlay — fades in on hover */}
-                  <div className="space-card-navy absolute inset-0 bg-[#2a3065] transition-opacity duration-300 ease-out opacity-0" />
-
-                  {/* Default gradient (bottom-up) — fades out on hover */}
-                  <div className="space-card-gradient absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 ease-out" />
-
-                  {/* Content layer — z-10 ensures it sits above image + overlays */}
-                  <div className="relative z-10 flex flex-col h-full p-4 lg:p-5">
-                    {/* Title — always visible at top-left */}
-                    <h3 className="font-inter-tight font-semibold text-white text-base lg:text-[17px] leading-snug">
-                      {card.title}
-                    </h3>
-
-                    {/* Specs — hidden by default, revealed on hover */}
-                    <ul className="space-card-specs mt-3 flex flex-col gap-2 opacity-0 transition-opacity duration-300 ease-out">
-                      {card.specs.map((spec) => (
-                        <li key={spec} className="text-white/85 text-[13px] leading-snug flex items-start gap-2">
-                          <span className="mt-1.5 shrink-0 w-1 h-1 rounded-full bg-white/60 inline-block" />
-                          {spec}
-                        </li>
-                      ))}
-                    </ul>
-
-                    {/* Spacer pushes button to bottom */}
-                    <div className="flex-1" />
-
-                    {/* Single morphing button: circle → pill on hover.
-                        Arrow is absolute right-0 w-11, so it fills the
-                        44px circle (centred) and stays pinned right as
-                        the pill expands. Text occupies the space to its left. */}
-                    <Link
-                      href="/contact"
-                      aria-label={`Book a tour for ${card.title}`}
-                      className="space-card-btn relative self-end overflow-hidden rounded-full bg-white h-11 transition-[width] duration-[350ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
-                    >
-                      {/* Text — clipped by overflow-hidden when pill is 44px wide */}
-                      <span className="space-card-btn-text absolute inset-y-0 left-0 right-11 flex items-center pl-4 font-inter-tight font-medium text-[14px] text-[#2a3065] whitespace-nowrap opacity-0 transition-opacity duration-200">
-                        Book a tour
-                      </span>
-                      {/* Arrow — always fills the rightmost 44px, visually centred in circle state */}
-                      <span className="absolute inset-y-0 right-0 w-11 flex items-center justify-center pointer-events-none">
-                        <ArrowRight size={14} className="text-[#2a3065]" />
-                      </span>
-                    </Link>
-                  </div>
-                </div>
+                  title={card.title}
+                  specs={card.specs}
+                  img={card.img}
+                  buttonText="Book a tour"
+                  buttonHref="/contact"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                />
               ))}
             </div>
           </div>

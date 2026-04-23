@@ -7,6 +7,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AmenitiesAccordion from "@/components/home/AmenitiesAccordion";
+import SpaceCard from "@/components/shared/SpaceCard";
 
 // ── Carousel data ─────────────────────────────────────────────────────────────
 
@@ -20,9 +21,21 @@ const CAROUSEL_TILES = [
 // ── Unit cards ────────────────────────────────────────────────────────────────
 
 const UNIT_CARDS = [
-  { label: "Storage spaces",     img: "/renders/Storage Final Image LOW RES.jpg" },
-  { label: "Hexa warehouse",     img: "/renders/Internal.jpg" },
-  { label: "Showroom warehouse", img: "/renders/Block H Front.jpg" },
+  {
+    title: "Storage Spaces",
+    img: "/renders/Storage Final Image LOW RES.jpg",
+    specs: ["31–75m² drive-through storage", "24/7 wireless keypad access", "Flexible monthly membership"],
+  },
+  {
+    title: "Hexa Warehouse",
+    img: "/renders/Internal.jpg",
+    specs: ["223–438m² warehouse units", "3-phase power, roller doors", "Mezzanine offices included"],
+  },
+  {
+    title: "Showroom Warehouse",
+    img: "/renders/Block H Front.jpg",
+    specs: ["Dual-purpose units", "Street-facing showroom", "Operational warehouse behind"],
+  },
 ];
 
 // ── Feature blocks ────────────────────────────────────────────────────────────
@@ -66,8 +79,8 @@ const FEATURE_BLOCKS = [
       },
     ],
     cta: { label: "See our ecosystem partners", href: "/ecosystem" },
-    img: "/renders/External Block B.jpg",
-    imgAlt: "Hexa Hub exterior, Huntingdale Melbourne",
+    img: "/renders/Aerial.jpg",
+    imgAlt: "Hexa Hub precinct aerial view, Huntingdale Melbourne",
     imgRight: false,
   },
 ];
@@ -229,36 +242,17 @@ export default function WarehouseSpacesPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+            <div className="space-types-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
               {UNIT_CARDS.map((card) => (
-                <div
-                  key={card.label}
-                  className="relative overflow-hidden rounded-2xl aspect-[2/3] flex flex-col"
-                >
-                  <Image
-                    src={card.img}
-                    alt={card.label}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                  {/* Bottom gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  {/* Content */}
-                  <div className="relative z-10 flex flex-col h-full p-5">
-                    <p className="font-inter-tight font-semibold text-white text-lg leading-snug">
-                      {card.label}
-                    </p>
-                    <div className="flex-1" />
-                    <Link
-                      href="/contact"
-                      aria-label={`Enquire about ${card.label}`}
-                      className="self-end w-11 h-11 rounded-full bg-white flex items-center justify-center hover:bg-[#F5F5F5] transition-colors"
-                    >
-                      <ArrowRight size={14} className="text-[#2a3065]" />
-                    </Link>
-                  </div>
-                </div>
+                <SpaceCard
+                  key={card.title}
+                  title={card.title}
+                  specs={card.specs}
+                  img={card.img}
+                  buttonText="Explore"
+                  buttonHref="/contact"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
               ))}
             </div>
           </div>
