@@ -15,7 +15,7 @@ const CAROUSEL_TILES = [
   { label: "Inventory",    sub: "Spaces", img: "/renders/Internal.jpg" },
   { label: "Fulfilment",   sub: "Spaces", img: "/renders/Storage Final Image LOW RES.jpg" },
   { label: "Showroom",     sub: "Spaces", img: "/renders/Block H Front.jpg" },
-  { label: "Security",     sub: "Spaces", img: "/renders/External Block A.jpg" },
+  { label: "Security",     sub: "Spaces", img: "/renders/Block B Front Close Up.jpg" },
 ];
 
 // ── Unit cards ────────────────────────────────────────────────────────────────
