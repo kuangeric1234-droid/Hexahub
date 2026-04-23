@@ -59,12 +59,12 @@ const TABLE_ROWS: { feature: string; virtual: CellValue; scale: CellValue }[] = 
   { feature: "Additional member access options", virtual: false, scale: false },
 ];
 
-function Cell({ value, dark }: { value: CellValue; dark?: boolean }) {
+function Cell({ value }: { value: CellValue }) {
   if (value === true)
-    return <CheckCircle size={20} className={dark ? "text-white mx-auto" : "text-[#2a3065] mx-auto"} />;
+    return <CheckCircle size={20} className="text-[#2a3065] mx-auto" />;
   if (value === false)
     return <XCircle size={20} className="text-[#D0D0D0] mx-auto" />;
-  return <span className={`text-[13px] leading-snug text-center block ${dark ? "text-white/90" : "text-[#555555]"}`}>{value}</span>;
+  return <span className="text-[13px] leading-snug text-center block text-[#555555]">{value}</span>;
 }
 
 // ── Value props ───────────────────────────────────────────────────────────────
@@ -269,7 +269,7 @@ export default function AccessPlansPage() {
               <div className="min-w-[640px] px-6 sm:px-8 lg:px-0">
 
                 {/* Plan header cards */}
-                <div className="grid grid-cols-[1fr_180px_180px] gap-3 mb-3">
+                <div className="grid grid-cols-[30%_35%_35%] gap-3 mb-3">
                   <div />
                   {/* Virtual */}
                   <div className="bg-[#eef0f8] rounded-xl p-5">
@@ -309,17 +309,17 @@ export default function AccessPlansPage() {
                 {TABLE_ROWS.map((row, i) => (
                   <div
                     key={row.feature}
-                    className={`grid grid-cols-[1fr_180px_180px] gap-3 items-center px-0 py-3 border-b border-[#E5E5E5] ${
+                    className={`grid grid-cols-[30%_35%_35%] gap-3 items-center px-0 py-3 border-b border-[#E5E5E5] ${
                       i % 2 === 0 ? "bg-white" : "bg-transparent"
                     }`}
                     style={{ borderRadius: i % 2 === 0 ? "8px" : undefined, padding: i % 2 === 0 ? "12px 16px" : "12px 16px" }}
                   >
                     <span className="text-[rgb(36,43,43)] text-[14px] font-medium">{row.feature}</span>
-                    <div className="flex items-center justify-center">
+                    <div className="flex items-center justify-center px-4">
                       <Cell value={row.virtual} />
                     </div>
-                    <div className="flex items-center justify-center bg-[#2a3065]/5 rounded-lg py-2 px-3 min-h-[44px]">
-                      <Cell value={row.scale} dark />
+                    <div className="flex items-center justify-center px-4">
+                      <Cell value={row.scale} />
                     </div>
                   </div>
                 ))}
