@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle } from "lucide-react";
+import { ArrowRight, CheckCircle, Check } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
@@ -144,7 +144,192 @@ export default function SpacesPage() {
     <>
       <Header />
       <main className="pt-16 min-h-screen bg-white">
-        <div className="bg-[#F5F5F5] border-b border-[#E5E5E5] py-12">
+
+        {/* ── PRICING OVERVIEW ── */}
+        <div className="bg-white border-b border-[#E5E5E5]">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20 py-16 lg:py-24">
+
+            {/* Section header */}
+            <div className="mb-12 max-w-2xl">
+              <h2 className="font-inter-tight font-medium text-3xl sm:text-4xl text-[rgb(36,43,43)] tracking-tight mb-4">
+                Flexible{" "}
+                <span className="font-besley font-medium italic underline decoration-[#2a3065] decoration-[3px] underline-offset-[4px]">
+                  memberships
+                </span>{" "}
+                that scale with your operation
+              </h2>
+              <p className="text-[#555555] text-base leading-relaxed">
+                From a virtual business address to a full dedicated unit — find the membership or space that fits your business today.
+              </p>
+            </div>
+
+            {/* Three cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
+
+              {/* ── Card 1: Virtual ── */}
+              <div className="bg-[#2a3065] rounded-2xl p-6 lg:p-8 flex flex-col min-h-[520px]">
+                <div className="mb-8">
+                  <p className="text-white/50 text-[11px] font-semibold uppercase tracking-widest mb-3">
+                    Membership
+                  </p>
+                  <h3 className="font-inter-tight font-bold text-2xl text-white mb-3">
+                    Virtual
+                  </h3>
+                  <p className="text-white/65 text-sm leading-relaxed">
+                    I need a professional business presence — without space.
+                  </p>
+                </div>
+
+                <div className="flex items-baseline gap-1.5 mb-8">
+                  <span className="font-inter-tight font-bold text-[52px] leading-none text-white">$150</span>
+                  <span className="text-white/55 text-lg">/month</span>
+                </div>
+
+                <ul className="flex-1 flex flex-col gap-3.5 mb-8">
+                  {[
+                    "Establish a legitimate Melbourne business address instantly",
+                    "Handle mail reliably without managing logistics",
+                    "Access the Hexa Hub ecosystem network as you grow",
+                  ].map((b) => (
+                    <li key={b} className="flex items-start gap-3 text-white/80 text-sm leading-snug">
+                      <Check size={14} className="text-white/40 shrink-0 mt-0.5" />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+
+                <div>
+                  <Link
+                    href="/contact"
+                    className="block w-full bg-white hover:bg-[#F5F5F5] text-[#2a3065] font-semibold text-sm text-center py-3 rounded-lg transition-colors duration-200 mb-3"
+                  >
+                    Get started
+                  </Link>
+                  <p className="text-white/40 text-xs text-center">30-day money back guarantee</p>
+                </div>
+              </div>
+
+              {/* ── Card 2: Scale (popular) ── */}
+              <div className="relative bg-[#2a3065] rounded-2xl p-6 lg:p-8 flex flex-col min-h-[520px] ring-2 ring-white/20">
+                {/* Badge */}
+                <span className="absolute top-5 right-5 bg-[#C8922A] text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">
+                  ★ popular
+                </span>
+
+                <div className="mb-8">
+                  <p className="text-white/50 text-[11px] font-semibold uppercase tracking-widest mb-3">
+                    Membership
+                  </p>
+                  <h3 className="font-inter-tight font-bold text-2xl text-white mb-3">
+                    Scale
+                  </h3>
+                  <p className="text-white/65 text-sm leading-relaxed">
+                    I need flexible space and logistics — without committing to a full warehouse.
+                  </p>
+                </div>
+
+                <div className="flex items-baseline gap-1.5 mb-8">
+                  <span className="font-inter-tight font-bold text-[52px] leading-none text-white">$400</span>
+                  <span className="text-white/55 text-lg">/month</span>
+                </div>
+
+                <ul className="flex-1 flex flex-col gap-3.5 mb-8">
+                  {[
+                    "Receive, store, and ship inventory as needed",
+                    "Pay only for the logistics services you actually use",
+                    "Operate professionally without managing a warehouse",
+                  ].map((b) => (
+                    <li key={b} className="flex items-start gap-3 text-white/80 text-sm leading-snug">
+                      <Check size={14} className="text-white/40 shrink-0 mt-0.5" />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+
+                <div>
+                  <Link
+                    href="/contact"
+                    className="block w-full bg-white hover:bg-[#F5F5F5] text-[#2a3065] font-semibold text-sm text-center py-3 rounded-lg transition-colors duration-200 mb-3"
+                  >
+                    Get started
+                  </Link>
+                  <p className="text-white/40 text-xs text-center">
+                    Need clarity?{" "}
+                    <Link href="/contact" className="text-white/60 hover:text-white underline underline-offset-2 transition-colors">
+                      Speak to our team
+                    </Link>
+                  </p>
+                </div>
+              </div>
+
+              {/* ── Card 3: Dedicated ── */}
+              <div className="bg-[#2a3065] rounded-2xl p-6 lg:p-8 flex flex-col min-h-[520px]">
+                <div className="mb-8">
+                  <p className="text-white/50 text-[11px] font-semibold uppercase tracking-widest mb-3">
+                    Membership
+                  </p>
+                  <h3 className="font-inter-tight font-bold text-2xl text-white mb-3">
+                    Dedicated
+                  </h3>
+                  <p className="text-white/65 text-sm leading-relaxed">
+                    I&apos;m running active operations and need my own dedicated space.
+                  </p>
+                </div>
+
+                <div className="mb-2">
+                  <span className="font-inter-tight font-bold text-[52px] leading-none text-white">POA</span>
+                </div>
+                <p className="text-white/45 text-xs mb-8">
+                  Price on application — choose unit type and size
+                </p>
+
+                <ul className="flex-1 flex flex-col gap-3.5 mb-8">
+                  {[
+                    "Dedicated warehouse, office, or storage unit",
+                    "24/7 keypad access to your space",
+                    "Full ecosystem partner access and on-site support",
+                  ].map((b) => (
+                    <li key={b} className="flex items-start gap-3 text-white/80 text-sm leading-snug">
+                      <Check size={14} className="text-white/40 shrink-0 mt-0.5" />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+
+                <div>
+                  <Link
+                    href="#units"
+                    className="block w-full bg-white hover:bg-[#F5F5F5] text-[#2a3065] font-semibold text-sm text-center py-3 rounded-lg transition-colors duration-200 mb-3"
+                  >
+                    Explore
+                  </Link>
+                  <p className="text-white/40 text-xs text-center">No commitment or payment required</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Helper row */}
+            <div className="flex flex-wrap items-center gap-3 mt-10">
+              <span className="text-[#6B6B6B] text-sm">Not sure which plan to choose?</span>
+              <Link
+                href="/contact"
+                className="bg-[#F5F5F5] hover:bg-[#EBEBEB] text-[#555555] text-sm font-medium px-4 py-1.5 rounded-full transition-colors duration-200"
+              >
+                Take a quiz
+              </Link>
+              <span className="text-[#D0D0D0] text-sm select-none">or</span>
+              <Link
+                href="/access-plans"
+                className="inline-flex items-center gap-1 text-[#2a3065] text-sm font-semibold hover:underline"
+              >
+                Compare plans <ArrowRight size={12} />
+              </Link>
+            </div>
+
+          </div>
+        </div>
+
+        <div id="units" className="bg-[#F5F5F5] border-b border-[#E5E5E5] py-12">
           <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-2">What we offer</p>
             <h1 className="text-3xl sm:text-4xl font-bold text-black tracking-tight">Spaces</h1>
