@@ -293,7 +293,7 @@ export default async function HomePage() {
               </Link>
             </div>
 
-            <div className="space-types-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
+            <div className="space-types-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-6">
               {SPACE_TYPES.map((card) => (
                 <SpaceCard
                   key={card.type}
@@ -302,7 +302,7 @@ export default async function HomePage() {
                   img={card.img}
                   buttonText="Book a tour"
                   buttonHref="/contact"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
                   aspectClass="aspect-[2/3] lg:aspect-auto lg:min-h-[500px]"
                 />
               ))}
@@ -425,7 +425,7 @@ export default async function HomePage() {
                   name: "Retail Presence",
                   location: "369 Lonsdale St + 878 Whitehorse Rd",
                   desc: "Physical retail and pop-up space at Melbourne CBD and Box Hill — test, sell, and build brand presence without a long-term commitment.",
-                  href: "/ecosystem#retail",
+                  href: "/retail",
                   badge: null,
                   current: false,
                   external: false,
