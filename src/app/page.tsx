@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle, MapPin, Clock, Zap, Shield, Package, Network } from "lucide-react";
+import { ArrowRight, CheckCircle, Zap, Package, Network, ShieldCheck, RefreshCw } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import UnitCard from "@/components/units/UnitCard";
@@ -41,12 +41,6 @@ const SPACE_TYPES = [
   },
 ];
 
-const TRUST_ITEMS = [
-  { icon: Clock, title: "24/7 Access", desc: "Wireless keypad entry around the clock, every day of the year." },
-  { icon: Shield, title: "Secure Site", desc: "24-hour CCTV throughout the estate and bollard protection." },
-  { icon: Zap, title: "3-Phase Power", desc: "Warehouse units come with 3-phase power as standard." },
-  { icon: MapPin, title: "Prime Location", desc: "Minutes from Monash Freeway, Oakleigh, and Clayton industrial precincts." },
-];
 
 const PILLARS = [
   {
@@ -284,6 +278,7 @@ export default async function HomePage() {
                   buttonText="Book a tour"
                   buttonHref="/contact"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                  aspectClass="aspect-[2/3] lg:min-h-[500px]"
                 />
               ))}
             </div>
@@ -471,53 +466,79 @@ export default async function HomePage() {
           </section>
         )}
 
-        {/* ── WHY HEXA HUB ── */}
-        <section className="py-24 bg-white">
+        {/* ── SIMPLE PRICING ── */}
+        <section className="py-20 lg:py-28 bg-white">
           <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+              {/* Left: content */}
               <div>
-                <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
-                  Why Hexa Hub
+                <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-4">
+                  Simple Pricing
                 </p>
-                <h2 className="text-3xl sm:text-4xl font-bold text-black tracking-tight mb-6">
-                  Built for brands<br />building in Australia.
+                <h2 className="font-inter-tight font-medium text-3xl sm:text-4xl text-[rgb(36,43,43)] tracking-tight mb-5">
+                  Scale without upfront{" "}
+                  <span className="font-besley font-medium italic underline decoration-[#2a3065] decoration-[3px] underline-offset-[4px]">
+                    chaos
+                  </span>
                 </h2>
-                <p className="text-[#6B6B6B] text-base leading-relaxed mb-8">
-                  Every unit at Hexa Hub is finished to a high specification — polished concrete, LED high-bay
-                  lighting, NBN, and CCTV — so you start operating from day one. No setup friction, no hidden
-                  infrastructure gaps.
+                <p className="text-[#555555] text-base leading-relaxed mb-10 max-w-lg">
+                  Our flexible month-to-month memberships grow as you do. No long-term industrial leases — just the space and support you need.
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {TRUST_ITEMS.map(({ icon: Icon, title, desc }) => (
-                    <div key={title} className="flex gap-3">
-                      <div className="shrink-0 w-8 h-8 bg-[#2a3065]/10 flex items-center justify-center mt-0.5">
-                        <Icon size={15} className="text-[#2a3065]" />
+                <div className="flex flex-col gap-6">
+                  {[
+                    {
+                      Icon: ShieldCheck,
+                      title: "Transparent costs",
+                      desc: "Know exactly what you pay for space and support.",
+                    },
+                    {
+                      Icon: RefreshCw,
+                      title: "Month-to-month",
+                      desc: "Flex up or down as your business changes.",
+                    },
+                  ].map(({ Icon, title, desc }) => (
+                    <div key={title} className="flex items-start gap-4">
+                      <div className="shrink-0 w-9 h-9 rounded-full bg-[#2a3065]/8 flex items-center justify-center mt-0.5">
+                        <Icon size={16} className="text-[#2a3065]" />
                       </div>
                       <div>
-                        <div className="text-black font-semibold text-sm">{title}</div>
-                        <div className="text-[#6B6B6B] text-sm mt-0.5">{desc}</div>
+                        <div className="font-inter-tight font-semibold text-[rgb(36,43,43)] text-sm mb-0.5">
+                          {title}
+                        </div>
+                        <div className="text-[#6B6B6B] text-sm leading-relaxed">{desc}</div>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="relative">
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image
-                    src="/renders/The Hub @ Found Spaces.jpg"
-                    alt="The Hub — communal amenity at Hexa Hub"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </div>
-                <div className="absolute -bottom-6 -left-6 bg-white border border-[#E5E5E5] p-5 max-w-[220px]">
-                  <div className="text-black font-bold text-2xl mb-1">The Hub</div>
-                  <div className="text-[#555555] text-xs leading-snug">
-                    Exclusive communal lounge, pool table, meeting room, and kitchen — free for all tenants.
+
+              {/* Right: pricing card */}
+              <div className="bg-[#2a3065] rounded-2xl p-10 lg:p-12 flex flex-col min-h-[420px] justify-between">
+                <div>
+                  <p className="text-[#C8922A] text-[11px] font-semibold uppercase tracking-widest mb-6">
+                    Starting at
+                  </p>
+                  <div className="flex items-baseline gap-2 mb-5">
+                    <span className="font-inter-tight font-semibold text-[72px] leading-none text-white">
+                      $400
+                    </span>
+                    <span className="text-white/50 text-xl">/month</span>
                   </div>
+                  <p className="text-white/55 text-sm leading-relaxed max-w-xs">
+                    Pricing varies by location, suite size, and availability. All units include basic amenities and member perks.
+                  </p>
+                </div>
+                <div className="mt-10">
+                  <Link
+                    href="/spaces"
+                    className="inline-flex items-center gap-2 bg-white hover:bg-[#F5F5F5] text-[#2a3065] font-semibold px-8 py-3.5 rounded-full transition-colors duration-200 text-sm"
+                  >
+                    See pricing &amp; availability <ArrowRight size={14} />
+                  </Link>
                 </div>
               </div>
+
             </div>
           </div>
         </section>
