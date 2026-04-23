@@ -10,29 +10,43 @@ import HeroCarousel from "@/components/shared/HeroCarousel";
 // ── Carousel data ─────────────────────────────────────────────────────────────
 
 const CAROUSEL_TILES = [
-  { label: "Inventory",    sub: "Spaces", img: "/renders/Internal.jpg" },
-  { label: "Fulfilment",   sub: "Spaces", img: "/renders/Storage Final Image LOW RES.jpg" },
-  { label: "Showroom",     sub: "Spaces", img: "/renders/Block H Front.jpg" },
-  { label: "Security",     sub: "Spaces", img: "/renders/Block B Front Close Up.jpg" },
+  { label: "Office",        sub: "Spaces", img: "/renders/Mezzanine.jpg" },
+  { label: "Collaboration", sub: "Spaces", img: "/renders/The Hub @ Found Spaces.jpg" },
+  { label: "Communal",      sub: "Spaces", img: "/renders/Aerial.jpg" },
 ];
 
 // ── Unit cards ────────────────────────────────────────────────────────────────
 
 const UNIT_CARDS = [
   {
-    title: "Storage Spaces",
-    img: "/renders/Storage Final Image LOW RES.jpg",
-    specs: ["31–75m² drive-through storage", "24/7 wireless keypad access", "Flexible monthly membership"],
+    title: "Office + Warehouse",
+    titleNode: (
+      <>
+        Office +{" "}
+        <span className="font-besley font-medium italic">warehouse</span>
+      </>
+    ),
+    img: "/renders/Mezzanine.jpg",
+    specs: [
+      "240m² over two levels",
+      "Full-floor office above, warehouse with tilt door below",
+      "Street frontage with roller door",
+    ],
   },
   {
-    title: "Hexa Warehouse",
-    img: "/renders/Internal.jpg",
-    specs: ["223–438m² warehouse units", "3-phase power, roller doors", "Mezzanine offices included"],
-  },
-  {
-    title: "Showroom Warehouse",
-    img: "/renders/Block H Front.jpg",
-    specs: ["Dual-purpose units", "Street-facing showroom", "Operational warehouse behind"],
+    title: "Private Offices",
+    titleNode: (
+      <>
+        Private{" "}
+        <span className="font-besley font-medium italic">offices</span>
+      </>
+    ),
+    img: "/renders/Block B Front.jpg",
+    specs: [
+      "128–136m² private offices",
+      "Natural light, district views",
+      "Ground and first floor options",
+    ],
   },
 ];
 
@@ -41,51 +55,51 @@ const UNIT_CARDS = [
 const FEATURE_BLOCKS = [
   {
     eyebrow: "Operations",
-    headingParts: ["We ", "ship", " and ", "receive", " for you"],
-    italics: [false, true, false, true, false],
+    headingParts: ["Workspace paired with ", "operations"],
+    italics: [false, true],
     subhead:
-      "Our on-site operations team handles inbound freight, package receiving, and outbound shipping — so you can focus on growing your brand instead of standing at the loading bay.",
+      "Most office space puts you on the 12th floor of a CBD tower, miles from your inventory. At Hexa Hub, your office sits alongside your actual operations — receiving, stock, shipping, and the teams that run them.",
     features: [
       {
-        label: "Carrier Pickup",
-        desc: "Direct pickup access for Australia Post, StarTrack, Couriers Please, and other major carriers — no trips to the post office.",
+        label: "All-in-one site",
+        desc: "Your office, warehouse, and ecosystem partners all at Huntingdale — no commuting between CBD meetings and industrial sites.",
       },
       {
-        label: "Loading Zones",
-        desc: "Dedicated loading zones with full-height roller doors for freight, container, and pallet movements.",
+        label: "Hub access included",
+        desc: "Every office tenant gets access to The Hub, our shared lounge and meeting space, for visitor meetings and team collaboration.",
       },
     ],
-    cta: { label: "Explore our logistics services", href: "/operations" },
-    img: "/renders/Storage Entry.jpg",
-    imgAlt: "Loading area at Hexa Hub Huntingdale",
+    cta: { label: "See what's included", href: "#amenities" },
+    img: "/renders/Mezzanine (Floor Boards).jpg",
+    imgAlt: "Office interior at Hexa Hub Huntingdale",
     imgRight: true,
   },
   {
     eyebrow: "Growth",
-    headingParts: ["A warehouse that ", "scales", " with you"],
+    headingParts: ["Office space that ", "scales", " with you"],
     italics: [false, true, false],
     subhead:
-      "Start with the space you need today and expand across units as your operations grow. Month-to-month terms, with pathways to larger warehouses and combined office-warehouse units when ready.",
+      "Start in a stand-alone office, expand into a combined office-warehouse unit, or grow across multiple suites — all on month-to-month terms.",
     features: [
       {
-        label: "Flexible Terms",
-        desc: "Month-to-month memberships with no long industrial lease commitment. Scale up or down as your inventory, team, or season changes.",
+        label: "Month-to-month",
+        desc: "No long commercial lease. Upgrade to a larger suite or combined unit when ready — no break fees, no renegotiation.",
       },
       {
-        label: "Ecosystem Partners",
-        desc: "Direct access to our ecosystem — EIZ Technology for imports and compliance, Digitec IT for systems, and Australia Post for outbound logistics — all built in.",
+        label: "Upgrade paths",
+        desc: "Move between office tiers as your team grows — from solo office, to shared team office, to full Office + Warehouse combined unit.",
       },
     ],
-    cta: { label: "See our ecosystem partners", href: "/ecosystem" },
-    img: "/renders/Aerial.jpg",
-    imgAlt: "Hexa Hub precinct aerial view, Huntingdale Melbourne",
+    cta: { label: "Explore combined units", href: "/warehouse-spaces" },
+    img: "/renders/The Hub @ Found Spaces.jpg",
+    imgAlt: "The Hub communal space at Hexa Hub",
     imgRight: false,
   },
 ];
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
-export default function WarehouseSpacesPage() {
+export default function OfficeSpacesPage() {
   return (
     <>
       <Header />
@@ -99,12 +113,12 @@ export default function WarehouseSpacesPage() {
               {/* Left — headline + CTAs */}
               <div>
                 <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-4">
-                  Warehouse Spaces
+                  Office Suites
                 </p>
                 <h1 className="font-inter-tight font-medium text-[36px] leading-[44px] sm:text-[44px] sm:leading-[54px] lg:text-[56px] lg:leading-[67px] text-[rgb(36,43,43)] tracking-tight mb-8">
-                  Give your brand room to{" "}
+                  Office spaces built for{" "}
                   <span className="font-besley font-medium italic underline decoration-[#2a3065] decoration-[3px] underline-offset-[4px]">
-                    grow
+                    operators
                   </span>
                 </h1>
                 <div className="flex flex-wrap items-center gap-4">
@@ -126,7 +140,7 @@ export default function WarehouseSpacesPage() {
               {/* Right — subhead */}
               <div className="lg:pt-6">
                 <p className="text-[#555555] text-lg leading-relaxed max-w-lg">
-                  Warehouse spaces at Huntingdale with the infrastructure, ecosystem, and on-site support to scale — purpose-built for brands operating in Australia.
+                  Private office suites at Huntingdale — purpose-built for brands that need a professional workspace alongside their physical operations. Month-to-month, with pathways to larger combined office-warehouse units as your team grows.
                 </p>
               </div>
             </div>
@@ -144,23 +158,25 @@ export default function WarehouseSpacesPage() {
                 Flexible memberships
               </p>
               <h2 className="font-inter-tight font-bold text-3xl sm:text-4xl text-[rgb(36,43,43)] tracking-tight mb-4">
-                Warehouse spaces
+                Office suites
               </h2>
               <p className="text-[#6B6B6B] text-base leading-relaxed max-w-2xl">
-                Whether you&apos;re storing your first pallet or scaling across multiple units, get the right amount of space now — and scale up or down as your business changes.
+                Whether you&apos;re solo or growing a team, get the right workspace now and expand when ready.
               </p>
             </div>
 
-            <div className="space-types-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+            <div className="space-types-grid grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
               {UNIT_CARDS.map((card) => (
                 <SpaceCard
                   key={card.title}
                   title={card.title}
+                  titleNode={card.titleNode}
                   specs={card.specs}
                   img={card.img}
                   buttonText="Explore"
                   buttonHref="/contact"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  aspectClass="aspect-[4/3]"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               ))}
             </div>
@@ -238,7 +254,7 @@ export default function WarehouseSpacesPage() {
         })}
 
         {/* ── 4. AMENITIES ── */}
-        <section className="py-20 lg:py-28 bg-white border-t border-[#E5E5E5]">
+        <section id="amenities" className="py-20 lg:py-28 bg-white border-t border-[#E5E5E5]">
           <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
             <div className="mb-12">
               <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
@@ -251,7 +267,7 @@ export default function WarehouseSpacesPage() {
                 under one roof
               </h2>
               <p className="text-[#6B6B6B] text-base max-w-xl leading-relaxed">
-                Explore all the amenities built into every Hexa Hub warehouse space.
+                Every amenity included across Hexa Hub office and warehouse spaces.
               </p>
             </div>
             <AmenitiesAccordion />
@@ -262,10 +278,10 @@ export default function WarehouseSpacesPage() {
         <section className="py-20 lg:py-28 bg-[#2a3065]">
           <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
             <h2 className="font-inter-tight font-bold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-4">
-              Find your warehouse today
+              Find your office today
             </h2>
             <p className="text-white/70 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-              Join brands scaling their operations at Huntingdale.
+              Join brands building their Australian operations at Huntingdale.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link

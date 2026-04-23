@@ -4,24 +4,28 @@ import { ArrowRight } from "lucide-react";
 
 type SpaceCardProps = {
   title: string;
+  titleNode?: React.ReactNode; // optional rich label (italic words etc.) — falls back to title
   specs: string[];
   img: string;
   buttonText: string;
   buttonHref: string;
   sizes?: string;
+  aspectClass?: string; // default: "aspect-[2/3]" (portrait); pass "aspect-[4/3]" for landscape
 };
 
 export default function SpaceCard({
   title,
+  titleNode,
   specs,
   img,
   buttonText,
   buttonHref,
   sizes = "(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw",
+  aspectClass = "aspect-[2/3]",
 }: SpaceCardProps) {
   return (
     <div
-      className="space-type-card group relative overflow-hidden rounded-2xl aspect-[2/3] flex flex-col"
+      className={`space-type-card group relative overflow-hidden rounded-2xl ${aspectClass} flex flex-col`}
       tabIndex={0}
     >
       {/* Background image — fades out on hover */}
@@ -42,7 +46,7 @@ export default function SpaceCard({
       {/* Content */}
       <div className="relative z-10 flex flex-col h-full p-4 lg:p-5">
         <h3 className="font-inter-tight font-semibold text-white text-base lg:text-[17px] leading-snug">
-          {title}
+          {titleNode ?? title}
         </h3>
 
         <ul className="space-card-specs mt-3 flex flex-col gap-2 opacity-0 transition-opacity duration-300 ease-out">
