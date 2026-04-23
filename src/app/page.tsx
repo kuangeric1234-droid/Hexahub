@@ -6,7 +6,7 @@ import Footer from "@/components/layout/Footer";
 import UnitCard from "@/components/units/UnitCard";
 import AmenitiesAccordion from "@/components/home/AmenitiesAccordion";
 import SpaceCard from "@/components/shared/SpaceCard";
-import { getFeaturedLeaseUnits, getFeaturedSaleUnits, getSiteSettings, getPartners, getMembers } from "@/lib/sanity/queries";
+import { getFeaturedLeaseUnits, getFeaturedSaleUnits, getSiteSettings, getPartners } from "@/lib/sanity/queries";
 
 const SPACE_TYPES = [
   {
@@ -66,15 +66,29 @@ const PILLARS = [
   },
 ];
 
+// ── Member strip — swap name strings for { name, img } objects when real logos arrive
+const MEMBER_STRIP: { name: string; img?: string }[] = [
+  { name: "Digitec IT" },
+  { name: "Tutti Kids" },
+  { name: "Fureeze" },
+  { name: "Member Business" },
+  { name: "Member Business" },
+  { name: "Member Business" },
+  { name: "Member Business" },
+  { name: "Member Business" },
+  { name: "Member Business" },
+  { name: "Member Business" },
+  { name: "Member Business" },
+];
+
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const [featuredLeaseUnits, featuredSaleUnits, settings, partners, members] = await Promise.all([
+  const [featuredLeaseUnits, featuredSaleUnits, settings, partners] = await Promise.all([
     getFeaturedLeaseUnits().catch(() => []),
     getFeaturedSaleUnits().catch(() => []),
     getSiteSettings().catch(() => null),
     getPartners().catch(() => []),
-    getMembers().catch(() => []),
   ]);
 
 
@@ -440,31 +454,47 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* ── MEMBERS ── */}
-        {members.length > 0 && (
-          <section className="py-24 bg-white border-b border-[#E5E5E5]">
-            <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
-              <div className="mb-12">
-                <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
-                  Community
-                </p>
-                <h2 className="text-3xl sm:text-4xl font-bold text-black tracking-tight">
-                  Businesses operating at Hexa Hub.
-                </h2>
-              </div>
-              <div className="flex flex-wrap gap-4">
-                {members.map((member) => (
-                  <div
-                    key={member._id}
-                    className="border border-[#E5E5E5] px-6 py-4 flex items-center justify-center min-w-[140px]"
-                  >
-                    <span className="text-[#555555] text-sm font-medium">{member.name}</span>
-                  </div>
-                ))}
-              </div>
+        {/* ── MEMBERS — infinite scroll strip ── */}
+        <section className="py-16 lg:py-20 bg-white border-b border-[#E5E5E5]">
+          {/* Heading — stays in container */}
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20 mb-10">
+            <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
+              Community
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-black tracking-tight">
+              Businesses operating at Hexa Hub.
+            </h2>
+          </div>
+
+          {/* Strip — full viewport width, breaks out of container */}
+          <div
+            className="overflow-hidden"
+            aria-label="Businesses operating at Hexa Hub"
+          >
+            <div className="animate-scroll-left flex gap-6 w-max py-2">
+              {[...MEMBER_STRIP, ...MEMBER_STRIP].map((member, i) => (
+                <div
+                  key={i}
+                  className="flex-shrink-0 flex items-center px-6 py-3 rounded-full border border-[#E5E5E5] bg-white h-12"
+                >
+                  {member.img ? (
+                    <Image
+                      src={member.img}
+                      alt={member.name}
+                      width={80}
+                      height={32}
+                      className="h-7 w-auto object-contain"
+                    />
+                  ) : (
+                    <span className="text-[#555555] text-sm font-medium whitespace-nowrap">
+                      {member.name}
+                    </span>
+                  )}
+                </div>
+              ))}
             </div>
-          </section>
-        )}
+          </div>
+        </section>
 
         {/* ── SIMPLE PRICING ── */}
         <section className="py-20 lg:py-28 bg-white">
