@@ -45,15 +45,15 @@ export default function SpaceCard({
 
       {/* Content */}
       <div className="relative z-10 flex flex-col h-full p-4 lg:p-5">
-        <h3 className="font-inter-tight font-semibold text-white text-base lg:text-[17px] leading-snug">
+        <h3 className="font-inter-tight font-semibold text-white text-[22px] lg:text-[17px] leading-snug">
           {titleNode ?? title}
         </h3>
 
-        <ul className="space-card-specs mt-3 flex flex-col gap-2 opacity-0 transition-opacity duration-300 ease-out">
+        <ul className="space-card-specs mt-3 flex flex-col gap-2 opacity-0 transition-opacity duration-300 ease-out text-[17px] lg:text-[13px] leading-relaxed lg:leading-snug">
           {specs.map((spec) => (
             <li
               key={spec}
-              className="text-white/85 text-[13px] leading-snug flex items-start gap-2"
+              className="text-white/85 flex items-start gap-2"
             >
               <span className="mt-1.5 shrink-0 w-1 h-1 rounded-full bg-white/60 inline-block" />
               {spec}
