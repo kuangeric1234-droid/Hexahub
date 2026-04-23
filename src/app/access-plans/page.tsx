@@ -64,7 +64,7 @@ function Cell({ value }: { value: CellValue }) {
     return <CheckCircle size={20} className="text-[#2a3065] mx-auto" />;
   if (value === false)
     return <XCircle size={20} className="text-[#D0D0D0] mx-auto" />;
-  return <span className="text-[13px] leading-snug text-center block text-[#555555]">{value}</span>;
+  return <span className="text-[11px] md:text-[13px] leading-snug text-center block text-[#555555]">{value}</span>;
 }
 
 // ── Value props ───────────────────────────────────────────────────────────────
@@ -266,17 +266,17 @@ export default function AccessPlansPage() {
 
             {/* Scrollable wrapper on mobile */}
             <div className="overflow-x-auto -mx-6 sm:-mx-8 lg:mx-0">
-              <div className="min-w-[640px] lg:min-w-0 px-6 sm:px-8 lg:px-0">
+              <div className="px-6 sm:px-8 lg:px-0">
 
                 {/* Plan header cards */}
-                <div className="grid grid-cols-[3fr_3.5fr_3.5fr] gap-3 mb-3">
+                <div className="grid grid-cols-[2fr_3fr_3fr] md:grid-cols-[3fr_3.5fr_3.5fr] gap-2 md:gap-3 mb-3">
                   <div />
                   {/* Virtual */}
-                  <div className="bg-[#eef0f8] rounded-xl p-5">
-                    <p className="font-inter-tight font-semibold text-[#2a3065] text-sm uppercase tracking-wider mb-2">
+                  <div className="bg-[#eef0f8] rounded-xl p-3 md:p-5">
+                    <p className="font-inter-tight font-semibold text-[#2a3065] text-xs md:text-sm uppercase tracking-wider mb-2">
                       Virtual
                     </p>
-                    <p className="font-inter-tight font-bold text-[rgb(36,43,43)] text-3xl leading-none">
+                    <p className="font-inter-tight font-bold text-[rgb(36,43,43)] text-2xl md:text-3xl leading-none">
                       $150
                       <span className="text-base font-medium text-[#6B6B6B]">/mo</span>
                     </p>
@@ -288,11 +288,11 @@ export default function AccessPlansPage() {
                     </Link>
                   </div>
                   {/* Scale */}
-                  <div className="bg-[#2a3065] rounded-xl p-5">
-                    <p className="font-inter-tight font-semibold text-white/70 text-sm uppercase tracking-wider mb-2">
+                  <div className="bg-[#2a3065] rounded-xl p-3 md:p-5">
+                    <p className="font-inter-tight font-semibold text-white/70 text-xs md:text-sm uppercase tracking-wider mb-2">
                       Scale
                     </p>
-                    <p className="font-inter-tight font-bold text-white text-3xl leading-none">
+                    <p className="font-inter-tight font-bold text-white text-2xl md:text-3xl leading-none">
                       $400
                       <span className="text-base font-medium text-white/60">/mo</span>
                     </p>
@@ -309,16 +309,16 @@ export default function AccessPlansPage() {
                 {TABLE_ROWS.map((row, i) => (
                   <div
                     key={row.feature}
-                    className={`grid grid-cols-[3fr_3.5fr_3.5fr] gap-3 items-center px-0 py-3 border-b border-[#E5E5E5] ${
+                    className={`grid grid-cols-[2fr_3fr_3fr] md:grid-cols-[3fr_3.5fr_3.5fr] gap-2 md:gap-3 items-center border-b border-[#E5E5E5] px-3 py-2 md:px-4 md:py-3 ${
                       i % 2 === 0 ? "bg-white" : "bg-transparent"
                     }`}
-                    style={{ borderRadius: i % 2 === 0 ? "8px" : undefined, padding: i % 2 === 0 ? "12px 16px" : "12px 16px" }}
+                    style={{ borderRadius: i % 2 === 0 ? "8px" : undefined }}
                   >
-                    <span className="text-[rgb(36,43,43)] text-[14px] font-medium">{row.feature}</span>
-                    <div className="flex items-center justify-center px-4">
+                    <span className="text-[rgb(36,43,43)] text-xs md:text-[14px] font-medium leading-snug">{row.feature}</span>
+                    <div className="flex items-center justify-center px-1 md:px-4">
                       <Cell value={row.virtual} />
                     </div>
-                    <div className="flex items-center justify-center px-4">
+                    <div className="flex items-center justify-center px-1 md:px-4">
                       <Cell value={row.scale} />
                     </div>
                   </div>
