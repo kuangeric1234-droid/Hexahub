@@ -49,6 +49,8 @@ const PILLARS = [
     title: "Five types of space, one address.",
     body: "Warehouses, storage, showrooms, offices, and combined office-warehouse units from 31–438m² at Huntingdale. Purpose-built, high-spec, and available now.",
     href: "/spaces",
+    img: "/renders/Internal.jpg",
+    imgAlt: "Warehouse interior at Hexa Hub Huntingdale",
   },
   {
     icon: Zap,
@@ -56,6 +58,8 @@ const PILLARS = [
     title: "Infrastructure that works from day one.",
     body: "3-phase power, roller doors, loading zones, 24/7 keypad access, NBN, CCTV, and The Hub — a shared lounge and meeting space included for every tenant.",
     href: "/operations",
+    img: "/renders/Storage Entry.jpg",
+    imgAlt: "Loading and storage area at Hexa Hub Huntingdale",
   },
   {
     icon: Network,
@@ -63,6 +67,8 @@ const PILLARS = [
     title: "A network of partners built in.",
     body: "Every member plugs into EIZ Technology, Digitec IT, Australia Post logistics, and direct mentorship — the partners you need to land and grow in Australia.",
     href: "/ecosystem",
+    img: "/renders/The Hub @ Found Spaces.jpg",
+    imgAlt: "The Hub communal lounge at Hexa Hub Huntingdale",
   },
 ];
 
@@ -176,11 +182,16 @@ export default async function HomePage() {
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {PILLARS.map(({ label, title, body, href }) => (
+              {PILLARS.map(({ label, title, body, href, img, imgAlt }) => (
                 <div key={label} className="bg-[#F5F5F5] rounded-3xl p-6 lg:p-8 flex flex-col">
-                  {/* Image placeholder */}
-                  <div className="w-full aspect-[4/3] rounded-2xl bg-[#E5E5E5] flex items-center justify-center mb-6 shrink-0">
-                    <span className="text-[#6B6B6B] text-xs font-medium uppercase tracking-widest">Image placeholder</span>
+                  <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mb-6 shrink-0">
+                    <Image
+                      src={img}
+                      alt={imgAlt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
                   </div>
 
                   {/* Eyebrow */}
