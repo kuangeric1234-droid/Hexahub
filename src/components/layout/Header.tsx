@@ -6,7 +6,7 @@ import { useState, useRef, useCallback } from "react";
 import {
   Menu, X, Phone, ChevronDown,
   Key, Package, Building2,
-  Truck, MailPlus,
+  Truck, MailPlus, Store,
 } from "lucide-react";
 
 // ── Nav config ────────────────────────────────────────────────────────────────
@@ -70,6 +70,12 @@ const NAV_CONFIG: NavItem[] = [
             href: "/australia-post",
             description: "Direct carrier pickup and partner access through our Australia Post integration",
             icon: MailPlus,
+          },
+          {
+            title: "Retail Presence",
+            href: "/retail",
+            description: "Melbourne retail and pop-up space at CBD and Box Hill — test and launch without a lease.",
+            icon: Store,
           },
         ],
       },
