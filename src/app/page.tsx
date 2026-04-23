@@ -292,7 +292,7 @@ export default async function HomePage() {
                   buttonText="Book a tour"
                   buttonHref="/contact"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                  aspectClass="aspect-[2/3] lg:min-h-[500px]"
+                  aspectClass="aspect-[2/3] lg:aspect-auto lg:min-h-[500px]"
                 />
               ))}
             </div>
