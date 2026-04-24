@@ -96,8 +96,8 @@ export type Person = {
   slug: { current: string };
   title?: string;
   company?: string;
-  companyLogo?: { asset: { _ref: string } };
-  photo?: { asset: { _ref: string }; alt?: string };
+  companyLogo?: { asset?: { _ref: string } | null } | null;
+  photo?: { asset?: { _ref: string } | null; alt?: string } | null;
   bio?: unknown[];
   socials?: PersonSocials;
 };
@@ -114,7 +114,7 @@ export type EventListItem = {
   rsvpEnabled?: boolean;
   rsvpClosingDate?: string;
   rsvpLink?: string;
-  coverImage?: { asset: { _ref: string }; alt?: string };
+  coverImage?: { asset?: { _ref: string } | null; alt?: string } | null;
 };
 
 /** Full shape returned by getEventBySlug — includes all detail-page fields */
@@ -130,7 +130,7 @@ export type Event = EventListItem & {
   organiserInstagramUrl?: string;
   rsvpCapacity?: number;
   rsvpFormOverride?: string;
-  gallery?: { asset: { _ref: string }; alt?: string }[];
+  gallery?: { asset?: { _ref: string } | null; alt?: string }[];
   speakers?: Person[];
   organisers?: Person[];
 };

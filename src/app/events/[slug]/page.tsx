@@ -150,7 +150,7 @@ const ptComponents: PortableTextComponents = {
 function PersonCard({ person }: { person: Person }) {
   return (
     <div className="bg-[#eef0f8] rounded-xl p-6 flex flex-col items-center text-center">
-      {person.photo && (
+      {person.photo?.asset && (
         <div className="relative w-20 h-20 rounded-full overflow-hidden mb-4 ring-2 ring-white">
           <Image
             src={urlFor(person.photo).width(160).height(160).url()}
@@ -170,7 +170,7 @@ function PersonCard({ person }: { person: Person }) {
       {person.company && (
         <p className="text-[#999] text-xs mt-0.5">{person.company}</p>
       )}
-      {person.companyLogo && (
+      {person.companyLogo?.asset && (
         <div className="relative h-5 w-24 mt-2">
           <Image
             src={urlFor(person.companyLogo).height(40).url()}
@@ -301,7 +301,7 @@ export default async function EventDetailPage({ params }: Props) {
 
         {/* ── HERO ─────────────────────────────────────────────────────────── */}
         <section className="relative min-h-[55vh] flex flex-col justify-end bg-[#2a3065]">
-          {event.coverImage && (
+          {event.coverImage?.asset && (
             <Image
               src={urlFor(event.coverImage).width(1600).height(900).url()}
               alt={event.coverImage.alt ?? event.title}
@@ -671,7 +671,7 @@ export default async function EventDetailPage({ params }: Props) {
 
               {event.gallery && event.gallery.length > 0 && (
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-                  {event.gallery.map((img, i) => (
+                  {event.gallery.filter(img => img?.asset).map((img, i) => (
                     <div
                       key={i}
                       className="relative aspect-square overflow-hidden rounded-lg bg-[#E5E5E5]"

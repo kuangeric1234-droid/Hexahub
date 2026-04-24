@@ -114,7 +114,7 @@ function EventCard({
       href={`/events/${event.slug.current}`}
       className="group border border-[#E5E5E5] hover:border-[#2a3065]/40 transition-colors flex flex-col"
     >
-      {event.coverImage ? (
+      {event.coverImage?.asset ? (
         <div className="relative aspect-[16/9] overflow-hidden bg-[#F5F5F5]">
           <Image
             src={urlFor(event.coverImage).width(640).height(360).url()}
