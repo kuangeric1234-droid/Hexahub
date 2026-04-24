@@ -520,7 +520,8 @@ export default async function EventDetailPage({ params }: Props) {
           <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12 lg:gap-16 items-start">
 
             {/* LEFT — overview + speakers + organisers */}
-            <div>
+            {/* order-2 on mobile so the RSVP sidebar renders first in single-column flow */}
+            <div className="order-2 lg:order-1">
               {event.description && Array.isArray(event.description) && event.description.length > 0 ? (
                 <>
                   <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-4">
@@ -547,7 +548,7 @@ export default async function EventDetailPage({ params }: Props) {
             </div>
 
             {/* RIGHT — sticky RSVP sidebar */}
-            <div>
+            <div className="order-1 lg:order-2">
               <div className="sticky top-24">
                 <SidebarContent
                   event={event}
