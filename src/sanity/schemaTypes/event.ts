@@ -129,7 +129,7 @@ export const eventSchema = defineType({
       type: "string",
       group: "details",
       description:
-        "Short human-readable label used on listing cards and the detail sidebar, e.g. "The Hub, Huntingdale".",
+        `Short human-readable label used on listing cards and the detail sidebar, e.g. "The Hub, Huntingdale".`,
       placeholder: "The Hub, Hexa Hub Huntingdale",
     }),
     defineField({
@@ -138,7 +138,7 @@ export const eventSchema = defineType({
       type: "string",
       group: "details",
       description:
-        "Shown in the detail-page sidebar and above the map, e.g. "7 Distribution Circuit, Huntingdale VIC 3166".",
+        `Shown in the detail-page sidebar and above the map, e.g. "7 Distribution Circuit, Huntingdale VIC 3166".`,
     }),
     defineField({
       name: "locationLatitude",
@@ -218,7 +218,7 @@ export const eventSchema = defineType({
       type: "datetime",
       group: "rsvp",
       description:
-        "After this date and time, the RSVP form is replaced with a "RSVPs are now closed" message.",
+        `After this date and time, the RSVP form is replaced with a "RSVPs are now closed" message.`,
     }),
     defineField({
       name: "rsvpFormOverride",
