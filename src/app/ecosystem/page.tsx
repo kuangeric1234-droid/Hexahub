@@ -66,7 +66,7 @@ const PARTNERS = [
       "On-site collection and drop-off at Huntingdale",
     ],
     bg: "bg-[#faf9f6]",
-    href: "https://auspost.com.au",
+    href: "https://auspost.com.au/business",
     external: true,
   },
   {

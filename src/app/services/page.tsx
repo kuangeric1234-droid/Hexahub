@@ -3,6 +3,7 @@ import Link from "next/link";
 import {
   ArrowRight,
   CheckCircle,
+  ExternalLink,
   Boxes,
   Truck,
   Layers,
@@ -297,8 +298,47 @@ export default async function ServicesPage() {
           </div>
         </section>
 
+        {/* ── AUSTRALIA POST PARTNERSHIP ── */}
+        <section className="py-24 bg-white border-t border-[#E5E5E5]">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
+            <div className="max-w-2xl">
+              <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
+                Partnership
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-black tracking-tight mb-6">
+                Australia Post Business
+              </h2>
+              <p className="text-[#6B6B6B] text-base leading-relaxed mb-4">
+                As an Australia Post business partner, Hexa Hub tenants gain streamlined access to
+                shipping and fulfilment services — including business shipping rates, parcel solutions,
+                and integration options that support operating at scale from the Hub.
+              </p>
+              <p className="text-[#6B6B6B] text-base leading-relaxed mb-8">
+                Visit{" "}
+                <a
+                  href="https://auspost.com.au/business"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#2a3065] underline hover:no-underline"
+                >
+                  Australia Post Business
+                </a>{" "}
+                to explore their full range of services.
+              </p>
+              <a
+                href="https://auspost.com.au/business"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-[#2a3065] hover:bg-[#1e2a54] text-white font-bold px-8 py-4 text-base transition-colors"
+              >
+                Visit Australia Post Business <ExternalLink size={15} />
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* ── CTA ── */}
-        <section className="py-24 bg-white">
+        <section className="py-24 bg-white border-t border-[#E5E5E5]">
           <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
             <h2 className="text-4xl font-bold text-black tracking-tight mb-4">
               Ready to put the platform to work?

@@ -6,7 +6,7 @@ import { useState, useRef, useCallback } from "react";
 import {
   Menu, X, Phone, ChevronDown,
   Key, Package, Building2,
-  Truck, MailPlus, Store,
+  Truck, MailPlus, Store, ExternalLink,
 } from "lucide-react";
 
 // ── Nav config ────────────────────────────────────────────────────────────────
@@ -16,6 +16,7 @@ type DropdownItem = {
   href: string;
   description: string;
   icon: React.ElementType;
+  external?: boolean;
 };
 
 type DropdownGroup = {
@@ -67,9 +68,10 @@ const NAV_CONFIG: NavItem[] = [
           },
           {
             title: "Australia Post Business Partner",
-            href: "/australia-post",
+            href: "https://auspost.com.au/business",
             description: "Direct carrier pickup and partner access through our Australia Post integration",
             icon: MailPlus,
+            external: true,
           },
           {
             title: "Retail Presence",
@@ -98,23 +100,42 @@ function DropdownItemRow({
   onClose: () => void;
 }) {
   const Icon = item.icon;
-  return (
-    <Link
-      href={item.href}
-      onClick={onClose}
-      className="flex items-start gap-4 px-4 py-3 rounded-lg hover:bg-[#F5F5F5] transition-colors duration-150 group"
-    >
+  const className = "flex items-start gap-4 px-4 py-3 rounded-lg hover:bg-[#F5F5F5] transition-colors duration-150 group";
+  const content = (
+    <>
       <span className="mt-0.5 shrink-0 w-8 h-8 rounded-lg bg-[#2a3065]/8 flex items-center justify-center">
         <Icon size={15} className="text-[#2a3065]" />
       </span>
       <span className="flex flex-col gap-0.5">
-        <span className="font-inter-tight font-semibold text-[14px] text-[rgb(36,43,43)] group-hover:text-black">
+        <span className="font-inter-tight font-semibold text-[14px] text-[rgb(36,43,43)] group-hover:text-black flex items-center gap-1">
           {item.title}
+          {item.external && <ExternalLink size={11} className="text-[#6B6B6B] shrink-0" />}
         </span>
         <span className="text-[#6B6B6B] text-[13px] leading-snug">
           {item.description}
         </span>
       </span>
+    </>
+  );
+
+  if (item.external) {
+    return (
+      <a
+        href={item.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${item.title} (opens in new tab)`}
+        onClick={onClose}
+        className={className}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={item.href} onClick={onClose} className={className}>
+      {content}
     </Link>
   );
 }
@@ -255,17 +276,36 @@ function MobileDropdown({
               <div className="flex flex-col gap-0.5">
                 {group.items.map((sub) => {
                   const Icon = sub.icon;
-                  return (
+                  const mobileClass = "flex items-center gap-3 pl-2 pr-2 py-2 rounded-lg hover:bg-[#F5F5F5] transition-colors";
+                  const mobileContent = (
+                    <>
+                      <Icon size={14} className="text-[#2a3065] shrink-0" />
+                      <span className="font-inter-tight font-semibold text-[14px] text-[rgb(36,43,43)] flex items-center gap-1">
+                        {sub.title}
+                        {sub.external && <ExternalLink size={10} className="text-[#6B6B6B] shrink-0" />}
+                      </span>
+                    </>
+                  );
+                  return sub.external ? (
+                    <a
+                      key={sub.href}
+                      href={sub.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${sub.title} (opens in new tab)`}
+                      onClick={onNavClose}
+                      className={mobileClass}
+                    >
+                      {mobileContent}
+                    </a>
+                  ) : (
                     <Link
                       key={sub.href}
                       href={sub.href}
                       onClick={onNavClose}
-                      className="flex items-center gap-3 pl-2 pr-2 py-2 rounded-lg hover:bg-[#F5F5F5] transition-colors"
+                      className={mobileClass}
                     >
-                      <Icon size={14} className="text-[#2a3065] shrink-0" />
-                      <span className="font-inter-tight font-semibold text-[14px] text-[rgb(36,43,43)]">
-                        {sub.title}
-                      </span>
+                      {mobileContent}
                     </Link>
                   );
                 })}
