@@ -48,14 +48,27 @@ export type Partner = {
 };
 
 export type MemberCategory =
-  | "ecommerce-retail"
-  | "logistics-fulfilment"
-  | "technology-digital"
+  | "accounting-tax"
+  | "architecture-planning"
+  | "business-services"
+  | "construction-trades"
+  | "consulting"
+  | "education-training"
+  | "energy-sustainability"
+  | "finance-capital"
   | "health-beauty"
-  | "food-beverage"
-  | "home-lifestyle"
-  | "fashion-apparel"
-  | "professional-services"
+  | "hospitality-food"
+  | "insurance"
+  | "legal"
+  | "logistics-distribution"
+  | "marketing-creative"
+  | "migration-services"
+  | "photography-media"
+  | "property-real-estate"
+  | "psychology-wellbeing"
+  | "retail"
+  | "technology-it"
+  | "transport"
   | "other";
 
 export type Member = {
