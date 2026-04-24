@@ -9,7 +9,7 @@ type Props = {
 };
 
 /** Minimum members required before the section renders. */
-const MIN_MEMBERS = 6;
+const MIN_MEMBERS = 3;
 
 export default function MemberLogoScroll({
   members,

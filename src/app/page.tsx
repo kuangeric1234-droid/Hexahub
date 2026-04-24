@@ -158,6 +158,9 @@ export default async function HomePage() {
           </div>
         </section>
 
+        {/* ── MEMBERS — infinite scroll strip (social proof, directly below hero) ── */}
+        <MemberLogoScroll members={scrollMembers} />
+
         {/* ── THREE PILLARS ── */}
         <section className="py-24 bg-white">
           <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
@@ -452,9 +455,6 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
-
-        {/* ── MEMBERS — infinite scroll strip ── */}
-        <MemberLogoScroll members={scrollMembers} />
 
         {/* ── SIMPLE PRICING ── */}
         <section className="py-20 lg:py-28 bg-white">

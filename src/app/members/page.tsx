@@ -59,9 +59,9 @@ export default async function MembersPage() {
                     key={m._id}
                     className="border border-[#E5E5E5] flex flex-col"
                   >
-                    {/* Person photo */}
-                    <div className="aspect-[4/3] bg-[#F5F5F5] overflow-hidden">
-                      {m.featuredPersonPhoto?.asset ? (
+                    {/* Person photo — 4:3 crop; logo fallback — square with padding */}
+                    {m.featuredPersonPhoto?.asset ? (
+                      <div className="aspect-[4/3] bg-[#F5F5F5] overflow-hidden">
                         <Image
                           src={urlFor(m.featuredPersonPhoto)
                             .width(600)
@@ -73,24 +73,24 @@ export default async function MembersPage() {
                           height={450}
                           className="w-full h-full object-cover"
                         />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center">
-                          {m.logo?.asset ? (
-                            <Image
-                              src={urlFor(m.logo).width(200).height(200).fit("max").url()}
-                              alt={m.name}
-                              width={100}
-                              height={100}
-                              className="object-contain max-h-16"
-                            />
-                          ) : (
-                            <span className="text-[#2a3065] font-bold text-2xl">
-                              {m.name.charAt(0)}
-                            </span>
-                          )}
-                        </div>
-                      )}
-                    </div>
+                      </div>
+                    ) : m.logo?.asset ? (
+                      <div className="aspect-square bg-[#F5F5F5] overflow-hidden flex items-center justify-center p-8">
+                        <Image
+                          src={urlFor(m.logo).width(400).height(400).fit("max").url()}
+                          alt={m.name}
+                          width={400}
+                          height={400}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                    ) : (
+                      <div className="aspect-square bg-[#F5F5F5] flex items-center justify-center">
+                        <span className="text-[#2a3065] font-bold text-2xl">
+                          {m.name.charAt(0)}
+                        </span>
+                      </div>
+                    )}
 
                     {/* Content */}
                     <div className="p-6 flex flex-col flex-1">

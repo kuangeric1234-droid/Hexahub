@@ -99,11 +99,11 @@ export default function MembersGrid({ members }: { members: Member[] }) {
               <div className="group aspect-square border border-[#E5E5E5] hover:border-[#2a3065]/30 bg-[#F5F5F5] hover:bg-white flex items-center justify-center p-6 transition-colors">
                 {m.logo?.asset ? (
                   <Image
-                    src={urlFor(m.logo).width(240).height(240).fit("max").url()}
+                    src={urlFor(m.logo).width(400).height(400).fit("max").url()}
                     alt={m.name}
-                    width={120}
-                    height={120}
-                    className="object-contain max-h-full max-w-full"
+                    width={400}
+                    height={400}
+                    className="w-full h-full object-contain"
                   />
                 ) : (
                   <span className="text-[#2a3065] font-bold text-lg text-center leading-tight">
