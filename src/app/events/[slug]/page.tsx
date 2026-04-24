@@ -7,7 +7,6 @@ import {
   ArrowRight,
   MapPin,
   Calendar,
-  Clock,
   Users,
   Globe,
   ExternalLink,
@@ -39,13 +38,14 @@ function IconFacebook({ size = 15 }: { size?: number }) {
     </svg>
   );
 }
+
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import HubSpotForm from "@/components/HubSpotForm";
 import { getEventBySlug } from "@/lib/sanity/queries";
 import { urlFor } from "@/lib/sanity/image";
-import type { Person } from "@/lib/sanity/queries";
+import type { Person, Event } from "@/lib/sanity/queries";
 
 export const dynamic = "force-dynamic";
 
@@ -72,60 +72,41 @@ const TZ = "Australia/Melbourne";
 
 function formatDateRange(date: string, endDate?: string): string {
   const start = new Date(date);
-
   const longDate: Intl.DateTimeFormatOptions = {
-    timeZone: TZ,
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
+    timeZone: TZ, weekday: "long", day: "numeric", month: "long", year: "numeric",
   };
   const timeOpts: Intl.DateTimeFormatOptions = {
-    timeZone: TZ,
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true,
-    timeZoneName: "short",
+    timeZone: TZ, hour: "numeric", minute: "2-digit", hour12: true, timeZoneName: "short",
   };
-
   const dateStr = start.toLocaleDateString("en-AU", longDate);
   const timeStr = start.toLocaleTimeString("en-AU", timeOpts);
-
   if (!endDate) return `${dateStr} · ${timeStr}`;
-
   const end = new Date(endDate);
   const startDay = start.toLocaleDateString("en-AU", { timeZone: TZ });
   const endDay = end.toLocaleDateString("en-AU", { timeZone: TZ });
-
   if (startDay === endDay) {
-    // Same-day: show time range
-    const endTime = end.toLocaleTimeString("en-AU", {
-      timeZone: TZ,
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    });
+    const endTime = end.toLocaleTimeString("en-AU", { timeZone: TZ, hour: "numeric", minute: "2-digit", hour12: true });
     return `${dateStr} · ${timeStr} – ${endTime}`;
   }
-
-  // Multi-day
-  const shortDate: Intl.DateTimeFormatOptions = {
-    timeZone: TZ,
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  };
+  const shortDate: Intl.DateTimeFormatOptions = { timeZone: TZ, day: "numeric", month: "short", year: "numeric" };
   return `${start.toLocaleDateString("en-AU", shortDate)} – ${end.toLocaleDateString("en-AU", shortDate)}`;
 }
 
-function formatShortDate(date: string): string {
+function formatBarDate(date: string): string {
   return new Date(date).toLocaleDateString("en-AU", {
-    timeZone: TZ,
-    weekday: "short",
-    day: "numeric",
-    month: "short",
-    year: "numeric",
+    timeZone: TZ, weekday: "short", day: "numeric", month: "short", year: "numeric",
   });
+}
+
+function formatBarTime(date: string, endDate?: string): string {
+  const start = new Date(date).toLocaleTimeString("en-AU", {
+    timeZone: TZ, hour: "numeric", minute: "2-digit", hour12: true, timeZoneName: "short",
+  });
+  if (!endDate) return start;
+  const end = new Date(endDate).toLocaleTimeString("en-AU", {
+    timeZone: TZ, hour: "numeric", minute: "2-digit", hour12: true,
+  });
+  return `${start} – ${end}`;
 }
 
 // ── Portable text components ──────────────────────────────────────────────────
@@ -184,46 +165,30 @@ function PersonCard({ person }: { person: Person }) {
       {person.socials && (
         <div className="flex items-center gap-3 mt-3">
           {person.socials.instagramUrl && (
-            <a
-              href={person.socials.instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <a href={person.socials.instagramUrl} target="_blank" rel="noopener noreferrer"
               aria-label={`${person.name} on Instagram`}
-              className="text-[#6B6B6B] hover:text-[#2a3065] transition-colors"
-            >
+              className="text-[#6B6B6B] hover:text-[#2a3065] transition-colors">
               <IconInstagram size={15} />
             </a>
           )}
           {person.socials.linkedinUrl && (
-            <a
-              href={person.socials.linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <a href={person.socials.linkedinUrl} target="_blank" rel="noopener noreferrer"
               aria-label={`${person.name} on LinkedIn`}
-              className="text-[#6B6B6B] hover:text-[#2a3065] transition-colors"
-            >
+              className="text-[#6B6B6B] hover:text-[#2a3065] transition-colors">
               <IconLinkedin size={15} />
             </a>
           )}
           {person.socials.facebookUrl && (
-            <a
-              href={person.socials.facebookUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <a href={person.socials.facebookUrl} target="_blank" rel="noopener noreferrer"
               aria-label={`${person.name} on Facebook`}
-              className="text-[#6B6B6B] hover:text-[#2a3065] transition-colors"
-            >
+              className="text-[#6B6B6B] hover:text-[#2a3065] transition-colors">
               <IconFacebook size={15} />
             </a>
           )}
           {person.socials.websiteUrl && (
-            <a
-              href={person.socials.websiteUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <a href={person.socials.websiteUrl} target="_blank" rel="noopener noreferrer"
               aria-label={`${person.name} website`}
-              className="text-[#6B6B6B] hover:text-[#2a3065] transition-colors"
-            >
+              className="text-[#6B6B6B] hover:text-[#2a3065] transition-colors">
               <Globe size={15} />
             </a>
           )}
@@ -233,29 +198,155 @@ function PersonCard({ person }: { person: Person }) {
   );
 }
 
-// ── People section ────────────────────────────────────────────────────────────
+// ── People block (renders inline inside the left column) ──────────────────────
 
-function PeopleSection({
-  heading,
-  people,
-}: {
-  heading: string;
-  people: Person[];
-}) {
+function PeopleBlock({ heading, people }: { heading: string; people: Person[] }) {
   if (!people.length) return null;
   return (
-    <section className="py-16 bg-white border-t border-[#E5E5E5]">
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
-        <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
-          {heading}
-        </p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {people.map((p) => (
-            <PersonCard key={p._id} person={p} />
-          ))}
-        </div>
+    <div className="mt-12 pt-10 border-t border-[#E5E5E5]">
+      <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-6">
+        {heading}
+      </p>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        {people.map((p) => (
+          <PersonCard key={p._id} person={p} />
+        ))}
       </div>
-    </section>
+    </div>
+  );
+}
+
+// ── Right-column RSVP sidebar content ─────────────────────────────────────────
+
+function SidebarContent({
+  event,
+  isPast,
+  rsvpClosed,
+  rsvpClosingDate,
+  portalId,
+  masterFormId,
+  region,
+}: {
+  event: Event;
+  isPast: boolean;
+  rsvpClosed: boolean;
+  rsvpClosingDate: Date | null;
+  portalId: string;
+  masterFormId: string;
+  region: string;
+}) {
+  if (event.rsvpEnabled) {
+    if (isPast) {
+      return (
+        <div className="border border-[#E5E5E5] rounded-xl p-6">
+          <p className="text-[#2a3065] text-xs font-semibold uppercase tracking-widest mb-3">RSVP</p>
+          <p className="font-inter-tight font-bold text-[rgb(36,43,43)] text-base mb-2 leading-snug">
+            This event has already happened.
+          </p>
+          <p className="text-[#6B6B6B] text-sm mb-5">
+            Check out our upcoming events to see what&apos;s on next.
+          </p>
+          <Link
+            href="/events"
+            className="inline-flex items-center gap-2 bg-[#2a3065] hover:bg-[#1e2a54] text-white font-bold px-5 py-2.5 text-sm transition-colors"
+          >
+            See upcoming events <ArrowRight size={13} />
+          </Link>
+        </div>
+      );
+    }
+
+    if (rsvpClosed) {
+      return (
+        <div className="border border-[#E5E5E5] rounded-xl p-6">
+          <p className="text-[#2a3065] text-xs font-semibold uppercase tracking-widest mb-3">RSVP</p>
+          <p className="font-inter-tight font-bold text-[rgb(36,43,43)] text-base mb-2 leading-snug">
+            RSVPs are now closed.
+          </p>
+          {rsvpClosingDate && (
+            <p className="text-[#6B6B6B] text-sm">
+              Registrations closed on{" "}
+              {rsvpClosingDate.toLocaleDateString("en-AU", {
+                timeZone: TZ, weekday: "long", day: "numeric", month: "long", year: "numeric",
+              })}.
+            </p>
+          )}
+        </div>
+      );
+    }
+
+    // Active form
+    return (
+      <div className="border border-[#E5E5E5] rounded-xl p-6">
+        <p className="text-[#2a3065] text-xs font-semibold uppercase tracking-widest mb-3">RSVP</p>
+        <h2 className="font-inter-tight font-bold text-[rgb(36,43,43)] text-lg mb-1 leading-snug">
+          Save your seat
+        </h2>
+        {event.rsvpCapacity && (
+          <div className="flex items-center gap-1.5 text-[#6B6B6B] text-xs mb-2">
+            <Users size={12} />
+            <span>{event.rsvpCapacity} spots</span>
+          </div>
+        )}
+        <p className="text-[#6B6B6B] text-sm mb-5 leading-relaxed">
+          Reserve your spot below. A confirmation will land in your inbox.
+        </p>
+        {rsvpClosingDate && (
+          <p className="text-[#6B6B6B] text-xs border-l-2 border-[#2a3065]/30 pl-3 mb-5">
+            RSVPs close{" "}
+            {rsvpClosingDate.toLocaleDateString("en-AU", {
+              timeZone: TZ, weekday: "long", day: "numeric", month: "long",
+            })}.
+          </p>
+        )}
+        <HubSpotForm
+          portalId={portalId}
+          formId={event.rsvpFormOverride || masterFormId}
+          region={region}
+          eventName={event.title}
+        />
+      </div>
+    );
+  }
+
+  if (event.rsvpLink) {
+    return (
+      <div className="border border-[#E5E5E5] rounded-xl p-6">
+        <p className="text-[#2a3065] text-xs font-semibold uppercase tracking-widest mb-3">Register</p>
+        <h2 className="font-inter-tight font-bold text-[rgb(36,43,43)] text-lg mb-4 leading-snug">
+          Register for this event
+        </h2>
+        <a
+          href={event.rsvpLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 bg-[#2a3065] hover:bg-[#1e2a54] text-white font-bold px-5 py-2.5 text-sm transition-colors"
+        >
+          Register / RSVP <ExternalLink size={13} />
+        </a>
+      </div>
+    );
+  }
+
+  // No RSVP at all — show a "Get in touch" CTA so the sidebar is never empty
+  return (
+    <div className="border border-[#E5E5E5] rounded-xl p-6">
+      <p className="text-[#2a3065] text-xs font-semibold uppercase tracking-widest mb-3">
+        Interested?
+      </p>
+      <h2 className="font-inter-tight font-bold text-[rgb(36,43,43)] text-lg mb-3 leading-snug">
+        Want to know more?
+      </h2>
+      <p className="text-[#6B6B6B] text-sm mb-5 leading-relaxed">
+        Reach out to our team for more information about this event.
+      </p>
+      <Link
+        href="/contact"
+        className="inline-flex items-center gap-2 bg-[#2a3065] hover:bg-[#1e2a54] text-white font-bold px-5 py-2.5 text-sm transition-colors"
+      >
+        Get in touch <ArrowRight size={13} />
+      </Link>
+    </div>
   );
 }
 
@@ -273,14 +364,10 @@ export default async function EventDetailPage({ params }: Props) {
   const rsvpClosingDate = event.rsvpClosingDate ? new Date(event.rsvpClosingDate) : null;
   const rsvpClosed = rsvpClosingDate ? rsvpClosingDate < now : false;
 
-  // Should the hero "Register" button be shown?
   const showRegisterBtn =
     !isPast &&
-    (event.rsvpEnabled
-      ? !rsvpClosed
-      : Boolean(event.rsvpLink));
+    (event.rsvpEnabled ? !rsvpClosed : Boolean(event.rsvpLink));
 
-  // Map embed URL
   const mapSrc =
     event.locationMapEmbedUrl ??
     (event.locationLatitude != null && event.locationLongitude != null
@@ -299,7 +386,7 @@ export default async function EventDetailPage({ params }: Props) {
       <Header />
       <main className="pt-16 min-h-screen bg-white">
 
-        {/* ── HERO ─────────────────────────────────────────────────────────── */}
+        {/* ── 1. HERO ───────────────────────────────────────────────────────── */}
         <section className="relative min-h-[55vh] flex flex-col justify-end bg-[#2a3065]">
           {event.coverImage?.asset && (
             <Image
@@ -311,11 +398,9 @@ export default async function EventDetailPage({ params }: Props) {
               sizes="100vw"
             />
           )}
-          {/* Gradient overlay — darker at bottom for text legibility */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/15" />
 
           <div className="relative z-10 max-w-[1440px] mx-auto w-full px-6 sm:px-8 lg:px-16 xl:px-20 pb-14 pt-28">
-            {/* Category badge */}
             <span
               className={`inline-block text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 mb-5 ${
                 isPast
@@ -360,11 +445,81 @@ export default async function EventDetailPage({ params }: Props) {
           </div>
         </section>
 
-        {/* ── TWO-COLUMN CONTENT ───────────────────────────────────────────── */}
-        <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20 py-16">
+        {/* ── 2. DETAILS BAR ───────────────────────────────────────────────── */}
+        <div className="border-b border-[#E5E5E5] bg-white">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20 py-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:flex-wrap gap-y-3 gap-x-0 text-sm">
+
+              {/* Date */}
+              <div className="flex items-center gap-2 text-[rgb(36,43,43)]">
+                <Calendar size={14} className="text-[#2a3065] shrink-0" />
+                <span className="font-medium">{formatBarDate(event.date)}</span>
+                <span className="text-[#6B6B6B] mx-1">·</span>
+                <span className="text-[#6B6B6B]">{formatBarTime(event.date, event.endDate)}</span>
+              </div>
+
+              {/* Divider */}
+              {(event.location || event.organiserName) && (
+                <span className="hidden sm:block mx-5 w-px h-4 bg-[#E5E5E5] shrink-0" />
+              )}
+
+              {/* Location */}
+              {event.location && (
+                <div className="flex items-center gap-2 text-[rgb(36,43,43)]">
+                  <MapPin size={14} className="text-[#2a3065] shrink-0" />
+                  <span>
+                    {event.location}
+                    {event.locationAddress && (
+                      <span className="text-[#6B6B6B] ml-1">· {event.locationAddress}</span>
+                    )}
+                  </span>
+                </div>
+              )}
+
+              {/* Divider */}
+              {event.organiserName && (
+                <span className="hidden sm:block mx-5 w-px h-4 bg-[#E5E5E5] shrink-0" />
+              )}
+
+              {/* Organiser */}
+              {event.organiserName && (
+                <div className="flex items-center gap-2">
+                  <span className="text-[#6B6B6B]">Organised by</span>
+                  <span className="text-[rgb(36,43,43)] font-medium">{event.organiserName}</span>
+                  {event.organiserInstagramUrl && (
+                    <a
+                      href={event.organiserInstagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-[#2a3065] text-xs font-semibold hover:underline"
+                    >
+                      Follow <ExternalLink size={10} />
+                    </a>
+                  )}
+                </div>
+              )}
+
+              {/* Back link — pushes to the right on desktop */}
+              <div className="sm:ml-auto">
+                <Link
+                  href="/events"
+                  className="inline-flex items-center gap-1.5 text-[#6B6B6B] hover:text-black transition-colors"
+                >
+                  <ArrowLeft size={13} />
+                  All events
+                </Link>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        {/* ── 3. TWO-COLUMN CONTENT ────────────────────────────────────────── */}
+        {/* id="rsvp" here so the hero anchor scroll reveals both columns */}
+        <div id="rsvp" className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20 py-16">
           <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12 lg:gap-16 items-start">
 
-            {/* LEFT — overview */}
+            {/* LEFT — overview + speakers + organisers */}
             <div>
               {event.description && Array.isArray(event.description) && event.description.length > 0 ? (
                 <>
@@ -379,244 +534,37 @@ export default async function EventDetailPage({ params }: Props) {
               ) : (
                 <p className="text-[#6B6B6B] text-sm italic">Event details coming soon.</p>
               )}
+
+              {/* Speakers — inline in left column */}
+              {Boolean(event.speakers?.length) && (
+                <PeopleBlock heading="Speakers" people={event.speakers!} />
+              )}
+
+              {/* Organisers — inline in left column */}
+              {Boolean(event.organisers?.length) && (
+                <PeopleBlock heading="Organisers" people={event.organisers!} />
+              )}
             </div>
 
-            {/* RIGHT — sticky details sidebar */}
+            {/* RIGHT — sticky RSVP sidebar */}
             <div>
-              <div className="sticky top-24 border border-[#E5E5E5] rounded-xl p-6 space-y-5">
-                <h2 className="font-inter-tight font-bold text-[rgb(36,43,43)] text-base">
-                  Details
-                </h2>
-
-                {/* Date/time */}
-                <div className="flex gap-3">
-                  <Calendar size={16} className="text-[#2a3065] shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-[rgb(36,43,43)] text-sm font-medium leading-snug">
-                      {formatShortDate(event.date)}
-                    </p>
-                    {event.endDate && (
-                      <p className="text-[#6B6B6B] text-xs mt-0.5">
-                        Until {formatShortDate(event.endDate)}
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                {/* Time */}
-                <div className="flex gap-3">
-                  <Clock size={16} className="text-[#2a3065] shrink-0 mt-0.5" />
-                  <p className="text-[rgb(36,43,43)] text-sm">
-                    {new Date(event.date).toLocaleTimeString("en-AU", {
-                      timeZone: TZ,
-                      hour: "numeric",
-                      minute: "2-digit",
-                      hour12: true,
-                      timeZoneName: "short",
-                    })}
-                    {event.endDate && (
-                      <>
-                        {" "}–{" "}
-                        {new Date(event.endDate).toLocaleTimeString("en-AU", {
-                          timeZone: TZ,
-                          hour: "numeric",
-                          minute: "2-digit",
-                          hour12: true,
-                        })}
-                      </>
-                    )}
-                  </p>
-                </div>
-
-                {/* Location */}
-                {(event.location || event.locationAddress) && (
-                  <div className="flex gap-3">
-                    <MapPin size={16} className="text-[#2a3065] shrink-0 mt-0.5" />
-                    <div>
-                      {event.location && (
-                        <p className="text-[rgb(36,43,43)] text-sm font-medium leading-snug">
-                          {event.location}
-                        </p>
-                      )}
-                      {event.locationAddress && (
-                        <p className="text-[#6B6B6B] text-xs mt-0.5">
-                          {event.locationAddress}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {/* Capacity */}
-                {event.rsvpCapacity && (
-                  <div className="flex gap-3">
-                    <Users size={16} className="text-[#2a3065] shrink-0 mt-0.5" />
-                    <p className="text-[rgb(36,43,43)] text-sm">
-                      Capacity: {event.rsvpCapacity} spots
-                    </p>
-                  </div>
-                )}
-
-                {/* Organiser */}
-                {event.organiserName && (
-                  <div className="pt-2 border-t border-[#E5E5E5]">
-                    <p className="text-[#6B6B6B] text-xs uppercase tracking-widest mb-1">
-                      Organised by
-                    </p>
-                    <div className="flex items-center gap-3">
-                      <span className="text-[rgb(36,43,43)] text-sm font-medium">
-                        {event.organiserName}
-                      </span>
-                      {event.organiserInstagramUrl && (
-                        <a
-                          href={event.organiserInstagramUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-[#2a3065] text-xs font-semibold hover:underline"
-                        >
-                          Follow <ExternalLink size={10} />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {/* Back to events */}
-                <div className="pt-3 border-t border-[#E5E5E5]">
-                  <Link
-                    href="/events"
-                    className="inline-flex items-center gap-1.5 text-[#6B6B6B] hover:text-black text-sm transition-colors"
-                  >
-                    <ArrowLeft size={13} />
-                    All events
-                  </Link>
-                </div>
+              <div className="sticky top-24">
+                <SidebarContent
+                  event={event}
+                  isPast={isPast}
+                  rsvpClosed={rsvpClosed}
+                  rsvpClosingDate={rsvpClosingDate}
+                  portalId={portalId}
+                  masterFormId={masterFormId}
+                  region={region}
+                />
               </div>
             </div>
 
           </div>
         </div>
 
-        {/* ── SPEAKERS ─────────────────────────────────────────────────────── */}
-        {Boolean(event.speakers?.length) && (
-          <PeopleSection heading="Speakers" people={event.speakers!} />
-        )}
-
-        {/* ── ORGANISERS ───────────────────────────────────────────────────── */}
-        {Boolean(event.organisers?.length) && (
-          <PeopleSection heading="Organisers" people={event.organisers!} />
-        )}
-
-        {/* ── RSVP ─────────────────────────────────────────────────────────── */}
-        <section id="rsvp" className="py-16 bg-[#F5F5F5] border-t border-[#E5E5E5]">
-          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
-            {event.rsvpEnabled ? (
-              isPast ? (
-                // Past event
-                <div className="max-w-lg">
-                  <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
-                    RSVP
-                  </p>
-                  <p className="text-black font-bold text-xl mb-2">
-                    This event has already happened.
-                  </p>
-                  <p className="text-[#6B6B6B] text-sm mb-6">
-                    Check out our upcoming events to see what&apos;s on next.
-                  </p>
-                  <Link
-                    href="/events"
-                    className="inline-flex items-center gap-2 bg-[#2a3065] hover:bg-[#1e2a54] text-white font-bold px-5 py-2.5 text-sm transition-colors"
-                  >
-                    See upcoming events <ArrowRight size={13} />
-                  </Link>
-                </div>
-              ) : rsvpClosed ? (
-                // RSVPs closed
-                <div className="max-w-lg">
-                  <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
-                    RSVP
-                  </p>
-                  <p className="text-black font-bold text-xl mb-2">
-                    RSVPs are now closed for this event.
-                  </p>
-                  {rsvpClosingDate && (
-                    <p className="text-[#6B6B6B] text-sm">
-                      Registrations closed on{" "}
-                      {rsvpClosingDate.toLocaleDateString("en-AU", {
-                        timeZone: TZ,
-                        weekday: "long",
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      })}
-                      .
-                    </p>
-                  )}
-                </div>
-              ) : (
-                // Active RSVP form
-                <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 lg:gap-20 items-start">
-                  <div>
-                    <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
-                      RSVP
-                    </p>
-                    <h2 className="font-inter-tight font-bold text-2xl sm:text-3xl text-[rgb(36,43,43)] tracking-tight mb-3">
-                      Save your seat
-                    </h2>
-                    {event.rsvpCapacity && (
-                      <p className="text-[#6B6B6B] text-sm mb-2">
-                        Capacity: {event.rsvpCapacity} spots
-                      </p>
-                    )}
-                    <p className="text-[#6B6B6B] text-sm leading-relaxed mb-8">
-                      Reserve your spot below. A confirmation will land in your inbox.
-                    </p>
-                    {rsvpClosingDate && (
-                      <p className="text-[#6B6B6B] text-xs border-l-2 border-[#2a3065]/30 pl-3">
-                        RSVPs close{" "}
-                        {rsvpClosingDate.toLocaleDateString("en-AU", {
-                          timeZone: TZ,
-                          weekday: "long",
-                          day: "numeric",
-                          month: "long",
-                        })}
-                        .
-                      </p>
-                    )}
-                  </div>
-                  <div>
-                    <HubSpotForm
-                      portalId={portalId}
-                      formId={event.rsvpFormOverride || masterFormId}
-                      region={region}
-                      eventName={event.title}
-                    />
-                  </div>
-                </div>
-              )
-            ) : event.rsvpLink ? (
-              // Legacy external RSVP link
-              <div className="max-w-lg">
-                <p className="text-[#2a3065] text-sm font-semibold uppercase tracking-widest mb-3">
-                  RSVP
-                </p>
-                <h2 className="font-inter-tight font-bold text-2xl text-[rgb(36,43,43)] tracking-tight mb-4">
-                  Register for this event
-                </h2>
-                <a
-                  href={event.rsvpLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-[#2a3065] hover:bg-[#1e2a54] text-white font-bold px-6 py-3 text-sm transition-colors"
-                >
-                  Register / RSVP <ExternalLink size={13} />
-                </a>
-              </div>
-            ) : null}
-          </div>
-        </section>
-
-        {/* ── LOCATION MAP ─────────────────────────────────────────────────── */}
+        {/* ── 4. LOCATION MAP ──────────────────────────────────────────────── */}
         {mapSrc && (
           <section className="py-16 bg-white border-t border-[#E5E5E5]">
             <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
@@ -651,7 +599,7 @@ export default async function EventDetailPage({ params }: Props) {
           </section>
         )}
 
-        {/* ── POST-EVENT RECAP ─────────────────────────────────────────────── */}
+        {/* ── 5. POST-EVENT RECAP ──────────────────────────────────────────── */}
         {hasPostEvent && (
           <section className="py-16 bg-[#F5F5F5] border-t border-[#E5E5E5]">
             <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20">
@@ -691,7 +639,7 @@ export default async function EventDetailPage({ params }: Props) {
           </section>
         )}
 
-        {/* ── FOOTER NAVIGATION ────────────────────────────────────────────── */}
+        {/* ── 6. FOOTER NAVIGATION ─────────────────────────────────────────── */}
         <div className="border-t border-[#E5E5E5] py-10">
           <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20 flex flex-wrap gap-4">
             <Link
