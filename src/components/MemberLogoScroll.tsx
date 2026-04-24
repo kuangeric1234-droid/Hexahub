@@ -11,6 +11,14 @@ type Props = {
 /** Minimum members required before the section renders. */
 const MIN_MEMBERS = 3;
 
+/**
+ * Minimum total logos in the strip for a smooth seamless loop.
+ * With large logos (80px) and wide gaps, we need enough content to
+ * fill the viewport multiple times so the translateX(-50%) reset is
+ * never visible at any screen width.
+ */
+const MIN_LOGOS_FOR_SMOOTH_LOOP = 20;
+
 export default function MemberLogoScroll({
   members,
   eyebrow = "Community",
@@ -18,10 +26,12 @@ export default function MemberLogoScroll({
 }: Props) {
   if (members.length < MIN_MEMBERS) return null;
 
-  // Duplicate the array so the seamless loop technique works:
-  // animate translateX(0) → translateX(-50%) — when the first set scrolls
-  // off-screen the duplicate set is already in position behind it.
-  const doubled = [...members, ...members];
+  // Always duplicate an even number of times so translateX(-50%) lands
+  // on an exact visual repeat boundary — the second half of the strip
+  // is identical to the first half, making the loop truly seamless.
+  const rawCount = Math.max(2, Math.ceil(MIN_LOGOS_FOR_SMOOTH_LOOP / members.length));
+  const evenCount = rawCount % 2 === 0 ? rawCount : rawCount + 1;
+  const displayMembers = Array.from({ length: evenCount }).flatMap(() => members);
 
   return (
     <section className="py-16 lg:py-20 bg-white border-b border-[#E5E5E5]">
@@ -43,11 +53,11 @@ export default function MemberLogoScroll({
       >
         <ul
           role="list"
-          className="animate-scroll-left flex gap-12 w-max py-3"
+          className="animate-scroll-left flex gap-12 md:gap-20 w-max py-5 md:py-6"
         >
-          {doubled.map((member, i) => {
+          {displayMembers.map((member, i) => {
             const logoUrl = urlFor(member.logo)
-              .height(96)
+              .height(160)
               .fit("max")
               .auto("format")
               .url();
@@ -56,10 +66,10 @@ export default function MemberLogoScroll({
               <Image
                 src={logoUrl}
                 alt={member.name}
-                width={200}
-                height={48}
-                className="h-8 lg:h-12 w-auto max-w-[160px] object-contain"
-                sizes="200px"
+                width={320}
+                height={80}
+                className="h-14 md:h-20 w-auto max-w-[240px] object-contain"
+                sizes="320px"
               />
             );
 
