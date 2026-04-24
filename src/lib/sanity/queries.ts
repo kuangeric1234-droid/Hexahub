@@ -83,7 +83,27 @@ export type Service = {
   order?: number;
 };
 
-export type Event = {
+export type PersonSocials = {
+  instagramUrl?: string;
+  linkedinUrl?: string;
+  facebookUrl?: string;
+  websiteUrl?: string;
+};
+
+export type Person = {
+  _id: string;
+  name: string;
+  slug: { current: string };
+  title?: string;
+  company?: string;
+  companyLogo?: { asset: { _ref: string } };
+  photo?: { asset: { _ref: string }; alt?: string };
+  bio?: unknown[];
+  socials?: PersonSocials;
+};
+
+/** Lightweight shape returned by listing queries (getUpcomingEvents, getPastEvents) */
+export type EventListItem = {
   _id: string;
   title: string;
   slug: { current: string };
@@ -91,11 +111,28 @@ export type Event = {
   endDate?: string;
   location?: string;
   summary?: string;
+  rsvpEnabled?: boolean;
+  rsvpClosingDate?: string;
+  rsvpLink?: string;
+  coverImage?: { asset: { _ref: string }; alt?: string };
+};
+
+/** Full shape returned by getEventBySlug — includes all detail-page fields */
+export type Event = EventListItem & {
+  tagline?: string;
   description?: unknown[];
   recap?: unknown[];
-  coverImage?: { asset: { _ref: string }; alt?: string };
+  locationAddress?: string;
+  locationLatitude?: number;
+  locationLongitude?: number;
+  locationMapEmbedUrl?: string;
+  organiserName?: string;
+  organiserInstagramUrl?: string;
+  rsvpCapacity?: number;
+  rsvpFormOverride?: string;
   gallery?: { asset: { _ref: string }; alt?: string }[];
-  rsvpLink?: string;
+  speakers?: Person[];
+  organisers?: Person[];
 };
 
 export type SiteSettings = {
@@ -109,6 +146,8 @@ export type SiteSettings = {
   socialLinks?: { platform: string; url: string }[];
 };
 
+// ── GROQ projections ─────────────────────────────────────────────────────────
+
 const UNIT_FIELDS = groq`
   _id, title, slug, unitId, type, listingType, status,
   streetAddress, block, sizeSquareMetres, groundFloorM2,
@@ -120,12 +159,37 @@ const UNIT_FIELDS = groq`
   floorPlan{ asset }
 `;
 
-const EVENT_FIELDS = groq`
+// Lightweight — used on listing pages (no speakers/organisers dereference)
+const EVENT_LIST_FIELDS = groq`
   _id, title, slug, date, endDate, location, summary,
-  description, recap, rsvpLink,
-  coverImage{ asset, alt },
-  gallery[]{ asset, alt }
+  rsvpEnabled, rsvpClosingDate, rsvpLink,
+  coverImage{ asset, alt }
 `;
+
+// Full detail — used on individual event pages
+const EVENT_FIELDS = groq`
+  _id, title, slug, date, endDate,
+  tagline, summary, description, recap,
+  location, locationAddress, locationLatitude, locationLongitude, locationMapEmbedUrl,
+  organiserName, organiserInstagramUrl,
+  rsvpEnabled, rsvpCapacity, rsvpClosingDate, rsvpFormOverride, rsvpLink,
+  coverImage{ asset, alt },
+  gallery[]{ asset, alt },
+  "speakers": speakers[]->{
+    _id, name, slug, title, company,
+    companyLogo{ asset },
+    photo{ asset, alt },
+    socials
+  },
+  "organisers": organisers[]->{
+    _id, name, slug, title, company,
+    companyLogo{ asset },
+    photo{ asset, alt },
+    socials
+  }
+`;
+
+// ── Query functions ───────────────────────────────────────────────────────────
 
 export async function getAllUnits(): Promise<Unit[]> {
   return client.fetch(groq`*[_type == "unit"] | order(type asc, unitId asc) { ${UNIT_FIELDS} }`);
@@ -155,12 +219,12 @@ export async function getTestimonials() {
   return client.fetch(groq`*[_type == "testimonial" && featured == true] | order(_createdAt asc) { _id, authorName, authorCompany, quote, photo }`);
 }
 
-export async function getUpcomingEvents(): Promise<Event[]> {
-  return client.fetch(groq`*[_type == "event" && date >= now()] | order(date asc) { ${EVENT_FIELDS} }`);
+export async function getUpcomingEvents(): Promise<EventListItem[]> {
+  return client.fetch(groq`*[_type == "event" && date >= now()] | order(date asc) { ${EVENT_LIST_FIELDS} }`);
 }
 
-export async function getPastEvents(): Promise<Event[]> {
-  return client.fetch(groq`*[_type == "event" && date < now()] | order(date desc) { ${EVENT_FIELDS} }`);
+export async function getPastEvents(): Promise<EventListItem[]> {
+  return client.fetch(groq`*[_type == "event" && date < now()] | order(date desc) { ${EVENT_LIST_FIELDS} }`);
 }
 
 export async function getEventBySlug(slug: string): Promise<Event | null> {

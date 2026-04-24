@@ -8,7 +8,7 @@ export type HubSpotContactParams = {
   company?: string;
   leadSource?: string;
   unitOfInterest?: string;
-  eventRegisteredFor?: string;
+  eventName?: string;
   message?: string;
 };
 
@@ -33,7 +33,7 @@ function buildProperties(params: HubSpotContactParams): Record<string, string> {
   if (params.company) props.company = params.company;
   if (params.leadSource) props.lead_source_website = params.leadSource;
   if (params.unitOfInterest) props.unit_of_interest = params.unitOfInterest;
-  if (params.eventRegisteredFor) props.event_registered_for = params.eventRegisteredFor;
+  if (params.eventName) props.event_name = params.eventName;
   if (params.message) props.enquiry_message = params.message;
   return props;
 }
