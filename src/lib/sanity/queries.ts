@@ -276,3 +276,21 @@ export async function getMembersByCategory(category: MemberCategory): Promise<Me
 export async function getMembers(): Promise<Member[]> {
   return getAllMembers();
 }
+
+/** Lightweight type for the homepage logo scroll — logo is guaranteed present (filtered at query level) */
+export type MemberForScroll = {
+  _id: string;
+  name: string;
+  logo: { asset: { _ref: string } };
+  website?: string;
+};
+
+/** Fetch active members that have a logo uploaded, ordered for the scroll strip. */
+export async function getMembersForScroll(): Promise<MemberForScroll[]> {
+  return client.fetch(
+    groq`*[_type == "member" && active == true && defined(logo.asset)] | order(order asc, name asc) {
+      _id, name, website,
+      logo{ asset }
+    }`
+  );
+}
