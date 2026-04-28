@@ -3,6 +3,7 @@
 import { useActionState, useEffect, useRef } from "react";
 import { submitEnquiry, type EnquiryState } from "@/lib/actions/enquiry";
 import { CheckCircle, AlertCircle, Send } from "lucide-react";
+import BookTourModal from "@/components/units/BookTourModal";
 
 const initialState: EnquiryState = { success: false };
 
@@ -158,14 +159,24 @@ export default function EnquiryForm({
         </div>
       )}
 
-      <button
-        type="submit"
-        disabled={pending}
-        className="flex items-center gap-2 bg-[#2a3065] hover:bg-[#1e2a54] disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold px-6 py-3 text-sm transition-colors duration-200"
-      >
-        <Send size={14} />
-        {pending ? "Sending…" : "Send Enquiry"}
-      </button>
+      <div className="flex flex-wrap items-center gap-3">
+        <button
+          type="submit"
+          disabled={pending}
+          className="flex items-center gap-2 bg-[#2a3065] hover:bg-[#1e2a54] disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold px-6 py-3 text-sm transition-colors duration-200"
+        >
+          <Send size={14} />
+          {pending ? "Sending…" : "Send Enquiry"}
+        </button>
+
+        {unitTitle && (
+          <BookTourModal
+            unitTitle={unitTitle}
+            unitId={unitId ?? ""}
+            buttonClassName="flex items-center gap-2 border border-[#2a3065] text-[#2a3065] hover:bg-[#2a3065] hover:text-white font-semibold px-6 py-3 text-sm transition-colors duration-200"
+          />
+        )}
+      </div>
 
       <p className="text-[#6B6B6B] text-xs">
         Prices exclude GST and outgoings. We respond within one business day.

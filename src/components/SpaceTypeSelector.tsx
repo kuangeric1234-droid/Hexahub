@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Package, Building2, Boxes, ArrowRight } from "lucide-react";
+import { Package, Building2, Boxes, Briefcase, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 const TYPES = [
@@ -13,10 +13,16 @@ const TYPES = [
     href: "/units?type=warehouse",
   },
   {
-    id: "office",
-    label: "Private Office",
+    id: "office-warehouse",
+    label: "Office + Warehouse",
     icon: Building2,
     href: "/units?type=office-warehouse",
+  },
+  {
+    id: "office",
+    label: "Office",
+    icon: Briefcase,
+    href: "/units?type=office",
   },
   {
     id: "storage",

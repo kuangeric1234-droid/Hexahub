@@ -4,6 +4,7 @@ import Footer from "@/components/layout/Footer";
 import UnitCard from "@/components/units/UnitCard";
 import { getAllUnits } from "@/lib/sanity/queries";
 import type { Unit } from "@/lib/sanity/queries";
+import { LayoutGrid, Package, Building2, Boxes, Briefcase } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Available Units",
@@ -11,11 +12,11 @@ export const metadata: Metadata = {
 };
 
 const TYPE_OPTIONS = [
-  { value: "", label: "All Types" },
-  { value: "warehouse", label: "Warehouse" },
-  { value: "storage", label: "Storage" },
-  { value: "office-warehouse", label: "Office + Warehouse" },
-  { value: "office", label: "Office" },
+  { value: "", label: "All Types", icon: LayoutGrid },
+  { value: "warehouse", label: "Warehouse", icon: Package },
+  { value: "storage", label: "Storage", icon: Boxes },
+  { value: "office-warehouse", label: "Office + Warehouse", icon: Building2 },
+  { value: "office", label: "Office", icon: Briefcase },
 ];
 
 const STATUS_OPTIONS = [
@@ -57,6 +58,17 @@ export default async function UnitsPage({ searchParams }: Props) {
     const p = new URLSearchParams();
     p.set("listing", listing);
     if (params.type) p.set("type", params.type);
+    if (params.status) p.set("status", params.status);
+    if (params.min) p.set("min", params.min);
+    if (params.max) p.set("max", params.max);
+    return `/units?${p.toString()}`;
+  }
+
+  function typeHref(typeValue: string) {
+    const p = new URLSearchParams();
+    p.set("listing", activeListing);
+    const isActive = (params.type ?? "") === typeValue;
+    if (!isActive && typeValue) p.set("type", typeValue);
     if (params.status) p.set("status", params.status);
     if (params.min) p.set("min", params.min);
     if (params.max) p.set("max", params.max);
@@ -107,19 +119,32 @@ export default async function UnitsPage({ searchParams }: Props) {
             </a>
           </div>
 
+          {/* Type icon filters */}
+          <div className="flex flex-wrap gap-3 mb-6">
+            {TYPE_OPTIONS.map((o) => {
+              const isActive = (params.type ?? "") === o.value;
+              const Icon = o.icon;
+              return (
+                <a
+                  key={o.value}
+                  href={typeHref(o.value)}
+                  className={`flex flex-col items-center gap-2 px-5 py-3.5 rounded-xl border-2 text-sm font-semibold transition-all duration-150 min-w-[110px] ${
+                    isActive
+                      ? "border-[#2a3065] bg-[#2a3065] text-white shadow-sm"
+                      : "border-[#E5E5E5] bg-white text-[#555555] hover:border-[#2a3065]/50 hover:text-[#2a3065]"
+                  }`}
+                >
+                  <Icon size={20} strokeWidth={1.75} />
+                  {o.label}
+                </a>
+              );
+            })}
+          </div>
+
           {/* Secondary filters */}
           <form className="flex flex-wrap gap-3 mb-10" method="GET">
             <input type="hidden" name="listing" value={activeListing} />
-
-            <select
-              name="type"
-              defaultValue={params.type ?? ""}
-              className="bg-white border border-[#E5E5E5] text-black text-sm px-3 py-2 focus:outline-none focus:border-[#2a3065]"
-            >
-              {TYPE_OPTIONS.map((o) => (
-                <option key={o.value} value={o.value}>{o.label}</option>
-              ))}
-            </select>
+            <input type="hidden" name="type" value={params.type ?? ""} />
 
             <select
               name="status"
