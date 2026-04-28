@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Package, Building2, Users, ArrowRight } from "lucide-react";
+import { Package, Building2, Boxes, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 const TYPES = [
@@ -10,19 +10,19 @@ const TYPES = [
     id: "warehouse",
     label: "Warehouse",
     icon: Package,
-    href: "/warehouse-spaces",
+    href: "/units?type=warehouse",
   },
   {
     id: "office",
     label: "Private Office",
     icon: Building2,
-    href: "/office-spaces",
+    href: "/units?type=office-warehouse",
   },
   {
-    id: "cowarehousing",
-    label: "Cowarehousing",
-    icon: Users,
-    href: "/spaces",
+    id: "storage",
+    label: "Storage",
+    icon: Boxes,
+    href: "/units?type=storage",
   },
 ] as const;
 
