@@ -9,6 +9,7 @@ import EnquiryForm from "@/components/forms/EnquiryForm";
 import { StatusBadge, TypeBadge } from "@/components/ui/Badge";
 import { getUnitBySlug, getAllUnits } from "@/lib/sanity/queries";
 import { urlFor } from "@/lib/sanity/image";
+import PhotoGallery from "@/components/units/PhotoGallery";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -48,6 +49,12 @@ export default async function UnitDetailPage({ params }: Props) {
 
   const photos = unit.photos ?? [];
   const heroPhoto = photos[0];
+
+  const galleryPhotos = photos.map((photo) => ({
+    thumb: urlFor(photo.asset).width(160).height(100).fit("crop").auto("format").url(),
+    full: urlFor(photo.asset).width(1400).height(900).fit("max").auto("format").url(),
+    alt: photo.alt ?? "",
+  }));
   const heroSrc = heroPhoto
     ? urlFor(heroPhoto.asset).width(1400).height(800).fit("crop").auto("format").url()
     : "/renders/Block H Front.jpg";
@@ -85,21 +92,8 @@ export default async function UnitDetailPage({ params }: Props) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
         </div>
 
-        {/* Thumbnail strip */}
-        {photos.length > 1 && (
-          <div className="bg-[#F5F5F5] border-b border-[#E5E5E5]">
-            <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20 py-3 flex gap-3 overflow-x-auto">
-              {photos.slice(0, 6).map((photo, i) => {
-                const src = urlFor(photo.asset).width(160).height(100).fit("crop").auto("format").url();
-                return (
-                  <div key={i} className="relative shrink-0 w-28 h-16 overflow-hidden border border-[#E5E5E5]">
-                    <Image src={src} alt={photo.alt ?? `View ${i + 1}`} fill className="object-cover" sizes="112px" />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
+        {/* Thumbnail strip with lightbox */}
+        <PhotoGallery photos={galleryPhotos} />
 
         <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 xl:px-20 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
