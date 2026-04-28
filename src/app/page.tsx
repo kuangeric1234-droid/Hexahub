@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import UnitCard from "@/components/units/UnitCard";
 import AmenitiesAccordion from "@/components/home/AmenitiesAccordion";
 import SpaceCard from "@/components/shared/SpaceCard";
+import SpaceTypeSelector from "@/components/SpaceTypeSelector";
 import { getFeaturedLeaseUnits, getFeaturedSaleUnits, getSiteSettings, getPartners, getMembersForScroll } from "@/lib/sanity/queries";
 import MemberLogoScroll from "@/components/MemberLogoScroll";
 
@@ -111,20 +112,7 @@ export default async function HomePage() {
                   Hexa Hub is a business infrastructure platform at Huntingdale, Melbourne — giving brands the space, operations, and partners to land and scale in Australia.
                 </p>
 
-                <div className="flex flex-wrap items-center gap-4 mb-12">
-                  <Link
-                    href="/contact#book-tour"
-                    className="inline-flex items-center gap-2 bg-[#2a3065] hover:bg-[#1e2a54] text-white font-bold px-8 py-4 text-base transition-colors duration-200"
-                  >
-                    Book a tour
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-2 text-[#2a3065] font-semibold text-base hover:underline transition-colors duration-200"
-                  >
-                    Speak to our team <ArrowRight size={16} />
-                  </Link>
-                </div>
+                <SpaceTypeSelector />
 
                 {/* Stats row */}
                 <div className="flex flex-wrap gap-x-8 gap-y-4 pt-8 border-t border-[#E5E5E5]">
