@@ -272,17 +272,16 @@ export default async function HomePage() {
               </Link>
             </div>
 
-            <div className="space-types-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-6">
               {SPACE_TYPES.map((card) => (
                 <SpaceCard
                   key={card.type}
                   title={card.title}
                   specs={card.specs}
                   img={card.img}
-                  buttonText="Book a tour"
-                  buttonHref="/contact"
+                  buttonText="View spaces"
+                  buttonHref={`/units?type=${card.type}`}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
-                  aspectClass="aspect-[2/3] lg:aspect-auto lg:min-h-[500px]"
                 />
               ))}
             </div>
