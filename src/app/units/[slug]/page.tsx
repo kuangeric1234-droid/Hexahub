@@ -193,18 +193,20 @@ export default async function UnitDetailPage({ params }: Props) {
                 </div>
               )}
 
-              {/* Location map placeholder */}
+              {/* Location map */}
               <div>
                 <h2 className="text-black font-bold text-lg mb-4">Location</h2>
-                <div className="bg-[#F5F5F5] border border-[#E5E5E5] aspect-video flex items-center justify-center">
-                  <a
-                    href="https://maps.google.com/?q=17-31+Franklyn+Street+Huntingdale+VIC"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#2a3065] text-sm underline"
-                  >
-                    View on Google Maps — 17-31 Franklyn Street, Huntingdale VIC 3166
-                  </a>
+                <div className="aspect-video border border-[#E5E5E5] overflow-hidden">
+                  <iframe
+                    src="https://www.google.com/maps?q=17-31+Franklyn+Street,+Huntingdale+VIC+3166&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Hexa Hub location map"
+                  />
                 </div>
               </div>
             </div>

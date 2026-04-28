@@ -81,16 +81,18 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Map placeholder */}
-              <div className="mt-10 bg-[#F5F5F5] border border-[#E5E5E5] aspect-video flex items-center justify-center">
-                <a
-                  href="https://maps.google.com/?q=7+Distribution+Circuit+Huntingdale+VIC"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#2a3065] text-sm underline"
-                >
-                  Open in Google Maps
-                </a>
+              {/* Map */}
+              <div className="mt-10 aspect-video border border-[#E5E5E5] overflow-hidden">
+                <iframe
+                  src="https://www.google.com/maps?q=7+Distribution+Circuit,+Huntingdale+VIC+3166&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Hexa Hub contact map"
+                />
               </div>
 
             </div>
