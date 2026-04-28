@@ -93,20 +93,12 @@ export default function ContactPage() {
                 </a>
               </div>
 
-              <div id="book-tour" className="mt-10 bg-[#F5F5F5] border border-[#2a3065]/40 p-6">
-                <h3 className="text-black font-bold mb-2">Book a Site Tour</h3>
-                <p className="text-[#555555] text-sm">
-                  The best way to understand the space is to walk it. We offer tours Monday–Friday. Select
-                  &ldquo;Book a site tour&rdquo; in the form, or mention it in your message, and we&apos;ll
-                  find a time that works.
-                </p>
-              </div>
             </div>
 
             {/* Form */}
             <div>
               <h2 className="text-black font-bold text-xl mb-6">Send an Enquiry</h2>
-              <EnquiryForm source="contact-page" showInterestField={true} />
+              <EnquiryForm source="contact-page" showInterestField={true} showBookTour={true} />
             </div>
           </div>
         </div>

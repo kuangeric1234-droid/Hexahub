@@ -23,6 +23,7 @@ interface Props {
   unitTitle?: string;
   source?: string;
   showInterestField?: boolean;
+  showBookTour?: boolean;
 }
 
 export default function EnquiryForm({
@@ -30,6 +31,7 @@ export default function EnquiryForm({
   unitTitle,
   source = "website",
   showInterestField = false,
+  showBookTour = false,
 }: Props) {
   const [state, action, pending] = useActionState(submitEnquiry, initialState);
   const formRef = useRef<HTMLFormElement>(null);
@@ -169,10 +171,10 @@ export default function EnquiryForm({
           {pending ? "Sending…" : "Send Enquiry"}
         </button>
 
-        {unitTitle && (
+        {(unitTitle || showBookTour) && (
           <BookTourModal
-            unitTitle={unitTitle}
-            unitId={unitId ?? ""}
+            unitTitle={unitTitle ?? "Hexa Hub — Huntingdale"}
+            unitId={unitId ?? "General"}
             buttonClassName="flex items-center gap-2 border border-[#2a3065] text-[#2a3065] hover:bg-[#2a3065] hover:text-white font-semibold px-6 py-3 text-sm transition-colors duration-200"
           />
         )}
