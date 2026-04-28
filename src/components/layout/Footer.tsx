@@ -32,11 +32,11 @@ export default function Footer() {
                 7 Distribution Circuit, Huntingdale VIC 3166
               </a>
               <a
-                href="mailto:marketing@hexa.com.au"
+                href="mailto:info@hexahub.com.au"
                 className="flex items-center gap-3 text-[#6B6B6B] hover:text-black text-sm transition-colors"
               >
                 <Mail size={14} className="shrink-0 text-[#2a3065]" />
-                marketing@hexa.com.au
+                info@hexahub.com.au
               </a>
               <a
                 href="tel:+61406016666"

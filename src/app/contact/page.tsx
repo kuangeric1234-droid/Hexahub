@@ -53,10 +53,10 @@ export default function ContactPage() {
                   <div>
                     <div className="text-black font-semibold text-sm mb-1">Email</div>
                     <a
-                      href="mailto:marketing@hexa.com.au"
+                      href="mailto:info@hexahub.com.au"
                       className="text-[#555555] hover:text-black text-sm transition-colors"
                     >
-                      marketing@hexa.com.au
+                      info@hexahub.com.au
                     </a>
                   </div>
                 </div>

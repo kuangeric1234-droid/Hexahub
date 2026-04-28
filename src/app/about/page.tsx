@@ -259,13 +259,13 @@ export default function AboutPage() {
                 </div>
               </a>
               <a
-                href="mailto:marketing@hexa.com.au"
+                href="mailto:info@hexahub.com.au"
                 className="group flex items-start gap-4 border border-[#E5E5E5] hover:border-[#2a3065]/40 p-6 transition-colors"
               >
                 <Mail size={18} className="text-[#2a3065] shrink-0 mt-0.5" />
                 <div>
                   <p className="text-black font-semibold text-sm mb-1">Email</p>
-                  <p className="text-[#555555] text-sm">marketing@hexa.com.au</p>
+                  <p className="text-[#555555] text-sm">info@hexahub.com.au</p>
                 </div>
               </a>
               <a

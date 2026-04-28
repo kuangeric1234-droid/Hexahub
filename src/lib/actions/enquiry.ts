@@ -55,7 +55,7 @@ export async function submitEnquiry(
     return {
       success: false,
       error:
-        "Something went wrong. Please try again or email us directly at marketing@hexa.com.au.",
+        "Something went wrong. Please try again or email us directly at info@hexahub.com.au.",
     };
   }
 

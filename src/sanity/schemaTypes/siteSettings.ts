@@ -6,7 +6,7 @@ export const siteSettingsSchema = defineType({
   type: "document",
   fields: [
     defineField({ name: "phone", title: "Phone", type: "string", initialValue: "+61 406 016 666" }),
-    defineField({ name: "email", title: "Email", type: "string", initialValue: "marketing@hexa.com.au", description: "Primary contact email — note this is @hexa.com.au (parent group domain), not @hexahub.com.au." }),
+    defineField({ name: "email", title: "Email", type: "string", initialValue: "info@hexahub.com.au", description: "Primary contact email — note this is @hexa.com.au (parent group domain), not @hexahub.com.au." }),
     defineField({ name: "address", title: "Address", type: "string", initialValue: "7 Distribution Circuit, Huntingdale VIC 3166" }),
     defineField({ name: "businessHours", title: "Business Hours", type: "string" }),
     defineField({
