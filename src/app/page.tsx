@@ -131,14 +131,14 @@ export default async function HomePage() {
               </div>
 
               {/* ── Right: media column ── */}
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
-                <Image
-                  src="/renders/Aerial.jpg"
-                  alt="Hexa Hub precinct aerial view, Huntingdale Melbourne"
-                  fill
-                  priority
-                  className="object-cover object-center"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#EBEBEB]">
+                <video
+                  src="/videos/hexahub-walkthrough.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
 
