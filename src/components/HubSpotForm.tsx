@@ -12,9 +12,11 @@ declare global {
           region: string;
           target: string;
           onFormReady?: (form: HTMLFormElement) => void;
+          onFormSubmitted?: () => void;
         }) => void;
       };
     };
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
@@ -48,6 +50,14 @@ export default function HubSpotForm({ portalId, formId, region, eventName }: Pro
           if (input) {
             input.value = eventName;
             input.dispatchEvent(new Event("input", { bubbles: true }));
+          }
+        },
+        onFormSubmitted: () => {
+          if (typeof window !== "undefined" && window.gtag) {
+            window.gtag("event", "form_submit_event_rsvp", {
+              form_name: "event_rsvp",
+              form_id: formId,
+            });
           }
         },
       });

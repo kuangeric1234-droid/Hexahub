@@ -1,6 +1,12 @@
 "use client";
 
 import { useActionState, useEffect, useRef } from "react";
+
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
 import { submitEnquiry, type EnquiryState } from "@/lib/actions/enquiry";
 import { CheckCircle, AlertCircle, Send } from "lucide-react";
 import BookTourModal from "@/components/units/BookTourModal";
@@ -37,8 +43,15 @@ export default function EnquiryForm({
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
-    if (state.success) formRef.current?.reset();
-  }, [state.success]);
+    if (!state.success) return;
+    formRef.current?.reset();
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", unitId ? "form_submit_enquiry" : "form_submit_contact", {
+        form_name: unitId ? "lot_enquiry" : "contact",
+        ...(unitId && { lot_id: unitId }),
+      });
+    }
+  }, [state.success, unitId]);
 
   return (
     <form ref={formRef} action={action} className="space-y-5" noValidate>

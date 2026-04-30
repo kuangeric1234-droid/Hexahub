@@ -3,6 +3,12 @@
 import { useState } from "react";
 import { X, CalendarDays } from "lucide-react";
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 const PORTAL_ID = "442586544";
 const FORM_ID = "f6a91f18-e7c8-434e-93c2-8b4dd23cd972";
 
@@ -83,6 +89,13 @@ export default function BookTourModal({ unitTitle, unitId, buttonClassName }: Pr
       );
       if (!res.ok) throw new Error();
       setSubmitted(true);
+      if (typeof window !== "undefined" && window.gtag) {
+        window.gtag("event", "form_submit_tour", {
+          form_name: "book_a_tour",
+          form_id: FORM_ID,
+          lot_id: unitId,
+        });
+      }
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
