@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, Mail, Phone } from "lucide-react";
+import { MapPin, Mail, Phone, Instagram, Facebook, Linkedin } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -45,6 +45,26 @@ export default function Footer() {
                 <Phone size={14} className="shrink-0 text-[#2a3065]" />
                 +61 406 016 666
               </a>
+            </div>
+
+            {/* Social icons */}
+            <div className="mt-6 flex items-center gap-3">
+              {[
+                { href: "https://www.instagram.com/hexahub.au/", icon: Instagram, label: "Instagram" },
+                { href: "https://www.facebook.com/profile.php?id=61585543572531", icon: Facebook, label: "Facebook" },
+                { href: "https://www.linkedin.com/company/hexa-hub/", icon: Linkedin, label: "LinkedIn" },
+              ].map(({ href, icon: Icon, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-9 h-9 flex items-center justify-center border border-[#E5E5E5] hover:border-[#2a3065] hover:text-[#2a3065] text-[#6B6B6B] transition-colors rounded-full"
+                >
+                  <Icon size={16} />
+                </a>
+              ))}
             </div>
           </div>
 
