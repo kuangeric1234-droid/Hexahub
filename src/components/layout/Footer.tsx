@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, Mail, Phone, Instagram, Facebook, Linkedin } from "lucide-react";
+import { MapPin, Mail, Phone } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -49,22 +49,24 @@ export default function Footer() {
 
             {/* Social icons */}
             <div className="mt-6 flex items-center gap-3">
-              {[
-                { href: "https://www.instagram.com/hexahub.au/", icon: Instagram, label: "Instagram" },
-                { href: "https://www.facebook.com/profile.php?id=61585543572531", icon: Facebook, label: "Facebook" },
-                { href: "https://www.linkedin.com/company/hexa-hub/", icon: Linkedin, label: "LinkedIn" },
-              ].map(({ href, icon: Icon, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="w-9 h-9 flex items-center justify-center border border-[#E5E5E5] hover:border-[#2a3065] hover:text-[#2a3065] text-[#6B6B6B] transition-colors rounded-full"
-                >
-                  <Icon size={16} />
-                </a>
-              ))}
+              <a href="https://www.instagram.com/hexahub.au/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+                className="w-9 h-9 flex items-center justify-center border border-[#E5E5E5] hover:border-[#2a3065] hover:text-[#2a3065] text-[#6B6B6B] transition-colors rounded-full">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61585543572531" target="_blank" rel="noopener noreferrer" aria-label="Facebook"
+                className="w-9 h-9 flex items-center justify-center border border-[#E5E5E5] hover:border-[#2a3065] hover:text-[#2a3065] text-[#6B6B6B] transition-colors rounded-full">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/company/hexa-hub/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
+                className="w-9 h-9 flex items-center justify-center border border-[#E5E5E5] hover:border-[#2a3065] hover:text-[#2a3065] text-[#6B6B6B] transition-colors rounded-full">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+                </svg>
+              </a>
             </div>
           </div>
 
